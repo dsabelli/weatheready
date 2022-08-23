@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import "virtual:windi.css";
 import App from "./App";
 import { store } from "./app/store";
-import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

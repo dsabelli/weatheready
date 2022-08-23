@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
 import Daily from "./pages/Daily";
 import Error from "./pages/Error";
 import FiveDay from "./pages/FiveDay";
