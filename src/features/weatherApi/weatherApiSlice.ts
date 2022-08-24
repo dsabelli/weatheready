@@ -14,7 +14,7 @@ export const weatherApiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `http://api.openweathermap.org/data/2.5/forecast`,
   }),
-  tagTypes: ["Weather"],
+  // tagTypes: ["Weather"],
   endpoints: (builder) => ({
     getWeather: builder.query<WeatherData, Coords>({
       query: (arg) => {
@@ -22,7 +22,7 @@ export const weatherApiSlice = createApi({
         return {
           url: `?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
           params: { lat, lon },
-          providesTags: ["Weather"],
+          // providesTags: ["Weather"],
         };
       },
     }),

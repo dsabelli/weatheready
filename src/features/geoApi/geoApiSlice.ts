@@ -10,7 +10,7 @@ export const geoApiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `http://api.openweathermap.org/geo/1.0/direct`,
   }),
-  tagTypes: ["Geo"],
+  // tagTypes: ["Geo"],
   endpoints: (builder) => ({
     getGeo: builder.query<GeoData[], Location>({
       query: (arg) => {
@@ -18,7 +18,7 @@ export const geoApiSlice = createApi({
         return {
           url: `?q=${city},${state},${country}&limit=${limit}&appid=${weatherApi}`,
           params: { city, state, country },
-          providesTags: ["Geo"],
+          // providesTags: ["Geo"],
         };
       },
     }),
