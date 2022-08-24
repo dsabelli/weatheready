@@ -1,3 +1,11 @@
+export interface GeoData {
+  name: string;
+  local_names: { en: string };
+  lat: number;
+  lon: number;
+  country: string;
+}
+
 export interface Weather {
   description: string;
   icon: string;
