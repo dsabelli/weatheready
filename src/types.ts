@@ -1,3 +1,9 @@
+export interface Location {
+  city: string;
+  state: string;
+  country: string;
+}
+
 export interface GeoData {
   name: string;
   local_names: { en: string };

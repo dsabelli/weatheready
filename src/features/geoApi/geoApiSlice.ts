@@ -1,13 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { GeoData } from "../../types";
+import { Location } from "../../types";
 
 const weatherApi: string = import.meta.env.VITE_WEATHER_API_KEY;
 const limit: number = 5;
-export interface Location {
-  city: string;
-  state: string;
-  country: string;
-}
 
 export const geoApiSlice = createApi({
   reducerPath: "geoApi",
