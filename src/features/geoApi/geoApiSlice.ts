@@ -10,13 +10,13 @@ export interface Location {
 }
 
 export const geoApiSlice = createApi({
-  reducerPath: "api",
+  reducerPath: "geoApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `http://api.openweathermap.org/geo/1.0/direct`,
   }),
   tagTypes: ["Geo"],
   endpoints: (builder) => ({
-    getGeo: builder.query<GeoData, Location>({
+    getGeo: builder.query<GeoData[], Location>({
       query: (arg) => {
         const { city, state, country } = arg;
         return {

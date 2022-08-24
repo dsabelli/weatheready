@@ -9,7 +9,7 @@ export interface Coords {
 }
 
 export const weatherApiSlice = createApi({
-  reducerPath: "api",
+  reducerPath: "weatherApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `http://api.openweathermap.org/data/2.5/forecast`,
   }),

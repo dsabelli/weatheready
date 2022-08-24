@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { weatherApiSlice } from "../features/api/weatherApiSlice";
+import { weatherApiSlice } from "../features/weatherApi/weatherApiSlice";
 import { geoApiSlice } from "../features/geoApi/geoApiSlice";
 
 export const store = configureStore({
