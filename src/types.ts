@@ -1,8 +1,8 @@
 export interface GeoData {
   name: string;
   local_names: { en: string };
-  lat: number;
-  lon: number;
+  lat: string;
+  lon: string;
   country: string;
 }
 
@@ -20,8 +20,8 @@ export interface WeatherData {
   };
   cod: number;
   coord: {
-    lon: number;
-    lat: number;
+    lon: string;
+    lat: string;
   };
   dt: number;
   id: number;
