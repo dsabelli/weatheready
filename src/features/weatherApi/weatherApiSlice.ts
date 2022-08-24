@@ -7,6 +7,7 @@ export interface Coords {
   lat: string;
   lon: string;
 }
+let units: string = "metric";
 
 export const weatherApiSlice = createApi({
   reducerPath: "weatherApi",
@@ -19,7 +20,7 @@ export const weatherApiSlice = createApi({
       query: (arg) => {
         const { lat, lon } = arg;
         return {
-          url: `?lat=${lat}&lon=${lon}&appid=${weatherApi}`,
+          url: `?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
           params: { lat, lon },
           providesTags: ["Weather"],
         };
