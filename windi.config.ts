@@ -18,5 +18,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [formsPlugin],
+  plugins: [formsPlugin, require("flowbite/plugin")],
 });
