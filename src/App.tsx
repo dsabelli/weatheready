@@ -20,7 +20,7 @@ function App() {
         <Route path="today/:id/:city" element={<Today />} />
       </Route>
       <Route path="error" element={<Error />} />
-      <Route path="not-found" element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
