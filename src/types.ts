@@ -13,10 +13,44 @@ export interface GeoData {
 }
 
 export interface Weather {
-  description: string;
-  icon: string;
   id: number;
   main: string;
+  description: string;
+  icon: string;
+}
+
+export interface MainWeather {
+  feels_like: number;
+  grnd_level?: number;
+  humidity: number;
+  pressure: number;
+  sea_level?: number;
+  temp: number;
+  temp_kf?: number;
+  temp_max: number;
+  temp_min: number;
+}
+
+export interface Wind {
+  deg: number;
+  gust: number;
+  speed: number;
+}
+
+export interface ListWeather {
+  dt: number;
+  visibility: number;
+  pop: number;
+  clouds: {
+    all: number;
+  };
+  dt_txt: string;
+  sys: {
+    pod: string;
+  };
+  main: MainWeather;
+  weather: Weather[];
+  wind: Wind;
 }
 
 export interface WeatherData {
@@ -26,19 +60,12 @@ export interface WeatherData {
   };
   cod: number;
   coord: {
-    lon: string;
-    lat: string;
+    lat: number;
+    lon: number;
   };
   dt: number;
   id: number;
-  main: {
-    feels_like: number;
-    humidity: number;
-    pressure: number;
-    temp: number;
-    temp_max: number;
-    temp_min: number;
-  };
+  main: MainWeather;
   name: string;
   sys: {
     country: string;
@@ -48,10 +75,26 @@ export interface WeatherData {
     type: number;
   };
   timezone: number;
-  visibility: number;
   weather: Weather[];
-  wind: {
-    speed: number;
-    deg: number;
+  wind: Wind;
+}
+
+export interface ForecastData {
+  cod: string;
+  message: number;
+  cnt: number;
+  list: ListWeather[];
+  city: {
+    country: string;
+    id: number;
+    name: string;
+    population: number;
+    sunrise: number;
+    sunset: number;
+    timezone: number;
+    coords: {
+      lat: number;
+      lon: number;
+    };
   };
 }
