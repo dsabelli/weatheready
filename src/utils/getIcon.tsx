@@ -78,7 +78,7 @@ const getIcon = (icon: string) => {
       break;
   }
 
-  return <div>{weatherIcon}</div>;
+  return <>{weatherIcon}</>;
 };
 
 export { getIcon };
