@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import ClothingCard from "../components/UI/ClothingCard";
 import NavBar from "../components/UI/NavBar";
 import CurrentWeather from "../features/weather/CurrentWeather";
+import TodayWeather from "../features/weather/TodayWeather";
 
 const Landing = () => {
   return (
@@ -14,6 +15,7 @@ const Landing = () => {
         </Link>
         <ClothingCard />
       </div>
+      <Outlet />
     </div>
   );
 };
