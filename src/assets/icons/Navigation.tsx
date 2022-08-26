@@ -9,7 +9,7 @@ const Navigation: React.FC<Props> = ({ className, rotate }) => {
   return (
     <div
       className={`${className}`}
-      style={{ transform: `rotate(${rotate}deg)` }}
+      style={{ transform: `rotate(${rotate - 180}deg)` }}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
