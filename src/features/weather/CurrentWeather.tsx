@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useGetWeatherQuery } from "../weatherApi/weatherApiSlice";
 import Loader from "../../components/UI/Loader";
 import Error from "../../pages/Error";
-import WeatherCard from "../../components/UI/WeatherCard";
+import CurrentWeatherCard from "../../components/UI/CurrentWeatherCard";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+import { setLocation } from "../location/locationSlice";
 
 interface Coords {
   coords: {
@@ -12,7 +15,8 @@ interface Coords {
 }
 
 const Weather = () => {
-  const [coords, setCoords] = useState({ lat: "0", lon: "0" });
+  const dispatch = useDispatch();
+  const { lat, lon } = useSelector((state: RootState) => state.location);
 
   const {
     data: weatherData,
@@ -21,13 +25,15 @@ const Weather = () => {
     isError: isWeatherError,
     error: weatherError,
   } = useGetWeatherQuery({
-    lat: coords.lat,
-    lon: coords.lon,
+    lat: lat,
+    lon: lon,
   });
 
   const successCallback = (position: Coords) => {
     const { latitude, longitude } = position.coords;
-    setCoords({ lat: latitude.toString(), lon: longitude.toString() });
+    dispatch(
+      setLocation({ lat: latitude.toString(), lon: longitude.toString() })
+    );
   };
 
   useEffect(() => {
@@ -44,7 +50,7 @@ const Weather = () => {
     console.log(weatherData);
 
     weatherEls = (
-      <WeatherCard
+      <CurrentWeatherCard
         temp={weatherData.main.temp}
         feelsLike={weatherData.main.feels_like}
         humidity={weatherData.main.humidity}
