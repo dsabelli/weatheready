@@ -1,4 +1,5 @@
 import React from "react";
+import Navigation from "../../assets/icons/Navigation";
 import { getIcon } from "../../utils/getIcon";
 
 interface WeatherCardData {
@@ -16,9 +17,12 @@ interface WeatherCardData {
   sunrise: number;
   sunset: number;
   icon: string;
+  description: string;
+  name?: string;
 }
+let units: string = "°C";
 
-const WeatherCard: React.FunctionComponent<WeatherCardData> = ({
+const WeatherCard: React.FC<WeatherCardData> = ({
   temp,
   feelsLike,
   humidity,
@@ -27,30 +31,59 @@ const WeatherCard: React.FunctionComponent<WeatherCardData> = ({
   sunrise,
   sunset,
   icon,
+  description,
 }) => {
+  const sunriseHours = new Date(sunrise * 1000).getHours();
+  const sunriseMinutes = new Date(sunrise * 1000).getMinutes();
+  const sunsetHours = new Date(sunset * 1000).getHours();
+  const sunsetMinutes = new Date(sunset * 1000).getMinutes();
   return (
-    <a
-      href="#"
-      className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-    >
-      {getIcon(icon)}
-      <div className="flex flex-col justify-between p-4 leading-normal">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          {" "}
-          {temp}
-          {feelsLike}
-          {humidity}
-          {clouds.all}
-          {wind.deg} {wind.speed} {wind.gust}
-          {sunrise}
-          {sunset}
-        </h5>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Here are the biggest enterprise technology acquisitions of 2021 so
-          far, in reverse chronological order.
-        </p>
+    <div className="flex bg-base-100 shadow-xl p-4">
+      <div className="flex flex-col">
+        <div className="text-2xl ">
+          <h2>Current Weather</h2>
+        </div>
+        <div className="flex justify-center items-center">
+          <div className="w-48 ">{getIcon(icon)}</div>
+          <div>
+            <p className="text-4xl">
+              {temp}
+              {units}
+            </p>
+            <p className="text-2xl">
+              Feels like {feelsLike}
+              {units}
+            </p>
+          </div>
+        </div>
+        <div>{description}</div>
       </div>
-    </a>
+      <div className="w-full px-4">
+        <ul className="mt-8">
+          <li className="flex justify-between border-b-2 mb-4 ">
+            <p>Cloud Cover</p> <p>{clouds.all}%</p>
+          </li>
+          <li className="flex justify-between border-b-2 mb-4">
+            <p>Humidity</p> <p>{humidity}%</p>
+          </li>
+          <li className="flex justify-between border-b-2 mb-4">
+            <p>Wind Speed</p>
+            <div className="flex gap-1">
+              <Navigation className={`w-5 mb-1.5  `} rotate={wind.deg} />
+              {wind.speed}km/h
+            </div>
+          </li>
+          <li className="flex justify-between border-b-2 mb-4">
+            <p>Wind Gust</p>
+            <p>{wind.gust}km/h</p>
+          </li>
+          <li className="flex justify-between border-b-2 mb-4">
+            <p>{`Sunrise ${sunriseHours}:${sunriseMinutes} AM`}</p>
+            <p>{`Sunset ${sunsetHours}:${sunsetMinutes} PM`}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 };
 
