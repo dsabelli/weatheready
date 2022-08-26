@@ -22,7 +22,7 @@ interface WeatherCardData {
 }
 let units: string = "°C";
 
-const WeatherCard: React.FC<WeatherCardData> = ({
+const CurrentWeatherCard: React.FC<WeatherCardData> = ({
   temp,
   feelsLike,
   humidity,
@@ -90,4 +90,4 @@ const WeatherCard: React.FC<WeatherCardData> = ({
   );
 };
 
-export default WeatherCard;
+export default CurrentWeatherCard;
