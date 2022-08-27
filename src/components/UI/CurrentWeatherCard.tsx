@@ -37,6 +37,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
   const sunriseMinutes = new Date(sunrise * 1000).getMinutes();
   const sunsetHours = new Date(sunset * 1000).getHours();
   const sunsetMinutes = new Date(sunset * 1000).getMinutes();
+
   return (
     <div className="flex bg-base-100 shadow-xl p-4 mx-auto">
       <div className="flex flex-col w-full">
@@ -81,8 +82,12 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             <p>{Math.round(wind.gust * 10)} km/h</p>
           </li>
           <li className="flex justify-between border-b-2 mb-4">
-            <p>{`Sunrise ${sunriseHours}:${sunriseMinutes} AM`}</p>
-            <p>{`Sunset ${sunsetHours}:${sunsetMinutes} PM`}</p>
+            <p>{`Sunrise ${sunriseHours}:${
+              sunriseMinutes < 10 ? 0 : ""
+            }${sunriseMinutes} AM`}</p>
+            <p>{`Sunset ${sunsetHours}:${
+              sunsetMinutes < 10 ? 0 : ""
+            }${sunsetMinutes} PM`}</p>
           </li>
         </ul>
       </div>
