@@ -1,6 +1,6 @@
 import React from "react";
 
-const W10d = () => {
+const A10n = () => {
   return (
     <div>
       <svg
@@ -11,15 +11,22 @@ const W10d = () => {
         <defs>
           <linearGradient
             id="b"
-            x1="16.5"
-            x2="21.5"
-            y1="19.67"
-            y2="28.33"
+            x1="13.58"
+            x2="24.15"
+            y1="15.57"
+            y2="33.87"
             gradientUnits="userSpaceOnUse"
           >
-            <stop offset="0" stopColor="#fbbf24" />
-            <stop offset=".45" stopColor="#fbbf24" />
-            <stop offset="1" stopColor="#f59e0b" />
+            <stop offset="0" stopColor="#86c3db" />
+            <stop offset=".45" stopColor="#86c3db" />
+            <stop offset="1" stopColor="#5eafcf" />
+            <animateTransform
+              attributeName="gradientTransform"
+              dur="10s"
+              repeatCount="indefinite"
+              type="rotate"
+              values="10 19.22 24.293; -10 19.22 24.293; 10 19.22 24.293"
+            />
           </linearGradient>
           <linearGradient
             id="c"
@@ -62,29 +69,20 @@ const W10d = () => {
             xlinkHref="#a"
           />
         </defs>
-        <circle
-          cx="19"
-          cy="24"
-          r="5"
-          fill="url(#b)"
-          stroke="#f8af18"
-          strokeMiterlimit="10"
-          strokeWidth=".5"
-        />
         <path
-          fill="none"
-          stroke="#fbbf24"
+          fill="url(#b)"
+          stroke="#72b9d5"
           strokeLinecap="round"
-          strokeMiterlimit="10"
-          strokeWidth="2"
-          d="M19 15.67V12.5m0 23v-3.17m5.89-14.22l2.24-2.24M10.87 32.13l2.24-2.24m0-11.78l-2.24-2.24m16.26 16.26l-2.24-2.24M7.5 24h3.17m19.83 0h-3.17"
+          strokeLinejoin="round"
+          strokeWidth=".5"
+          d="M29.33 26.68a10.61 10.61 0 01-10.68-10.54A10.5 10.5 0 0119 13.5a10.54 10.54 0 1011.5 13.11 11.48 11.48 0 01-1.17.07z"
         >
           <animateTransform
             attributeName="transform"
-            dur="45s"
+            dur="10s"
             repeatCount="indefinite"
             type="rotate"
-            values="0 19 24; 360 19 24"
+            values="-10 19.22 24.293; 10 19.22 24.293; -10 19.22 24.293"
           />
         </path>
         <path
@@ -169,4 +167,4 @@ const W10d = () => {
   );
 };
 
-export default W10d;
+export default A10n;

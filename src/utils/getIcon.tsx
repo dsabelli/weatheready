@@ -1,84 +1,84 @@
 import React from "react";
-import W01d from "../assets/icons/W01d";
-import W01n from "../assets/icons/W01n";
-import W02d from "../assets/icons/W02d";
-import W02n from "../assets/icons/W02n";
-import W03d from "../assets/icons/W03d";
-import W03n from "../assets/icons/W03n";
-import W04d from "../assets/icons/W04d";
-import W04n from "../assets/icons/W04n";
-import W09d from "../assets/icons/W09d";
-import W09n from "../assets/icons/W09n";
-import W10d from "../assets/icons/W10d";
-import W10n from "../assets/icons/W10n";
-import W11d from "../assets/icons/W11d";
-import W11n from "../assets/icons/W11n";
-import W13d from "../assets/icons/W13d";
-import W13n from "../assets/icons/W13n";
-import W50d from "../assets/icons/W50d";
-import W50n from "../assets/icons/W50n";
+import A01d from "../assets/icons/animated/A01d";
+import A01n from "../assets/icons/animated/A01n";
+import A02d from "../assets/icons/animated/A02d";
+import A02n from "../assets/icons/animated/A02n";
+import A03d from "../assets/icons/animated/A03d";
+import A03n from "../assets/icons/animated/A03n";
+import A04d from "../assets/icons/animated/A04d";
+import A04n from "../assets/icons/animated/A04n";
+import A09d from "../assets/icons/animated/A09d";
+import A09n from "../assets/icons/animated/A09n";
+import A10d from "../assets/icons/animated/A10d";
+import A10n from "../assets/icons/animated/A10n";
+import A11d from "../assets/icons/animated/A11d";
+import A11n from "../assets/icons/animated/A11n";
+import A13d from "../assets/icons/animated/A13d";
+import A13n from "../assets/icons/animated/A13n";
+import A50d from "../assets/icons/animated/A50d";
+import A50n from "../assets/icons/animated/A50n";
 
-const getIcon = (icon: string) => {
+const getAnimatedIcon = (icon: string) => {
   let weatherIcon;
 
   switch (true) {
     case icon === "01d":
-      weatherIcon = <W01d />;
+      weatherIcon = <A01d />;
       break;
     case icon === "01n":
-      weatherIcon = <W01n />;
+      weatherIcon = <A01n />;
       break;
     case icon === "02d":
-      weatherIcon = <W02d />;
+      weatherIcon = <A02d />;
       break;
     case icon === "02n":
-      weatherIcon = <W02n />;
+      weatherIcon = <A02n />;
       break;
     case icon === "03d":
-      weatherIcon = <W03d />;
+      weatherIcon = <A03d />;
       break;
     case icon === "03n":
-      weatherIcon = <W03n />;
+      weatherIcon = <A03n />;
       break;
     case icon === "04d":
-      weatherIcon = <W04d />;
+      weatherIcon = <A04d />;
       break;
     case icon === "04n":
-      weatherIcon = <W04n />;
+      weatherIcon = <A04n />;
       break;
     case icon === "09d":
-      weatherIcon = <W09d />;
+      weatherIcon = <A09d />;
       break;
     case icon === "09n":
-      weatherIcon = <W09n />;
+      weatherIcon = <A09n />;
       break;
     case icon === "10d":
-      weatherIcon = <W10d />;
+      weatherIcon = <A10d />;
       break;
     case icon === "10n":
-      weatherIcon = <W10n />;
+      weatherIcon = <A10n />;
       break;
     case icon === "11d":
-      weatherIcon = <W11d />;
+      weatherIcon = <A11d />;
       break;
     case icon === "11n":
-      weatherIcon = <W11n />;
+      weatherIcon = <A11n />;
       break;
     case icon === "13d":
-      weatherIcon = <W13d />;
+      weatherIcon = <A13d />;
       break;
     case icon === "13n":
-      weatherIcon = <W13n />;
+      weatherIcon = <A13n />;
       break;
     case icon === "50d":
-      weatherIcon = <W50d />;
+      weatherIcon = <A50d />;
       break;
     case icon === "50n":
-      weatherIcon = <W50n />;
+      weatherIcon = <A50n />;
       break;
   }
 
   return <>{weatherIcon}</>;
 };
 
-export { getIcon };
+export { getAnimatedIcon };

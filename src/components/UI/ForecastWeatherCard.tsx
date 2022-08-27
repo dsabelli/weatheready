@@ -1,5 +1,5 @@
 import React from "react";
-import { getIcon } from "../../utils/getIcon";
+import { getAnimatedIcon } from "../../utils/getIcon";
 
 interface ForecastCardData {
   temp: number;
@@ -24,7 +24,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
         </div>
         <div className="flex w-full">
           <div className="flex justify-center items-center w-full">
-            <div className="w-48 ">{getIcon(icon)}</div>
+            <div className="w-48 ">{getAnimatedIcon(icon)}</div>
             <div>
               <p className="text-4xl">
                 {Math.round(temp)}

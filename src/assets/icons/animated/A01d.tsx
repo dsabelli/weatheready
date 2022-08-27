@@ -1,6 +1,6 @@
 import React from "react";
 
-const W01d = () => {
+const A01d = () => {
   return (
     <div>
       {" "}
@@ -49,4 +49,4 @@ const W01d = () => {
   );
 };
 
-export default W01d;
+export default A01d;

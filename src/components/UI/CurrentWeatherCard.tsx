@@ -1,6 +1,6 @@
 import React from "react";
-import Navigation from "../../assets/icons/Navigation";
-import { getIcon } from "../../utils/getIcon";
+import Navigation from "../../assets/icons/static/Navigation";
+import { getAnimatedIcon } from "../../utils/getIcon";
 
 interface WeatherCardData {
   temp: number;
@@ -45,7 +45,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
           <h2>Current Weather</h2>
         </div>
         <div className="flex justify-center items-center">
-          <div className="w-48 ">{getIcon(icon)}</div>
+          <div className="w-48 ">{getAnimatedIcon(icon)}</div>
           <div>
             <p className="text-4xl">
               {Math.round(temp)}

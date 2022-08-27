@@ -1,6 +1,6 @@
 import React from "react";
 
-const W04n = () => {
+const A04n = () => {
   return (
     <div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
@@ -38,4 +38,4 @@ const W04n = () => {
   );
 };
 
-export default W04n;
+export default A04n;

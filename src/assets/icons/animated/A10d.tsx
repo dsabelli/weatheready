@@ -1,6 +1,6 @@
 import React from "react";
 
-const W09d = () => {
+const A10d = () => {
   return (
     <div>
       <svg
@@ -11,6 +11,18 @@ const W09d = () => {
         <defs>
           <linearGradient
             id="b"
+            x1="16.5"
+            x2="21.5"
+            y1="19.67"
+            y2="28.33"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0" stopColor="#fbbf24" />
+            <stop offset=".45" stopColor="#fbbf24" />
+            <stop offset="1" stopColor="#f59e0b" />
+          </linearGradient>
+          <linearGradient
+            id="c"
             x1="22.56"
             x2="39.2"
             y1="21.96"
@@ -34,7 +46,7 @@ const W09d = () => {
             <stop offset="1" stopColor="#0950bc" />
           </linearGradient>
           <linearGradient
-            id="c"
+            id="d"
             x1="29.53"
             x2="32.47"
             y1="42.95"
@@ -42,7 +54,7 @@ const W09d = () => {
             xlinkHref="#a"
           />
           <linearGradient
-            id="d"
+            id="e"
             x1="36.53"
             x2="39.47"
             y1="42.95"
@@ -50,8 +62,33 @@ const W09d = () => {
             xlinkHref="#a"
           />
         </defs>
-        <path
+        <circle
+          cx="19"
+          cy="24"
+          r="5"
           fill="url(#b)"
+          stroke="#f8af18"
+          strokeMiterlimit="10"
+          strokeWidth=".5"
+        />
+        <path
+          fill="none"
+          stroke="#fbbf24"
+          strokeLinecap="round"
+          strokeMiterlimit="10"
+          strokeWidth="2"
+          d="M19 15.67V12.5m0 23v-3.17m5.89-14.22l2.24-2.24M10.87 32.13l2.24-2.24m0-11.78l-2.24-2.24m16.26 16.26l-2.24-2.24M7.5 24h3.17m19.83 0h-3.17"
+        >
+          <animateTransform
+            attributeName="transform"
+            dur="45s"
+            repeatCount="indefinite"
+            type="rotate"
+            values="0 19 24; 360 19 24"
+          />
+        </path>
+        <path
+          fill="url(#c)"
           stroke="#e6effc"
           strokeMiterlimit="10"
           strokeWidth=".5"
@@ -81,7 +118,7 @@ const W09d = () => {
         </path>
         <path
           fill="none"
-          stroke="url(#c)"
+          stroke="url(#d)"
           strokeLinecap="round"
           strokeMiterlimit="10"
           strokeWidth="2"
@@ -105,7 +142,7 @@ const W09d = () => {
         </path>
         <path
           fill="none"
-          stroke="url(#d)"
+          stroke="url(#e)"
           strokeLinecap="round"
           strokeMiterlimit="10"
           strokeWidth="2"
@@ -132,4 +169,4 @@ const W09d = () => {
   );
 };
 
-export default W09d;
+export default A10d;

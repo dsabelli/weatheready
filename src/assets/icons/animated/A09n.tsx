@@ -1,6 +1,6 @@
 import React from "react";
 
-const W09n = () => {
+const A09n = () => {
   return (
     <div>
       <svg
@@ -132,4 +132,4 @@ const W09n = () => {
   );
 };
 
-export default W09n;
+export default A09n;

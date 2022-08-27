@@ -1,6 +1,6 @@
 import React from "react";
 
-const W50d = () => {
+const A50n = () => {
   return (
     <div>
       <svg
@@ -80,4 +80,4 @@ const W50d = () => {
   );
 };
 
-export default W50d;
+export default A50n;

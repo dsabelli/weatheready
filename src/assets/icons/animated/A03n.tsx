@@ -1,11 +1,10 @@
 import React from "react";
-// import "./W04d.css";
-const W04d = () => {
+
+const A03n = () => {
   return (
     <div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
         <defs>
-          {" "}
           <linearGradient
             id="a"
             x1="22.56"
@@ -39,4 +38,4 @@ const W04d = () => {
   );
 };
 
-export default W04d;
+export default A03n;

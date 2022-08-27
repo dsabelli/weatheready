@@ -1,6 +1,6 @@
 import React from "react";
 
-const W13d = () => {
+const A13n = () => {
   return (
     <div>
       <svg
@@ -244,4 +244,4 @@ const W13d = () => {
   );
 };
 
-export default W13d;
+export default A13n;
