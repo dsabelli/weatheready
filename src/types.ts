@@ -37,22 +37,6 @@ export interface Wind {
   speed: number;
 }
 
-export interface ListWeather {
-  dt: number;
-  visibility: number;
-  pop: number;
-  clouds: {
-    all: number;
-  };
-  dt_txt: string;
-  sys: {
-    pod: string;
-  };
-  main: MainWeather;
-  weather: Weather[];
-  wind: Wind;
-}
-
 export interface WeatherData {
   base: string;
   clouds: {
@@ -75,6 +59,25 @@ export interface WeatherData {
     type: number;
   };
   timezone: number;
+  weather: Weather[];
+  wind: Wind;
+}
+
+export interface ListWeather {
+  dt: number;
+  visibility: number;
+  pop: number;
+  clouds: {
+    all: number;
+  };
+  dt_txt: string;
+  sys: {
+    pod: string;
+  };
+  main: MainWeather;
+  rain: {
+    "3h": number;
+  };
   weather: Weather[];
   wind: Wind;
 }
