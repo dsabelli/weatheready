@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import ForecastWeatherCard from "../../components/UI/ForecastWeatherCard";
 import Loader from "../../components/UI/Loader";
-import { useGetOneCallQuery } from "../weatherApi/weatherApiSlice";
+import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
 import Error from "../../pages/Error";
+import { nanoid } from "nanoid";
 const EightDayWeather = () => {
   const { lat, lon } = useSelector((state: RootState) => state.location);
   const {
@@ -17,7 +18,6 @@ const EightDayWeather = () => {
     lat: lat,
     lon: lon,
   });
-  console.log(weatherData);
 
   let weatherEls;
 
@@ -26,15 +26,25 @@ const EightDayWeather = () => {
   } else if (isWeatherSuccess) {
     console.log(weatherData);
 
-    weatherEls = (
+    weatherEls = weatherData.daily.map((day) => (
       <ForecastWeatherCard
-        temp={22}
-        feelsLike={24}
-        icon="01d"
-        description="sunny"
-        name="Leamington"
+        key={nanoid()}
+        temp={day.temp.max}
+        feelsLike={day.temp.min}
+        icon={day.weather[0].icon}
+        description={day.weather[0].description}
+        iconWidth={`w-24`}
+        date={day.dt}
+        rain={day.rain}
+        snow={day.snow}
+        pop={day.pop}
+        windSpeed={day.wind_speed}
+        windGust={day.wind_gust}
+        uvi={day.uvi}
+        humidity={day.humidity}
+        clouds={day.clouds}
       />
-    );
+    ));
   } else if (isWeatherError) {
     weatherEls = <Error />;
   }
