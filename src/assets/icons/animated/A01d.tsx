@@ -23,7 +23,7 @@ const A01d = () => {
           cx="32"
           cy="32"
           r="10.5"
-          fill="url(#a)"
+          fill="#f8af18"
           stroke="#f8af18"
           strokeMiterlimit="10"
           strokeWidth=".5"
