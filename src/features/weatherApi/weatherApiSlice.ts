@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { WeatherData, ForecastData, OneCallData } from "../../types";
+import { OneCallData } from "../../types";
 
 const weatherApi: string = import.meta.env.VITE_WEATHER_API_KEY;
 
@@ -16,26 +16,26 @@ export const weatherApiSlice = createApi({
   }),
   // tagTypes: ["Weather"],
   endpoints: (builder) => ({
-    getWeather: builder.query<WeatherData, Coords>({
-      query: (arg) => {
-        const { lat, lon } = arg;
-        return {
-          url: `2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
-          params: { lat, lon },
-          // providesTags: ["Weather"],
-        };
-      },
-    }),
-    getForecast: builder.query<ForecastData, Coords>({
-      query: (arg) => {
-        const { lat, lon } = arg;
-        return {
-          url: `2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
-          params: { lat, lon },
-          // providesTags: ["Weather"],
-        };
-      },
-    }),
+    // getWeather: builder.query<WeatherData, Coords>({
+    //   query: (arg) => {
+    //     const { lat, lon } = arg;
+    //     return {
+    //       url: `2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
+    //       params: { lat, lon },
+    //       // providesTags: ["Weather"],
+    //     };
+    //   },
+    // }),
+    // getForecast: builder.query<ForecastData, Coords>({
+    //   query: (arg) => {
+    //     const { lat, lon } = arg;
+    //     return {
+    //       url: `2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
+    //       params: { lat, lon },
+    //       // providesTags: ["Weather"],
+    //     };
+    //   },
+    // }),
     getOneCall: builder.query<OneCallData, Coords>({
       query: (arg) => {
         const { lat, lon } = arg;
@@ -49,5 +49,4 @@ export const weatherApiSlice = createApi({
   }),
 });
 
-export const { useGetWeatherQuery, useGetForecastQuery, useGetOneCallQuery } =
-  weatherApiSlice;
+export const { useGetOneCallQuery } = weatherApiSlice;
