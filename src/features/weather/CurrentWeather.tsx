@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useGetWeatherQuery } from "../weatherApi/weatherApiSlice";
+import { useGetOneCallQuery } from "../weatherApi/weatherApiSlice";
 import Loader from "../../components/UI/Loader";
 import Error from "../../pages/Error";
 import CurrentWeatherCard from "../../components/UI/CurrentWeatherCard";
@@ -24,7 +24,7 @@ const Weather = () => {
     isSuccess: isWeatherSuccess,
     isError: isWeatherError,
     error: weatherError,
-  } = useGetWeatherQuery({
+  } = useGetOneCallQuery({
     lat: lat,
     lon: lon,
   });
@@ -51,16 +51,18 @@ const Weather = () => {
 
     weatherEls = (
       <CurrentWeatherCard
-        temp={weatherData.main.temp}
-        feelsLike={weatherData.main.feels_like}
-        humidity={weatherData.main.humidity}
-        clouds={weatherData.clouds}
-        wind={weatherData.wind}
-        sunrise={weatherData.sys.sunrise}
-        sunset={weatherData.sys.sunset}
-        icon={weatherData.weather[0].icon}
-        description={weatherData.weather[0].description}
-        name={weatherData.name}
+        temp={weatherData.current.temp}
+        feelsLike={weatherData.current.feels_like}
+        humidity={weatherData.current.humidity}
+        clouds={weatherData.current.clouds}
+        windSpeed={weatherData.current.wind_speed}
+        windDeg={weatherData.current.wind_deg}
+        windGust={weatherData.current.wind_gust}
+        sunrise={weatherData.current.sunrise}
+        sunset={weatherData.current.sunset}
+        uvi={weatherData.current.uvi}
+        icon={weatherData.current.weather[0].icon}
+        description={weatherData.current.weather[0].description}
       />
     );
   } else if (isWeatherError) {
