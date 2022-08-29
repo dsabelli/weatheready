@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { WeatherData, ForecastData } from "../../types";
+import { WeatherData, ForecastData, OneCallData } from "../../types";
 
 const weatherApi: string = import.meta.env.VITE_WEATHER_API_KEY;
 
@@ -36,11 +36,11 @@ export const weatherApiSlice = createApi({
         };
       },
     }),
-    getHourlyForecast: builder.query<ForecastData, Coords>({
+    getOneCall: builder.query<OneCallData, Coords>({
       query: (arg) => {
         const { lat, lon } = arg;
         return {
-          url: `3.0/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely&units=${units}&appid=${weatherApi}`,
+          url: `3.0/onecall?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
           params: { lat, lon },
           // providesTags: ["Weather"],
         };
@@ -49,8 +49,5 @@ export const weatherApiSlice = createApi({
   }),
 });
 
-export const {
-  useGetWeatherQuery,
-  useGetForecastQuery,
-  useGetHourlyForecastQuery,
-} = weatherApiSlice;
+export const { useGetWeatherQuery, useGetForecastQuery, useGetOneCallQuery } =
+  weatherApiSlice;
