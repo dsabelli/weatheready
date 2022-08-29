@@ -6,6 +6,7 @@ import CurrentWeatherCard from "../../components/UI/CurrentWeatherCard";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { setLocation } from "../location/locationSlice";
+import PrecipitationChart from "../../components/UI/PrecipitationChart";
 
 interface Coords {
   coords: {
@@ -50,20 +51,23 @@ const Weather = () => {
     console.log(weatherData);
 
     weatherEls = (
-      <CurrentWeatherCard
-        temp={weatherData.current.temp}
-        feelsLike={weatherData.current.feels_like}
-        humidity={weatherData.current.humidity}
-        clouds={weatherData.current.clouds}
-        windSpeed={weatherData.current.wind_speed}
-        windDeg={weatherData.current.wind_deg}
-        windGust={weatherData.current.wind_gust}
-        sunrise={weatherData.current.sunrise}
-        sunset={weatherData.current.sunset}
-        uvi={weatherData.current.uvi}
-        icon={weatherData.current.weather[0].icon}
-        description={weatherData.current.weather[0].description}
-      />
+      <div>
+        <CurrentWeatherCard
+          temp={weatherData.current.temp}
+          feelsLike={weatherData.current.feels_like}
+          humidity={weatherData.current.humidity}
+          clouds={weatherData.current.clouds}
+          windSpeed={weatherData.current.wind_speed}
+          windDeg={weatherData.current.wind_deg}
+          windGust={weatherData.current.wind_gust}
+          sunrise={weatherData.current.sunrise}
+          sunset={weatherData.current.sunset}
+          uvi={weatherData.current.uvi}
+          icon={weatherData.current.weather[0].icon}
+          description={weatherData.current.weather[0].description}
+        />
+        <PrecipitationChart data={weatherData.minutely} />
+      </div>
     );
   } else if (isWeatherError) {
     weatherEls = <Error />;
