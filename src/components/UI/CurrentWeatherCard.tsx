@@ -8,11 +8,9 @@ interface WeatherCardData {
   feelsLike: number;
   humidity: number;
   clouds: number;
-
   windSpeed: number;
   windDeg: number;
   windGust: number;
-
   sunrise: number;
   sunset: number;
   icon: string;
@@ -35,18 +33,22 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
   description,
   uvi,
 }) => {
-  const sunriseHours = new Date(sunrise * 1000).getHours();
-  const sunriseMinutes = new Date(sunrise * 1000).getMinutes();
-  const sunsetHours = new Date(sunset * 1000).getHours();
-  const sunsetMinutes = new Date(sunset * 1000).getMinutes();
-  const uv = Math.round(uvi);
+  const sunriseHours: number = new Date(sunrise * 1000).getHours();
+  const sunriseMinutes: number = new Date(sunrise * 1000).getMinutes();
+  const sunsetHours: number = new Date(sunset * 1000).getHours();
+  const sunsetMinutes: number = new Date(sunset * 1000).getMinutes();
+  const uv: number = Math.round(uvi);
+  const desc: string = description
+    .split(" ")
+    .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
+    .join(" ");
 
   return (
     <div className="flex bg-base-100 shadow-xl p-4 mx-auto">
       <div className="flex flex-col w-full">
         <div className="text-2xl ">
           <h2>Current Weather - </h2>
-          <div>{description}</div>
+          <div>{desc}</div>
         </div>
         <div className="flex justify-center items-center">
           <div className="w-48 ">{getAnimatedIcon(icon)}</div>
@@ -64,7 +66,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             </p>
           </div>
         </div>
-        <div className="flex justify-between border-b-2 mb-4">
+        <div className="flex justify-between  mb-4">
           <p>{`Sunrise ${sunriseHours}:${
             sunriseMinutes < 10 ? 0 : ""
           }${sunriseMinutes} AM`}</p>
