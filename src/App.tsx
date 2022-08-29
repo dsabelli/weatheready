@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Error from "./pages/Error";
-import FiveDay from "./pages/FiveDay";
+import EightDay from "./pages/EightDay";
 import Hourly from "./pages/Hourly";
 import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
@@ -16,7 +16,7 @@ function App() {
       <Route path="/app" element={<Landing />}>
         <Route path="today/a/a" element={<Today />} />
         <Route path="hourly/:id/:city" element={<Hourly />} />
-        <Route path="5-day/:id/:city" element={<FiveDay />} />
+        <Route path="5-day/:id/:city" element={<EightDay />} />
       </Route>
       <Route path="error" element={<Error />} />
       <Route path="*" element={<NotFound />} />

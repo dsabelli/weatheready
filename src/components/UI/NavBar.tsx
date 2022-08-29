@@ -30,8 +30,8 @@ const NavBar = () => {
             </li>
           </Link>
           <Link to="/app/5-day">
-            <li className={` ${path.includes("5-day") ? "bordered" : "pb-1"}`}>
-              <p>5-Day</p>
+            <li className={` ${path.includes("8-day") ? "bordered" : "pb-1"}`}>
+              <p>8-Day</p>
             </li>
           </Link>
         </ul>
