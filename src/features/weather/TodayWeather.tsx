@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import ForecastWeatherCard from "../../components/UI/ForecastWeatherCard";
 import Loader from "../../components/UI/Loader";
-import { useGetForecastQuery } from "../../features/weatherApi/weatherApiSlice";
+import { useGetHourlyForecastQuery } from "../../features/weatherApi/weatherApiSlice";
 import Error from "../../pages/Error";
 const TodayWeather = () => {
   const { lat, lon } = useSelector((state: RootState) => state.location);
@@ -13,7 +13,7 @@ const TodayWeather = () => {
     isSuccess: isWeatherSuccess,
     isError: isWeatherError,
     error: weatherError,
-  } = useGetForecastQuery({
+  } = useGetHourlyForecastQuery({
     lat: lat,
     lon: lon,
   });

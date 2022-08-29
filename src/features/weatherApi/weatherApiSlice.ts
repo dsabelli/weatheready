@@ -12,7 +12,7 @@ let units: string = "metric";
 export const weatherApiSlice = createApi({
   reducerPath: "weatherApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `http://api.openweathermap.org/data/2.5/`,
+    baseUrl: `http://api.openweathermap.org/data/`,
   }),
   // tagTypes: ["Weather"],
   endpoints: (builder) => ({
@@ -20,7 +20,7 @@ export const weatherApiSlice = createApi({
       query: (arg) => {
         const { lat, lon } = arg;
         return {
-          url: `weather?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
+          url: `2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
           params: { lat, lon },
           // providesTags: ["Weather"],
         };
@@ -30,7 +30,17 @@ export const weatherApiSlice = createApi({
       query: (arg) => {
         const { lat, lon } = arg;
         return {
-          url: `forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
+          url: `2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
+          params: { lat, lon },
+          // providesTags: ["Weather"],
+        };
+      },
+    }),
+    getHourlyForecast: builder.query<ForecastData, Coords>({
+      query: (arg) => {
+        const { lat, lon } = arg;
+        return {
+          url: `3.0/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely&units=${units}&appid=${weatherApi}`,
           params: { lat, lon },
           // providesTags: ["Weather"],
         };
@@ -39,4 +49,8 @@ export const weatherApiSlice = createApi({
   }),
 });
 
-export const { useGetWeatherQuery, useGetForecastQuery } = weatherApiSlice;
+export const {
+  useGetWeatherQuery,
+  useGetForecastQuery,
+  useGetHourlyForecastQuery,
+} = weatherApiSlice;
