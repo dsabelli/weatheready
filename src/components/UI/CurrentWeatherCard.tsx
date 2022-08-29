@@ -74,12 +74,12 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             <p>Wind Speed</p>
             <div className="flex gap-1">
               <Navigation className={`w-5 mb-1.5`} rotate={wind.deg} />
-              {Math.round(wind.speed * 10)} km/h
+              {Math.round(wind.speed * 3.6)} km/h
             </div>
           </li>
           <li className="flex justify-between border-b-2 mb-4">
             <p>Wind Gust</p>
-            <p>{Math.round(wind.gust * 10)} km/h</p>
+            <p>{Math.round(wind.gust * 3.6)} km/h</p>
           </li>
           <li className="flex justify-between border-b-2 mb-4">
             <p>{`Sunrise ${sunriseHours}:${
