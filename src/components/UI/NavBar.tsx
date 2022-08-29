@@ -24,12 +24,12 @@ const NavBar = () => {
               <p>Today</p>
             </li>
           </Link>
-          <Link to="/app/hourly">
+          <Link to="/app/hourly/a/a">
             <li className={` ${path.includes("hourly") ? "bordered" : "pb-1"}`}>
               <p>Hourly</p>
             </li>
           </Link>
-          <Link to="/app/5-day">
+          <Link to="/app/8-day/a/a">
             <li className={` ${path.includes("8-day") ? "bordered" : "pb-1"}`}>
               <p>8-Day</p>
             </li>
