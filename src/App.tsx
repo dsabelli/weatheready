@@ -14,9 +14,9 @@ function App() {
   return (
     <Routes>
       <Route path="/app" element={<Landing />}>
-        <Route path="today/a/a" element={<Today />} />
+        <Route path="today/:id/:city" element={<Today />} />
         <Route path="hourly/:id/:city" element={<Hourly />} />
-        <Route path="5-day/:id/:city" element={<EightDay />} />
+        <Route path="8-day/:id/:city" element={<EightDay />} />
       </Route>
       <Route path="error" element={<Error />} />
       <Route path="*" element={<NotFound />} />
