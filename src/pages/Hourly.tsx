@@ -1,7 +1,12 @@
 import React from "react";
+import HourlyWeather from "../features/weather/HourlyWeather";
 
 const Hourly = () => {
-  return <div>Hourly</div>;
+  return (
+    <div>
+      <HourlyWeather />
+    </div>
+  );
 };
 
 export default Hourly;
