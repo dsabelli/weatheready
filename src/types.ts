@@ -105,6 +105,11 @@ export interface ForecastData {
   };
 }
 
+export interface MinuteWeather {
+  dt: number;
+  precipitation: number;
+}
+
 export interface DailyWeather {
   dt: number;
   sunrise: number;
@@ -148,12 +153,33 @@ export interface Alerts {
   description: string;
 }
 
+export interface CurrentWeather {
+  dt: number;
+  sunrise: number;
+  sunset: number;
+  temp: number;
+  feels_like: number;
+  pressure: number;
+  humidity: number;
+  dew_point: number;
+  uvi: number;
+  clouds: number;
+  visibility: number;
+  wind_speed: number;
+  wind_deg: number;
+  wind_gust: number;
+  weather: Weather[];
+  pop?: number;
+}
+
 export interface OneCallData {
   lat: number;
   lon: number;
   timezone: string;
   timezone_offset: number;
-  hourly: ListWeather[];
+  current: CurrentWeather;
+  hourly: CurrentWeather[];
+  minutely: MinuteWeather[];
   daily: DailyWeather[];
   alerts: Alerts[];
 }
