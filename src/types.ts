@@ -78,6 +78,9 @@ export interface ListWeather {
   rain: {
     "3h": number;
   };
+  snow: {
+    "3h": number;
+  };
   weather: Weather[];
   wind: Wind;
 }
