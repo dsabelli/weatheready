@@ -27,28 +27,38 @@ const TodayWeather = () => {
   } else if (isWeatherSuccess) {
     console.log(weatherData);
 
-    weatherEls = (
-      <ForecastWeatherCard
-        key={nanoid()}
-        todayTemp={weatherData.daily[0].temp}
-        todayFeelsLike={weatherData.daily[0].feels_like}
-        icon={weatherData.daily[0].weather[0].icon}
-        description={weatherData.daily[0].weather[0].description}
-        iconWidth={`w-24`}
-        title={`title???`}
-        date={weatherData.daily[0].dt}
-        rain={weatherData.daily[0].rain}
-        snow={weatherData.daily[0].snow}
-        pop={weatherData.daily[0].pop}
-        windSpeed={weatherData.daily[0].wind_speed}
-        windGust={weatherData.daily[0].wind_gust}
-        uvi={weatherData.daily[0].uvi}
-        humidity={weatherData.daily[0].humidity}
-        clouds={weatherData.daily[0].clouds}
-        temp={0}
-        feelsLike={0}
-      />
-    );
+    weatherEls = weatherData.hourly
+      //filter for 8am/2pm/8pm today and 2am tomorrow
+      .filter((day) => {
+        const hours = new Date(day.dt * 1000).getHours();
+        const currentDay = new Date(day.dt * 1000).getDate();
+        const today = new Date().getDate();
+        return (
+          (hours === 2 && currentDay === today + 1) ||
+          (hours === 8 && currentDay === today) ||
+          (hours === 14 && currentDay === today) ||
+          (hours === 20 && currentDay === today)
+        );
+      })
+      .map((hour) => (
+        <ForecastWeatherCard
+          key={nanoid()}
+          temp={hour.temp}
+          feelsLike={hour.feels_like}
+          icon={hour.weather[0].icon}
+          description={hour.weather[0].description}
+          iconWidth={`w-24`}
+          date={hour.dt}
+          rain={0}
+          snow={0}
+          pop={hour.pop || 0}
+          windSpeed={hour.wind_speed}
+          windGust={hour.wind_gust}
+          uvi={hour.uvi}
+          humidity={hour.humidity}
+          clouds={hour.clouds}
+        />
+      ));
   } else if (isWeatherError) {
     weatherEls = <Error />;
   }
