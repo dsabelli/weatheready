@@ -67,8 +67,10 @@ const Weather = () => {
           uvi={current.uvi}
           icon={current.weather[0].icon}
           description={current.weather[0].description}
-          rain={current.rain["1h"] || 0}
-          snow={current.snow["1h"] || 0}
+          rain={0}
+          snow={0}
+          // rain={current.rain["1h"] || 0}
+          // snow={current.snow["1h"] || 0}
         />
         <PrecipitationChart data={weatherData.minutely} />
       </div>
