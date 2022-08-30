@@ -22,7 +22,11 @@ const PrecipitationChart: React.FC<PrecipitationData> = ({ data }) => {
   const precipData = data.map((d) => {
     const hours = new Date(d.dt * 1000).getHours();
     const minutes = new Date(d.dt * 1000).getMinutes();
-    return { ...d, dt: `${hours}:${minutes < 10 ? 0 : ""}${minutes}` };
+    return {
+      ...d,
+      dt: `${hours}:${minutes < 10 ? 0 : ""}${minutes}`,
+      precipitation: Math.round(d.precipitation * 100) / 100,
+    };
   });
 
   const hidePrecipData = precipData.every((d) => d.precipitation === 0);
@@ -46,8 +50,8 @@ const PrecipitationChart: React.FC<PrecipitationData> = ({ data }) => {
             <Area
               type="monotone"
               dataKey="precipitation"
-              stroke="#387908"
-              fill="#387908"
+              stroke="#2995d2"
+              fill="#0072bb"
               yAxisId={0}
             />
           </AreaChart>
