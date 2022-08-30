@@ -24,7 +24,7 @@ const persistConfig: Config = {
 const initialState: Settings = {
   metric: true,
   imperial: false,
-  units: { temp: "°C", precip: "mm/h", wind: "km/h" },
+  units: { temp: "°C", precip: "mm", wind: "km/h" },
 };
 const settingsSlice = createSlice({
   name: "settings",
@@ -35,8 +35,8 @@ const settingsSlice = createSlice({
       state.metric = payload;
       state.imperial = !payload;
       state.metric
-        ? (state.units = { temp: "°C", precip: "mm/h", wind: "km/h" })
-        : (state.units = { temp: "°F", precip: "in/h", wind: "mph" });
+        ? (state.units = { temp: "°C", precip: "mm", wind: "km/h" })
+        : (state.units = { temp: "°F", precip: "in", wind: "mph" });
     },
   },
 });
