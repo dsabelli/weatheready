@@ -19,7 +19,7 @@ const A03d = () => {
           </linearGradient>
         </defs>
         <path
-          fill="url(#a)"
+          fill="#e6effc"
           stroke="#e6effc"
           strokeMiterlimit="10"
           strokeWidth=".5"

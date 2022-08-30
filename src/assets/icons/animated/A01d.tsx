@@ -29,7 +29,7 @@ const A01d = () => {
           strokeWidth=".5"
         />
         <path
-          fill="none"
+          fill="#fbbf24"
           stroke="#fbbf24"
           strokeLinecap="round"
           strokeMiterlimit="10"

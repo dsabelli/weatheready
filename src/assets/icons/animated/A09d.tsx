@@ -51,7 +51,7 @@ const A09d = () => {
           />
         </defs>
         <path
-          fill="url(#b)"
+          fill="e6effc"
           stroke="#e6effc"
           strokeMiterlimit="10"
           strokeWidth=".5"

@@ -34,13 +34,13 @@ const A02d = () => {
           cx="19"
           cy="24"
           r="5"
-          fill="url(#a)"
+          fill="#f8af18"
           stroke="#f8af18"
           strokeMiterlimit="10"
           strokeWidth=".5"
         />
         <path
-          fill="none"
+          fill="#fbbf24"
           stroke="#fbbf24"
           strokeLinecap="round"
           strokeMiterlimit="10"
@@ -56,7 +56,7 @@ const A02d = () => {
           />
         </path>
         <path
-          fill="url(#b)"
+          fill="#e6effc"
           stroke="#e6effc"
           strokeMiterlimit="10"
           strokeWidth=".5"

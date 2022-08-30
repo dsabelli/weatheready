@@ -70,7 +70,7 @@ const A10n = () => {
           />
         </defs>
         <path
-          fill="url(#b)"
+          fill="#72b9d5"
           stroke="#72b9d5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -86,7 +86,7 @@ const A10n = () => {
           />
         </path>
         <path
-          fill="url(#c)"
+          fill="#e6effc"
           stroke="#e6effc"
           strokeMiterlimit="10"
           strokeWidth=".5"

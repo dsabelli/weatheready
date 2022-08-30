@@ -96,7 +96,7 @@ const A13d = () => {
           strokeWidth=".5"
         />
         <path
-          fill="none"
+          fill="#fbbf24"
           stroke="#fbbf24"
           strokeLinecap="round"
           strokeMiterlimit="10"
@@ -112,7 +112,7 @@ const A13d = () => {
           />
         </path>
         <path
-          fill="url(#c)"
+          fill="#e6effc"
           stroke="#e6effc"
           strokeMiterlimit="10"
           strokeWidth=".5"

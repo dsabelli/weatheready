@@ -38,7 +38,7 @@ const A02n = () => {
           </linearGradient>
         </defs>
         <path
-          fill="url(#a)"
+          fill="#72b9d5"
           stroke="#72b9d5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -54,7 +54,7 @@ const A02n = () => {
           />
         </path>
         <path
-          fill="url(#b)"
+          fill="#e6effc"
           stroke="#e6effc"
           strokeMiterlimit="10"
           strokeWidth=".5"
