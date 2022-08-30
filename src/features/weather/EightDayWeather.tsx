@@ -7,6 +7,7 @@ import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
 import Error from "../../pages/Error";
 import { nanoid } from "nanoid";
 const EightDayWeather = () => {
+  const { metric } = useSelector((state: RootState) => state.settings);
   const { lat, lon } = useSelector((state: RootState) => state.location);
   const {
     data: weatherData,
@@ -17,6 +18,7 @@ const EightDayWeather = () => {
   } = useGetOneCallQuery({
     lat: lat,
     lon: lon,
+    units: metric ? "metric" : "imperial",
   });
 
   let weatherEls;
@@ -35,11 +37,11 @@ const EightDayWeather = () => {
         description={day.weather[0].description}
         iconWidth={`w-24`}
         date={day.dt}
-        rain={day.rain}
-        snow={day.snow}
+        rain={metric ? day.rain || 0 : day.rain / 25.4 || 0}
+        snow={metric ? day.snow || 0 : day.snow / 25.4 || 0}
         pop={day.pop}
-        windSpeed={day.wind_speed}
-        windGust={day.wind_gust}
+        windSpeed={metric ? day.wind_speed * 3.6 : day.wind_speed}
+        windGust={metric ? day.wind_gust * 3.6 : day.wind_gust}
         uvi={day.uvi}
         humidity={day.humidity}
         clouds={day.clouds}

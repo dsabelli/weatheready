@@ -68,6 +68,8 @@ export interface Alerts {
 }
 
 export interface CurrentWeather {
+  rain: number;
+  snow: number;
   dt: number;
   sunrise: number;
   sunset: number;

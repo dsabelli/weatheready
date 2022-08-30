@@ -3,7 +3,10 @@ import { getAnimatedIcon } from "../../utils/getIcon";
 import { getDayOfWeek } from "../../utils/getDayOfWeek";
 import { getUvDesc } from "../../utils/getUvDesc";
 import { useLocation } from "react-router-dom";
-import { getTimeOfDay } from "../../utils/getTimeofDay";
+import { getTimeOfDay } from "../../utils/getTimeOfDay";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+
 interface ForecastCardData {
   temp: number;
   feelsLike: number;
@@ -20,8 +23,6 @@ interface ForecastCardData {
   humidity: number;
   clouds: number;
 }
-let units: string = "°C";
-
 const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   temp,
   feelsLike,
@@ -39,6 +40,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   date,
 }) => {
   let location = useLocation();
+  const { units } = useSelector((state: RootState) => state.settings);
   const pathname = location.pathname;
   const desc: string = description
     .split(" ")
@@ -72,32 +74,70 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
           <div className="flex w-full">
             <div className="flex justify-center items-center w-full">
               <div className={` ${iconWidth}`}>{getAnimatedIcon(icon)}</div>
-              <div className="flex gap-2">
-                <p className="text-4xl">
-                  {Math.round(temp)}
-                  {units}
-                </p>{" "}
-                <p className="text-lg opacity-70 self-end">
-                  /{Math.round(feelsLike)}
-                  {units}{" "}
-                </p>
+              <div
+                className={`${pathname.includes("8-day") ? "flex gap-2" : ""}`}
+              >
+                {pathname.includes("8-day") && (
+                  <>
+                    {" "}
+                    <p className="text-4xl">
+                      {Math.round(temp)}
+                      {units.temp}
+                    </p>{" "}
+                    <p className="text-lg opacity-70 self-end">
+                      /{Math.round(feelsLike)}
+                      {units.temp}{" "}
+                    </p>
+                  </>
+                )}
+                {!pathname.includes("8-day") && (
+                  <>
+                    <p className="text-4xl">
+                      {Math.round(temp)}
+                      {units.temp}
+                    </p>
+                    <p className="text-sm">
+                      Feels like{" "}
+                      <span className="text-xl">
+                        {Math.round(feelsLike)}
+                        {units.temp}
+                      </span>
+                    </p>
+                  </>
+                )}
               </div>
             </div>
             <div className="flex justify-between items-center w-full">
               <p>{desc}</p>
-              <p className={`${pop === 0 ? "hidden" : ""}`}>{pop * 100}%</p>
+              <p className={`${pop === 0 ? "hidden" : ""}`}>
+                {Math.round(pop * 100)}%
+              </p>
             </div>
           </div>
         </div>
       </div>
       <div className="collapse-content ">
         <ul className="flex gap-4 justify-around">
-          <li>Rain {rain}</li>
-          <li>Snow {snow}</li>
-          <li>Clouds {clouds}</li>
-          <li>Humidity {humidity}</li>
-          <li>Wind {Math.round(windSpeed * 3.6)}</li>
-          <li>Wind Gust {Math.round(windGust * 3.6)}</li>
+          {rain !== 0 && (
+            <li>
+              Rain {Math.round(rain * 100) / 100}
+              {units.precip}
+            </li>
+          )}
+          {snow !== 0 && (
+            <li>
+              Snow {Math.round(snow * 100) / 100}
+              {units.precip}
+            </li>
+          )}
+          <li>Clouds {Math.round(clouds)}%</li>
+          <li>Humidity {Math.round(humidity)}%</li>
+          <li>
+            Wind {Math.round(windSpeed)} {units.wind}
+          </li>
+          <li>
+            Wind Gust {Math.round(windGust)} {units.wind}
+          </li>
           <li>
             UV {Math.round(uvi)} {getUvDesc(uvi)}
           </li>

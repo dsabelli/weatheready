@@ -6,8 +6,8 @@ const weatherApi: string = import.meta.env.VITE_WEATHER_API_KEY;
 export interface Coords {
   lat: string;
   lon: string;
+  units: string;
 }
-let units: string = "metric";
 
 export const weatherApiSlice = createApi({
   reducerPath: "weatherApi",
@@ -38,10 +38,10 @@ export const weatherApiSlice = createApi({
     // }),
     getOneCall: builder.query<OneCallData, Coords>({
       query: (arg) => {
-        const { lat, lon } = arg;
+        const { lat, lon, units } = arg;
         return {
           url: `3.0/onecall?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
-          params: { lat, lon },
+          params: { lat, lon, units },
           // providesTags: ["Weather"],
         };
       },

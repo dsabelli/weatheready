@@ -8,6 +8,7 @@ import Error from "../../pages/Error";
 import { nanoid } from "nanoid";
 const TodayWeather = () => {
   const { lat, lon } = useSelector((state: RootState) => state.location);
+  const { metric } = useSelector((state: RootState) => state.settings);
   const {
     data: weatherData,
     isLoading: isWeatherLoading,
@@ -17,6 +18,7 @@ const TodayWeather = () => {
   } = useGetOneCallQuery({
     lat: lat,
     lon: lon,
+    units: metric ? "metric" : "imperial",
   });
   console.log(weatherData);
 
@@ -49,11 +51,11 @@ const TodayWeather = () => {
           description={hour.weather[0].description}
           iconWidth={`w-24`}
           date={hour.dt}
-          rain={0}
-          snow={0}
+          rain={metric ? hour.rain || 0 : hour.rain / 25.4 || 0}
+          snow={metric ? hour.snow || 0 : hour.snow / 25.4 || 0}
           pop={hour.pop || 0}
-          windSpeed={hour.wind_speed}
-          windGust={hour.wind_gust}
+          windSpeed={metric ? hour.wind_speed * 3.6 : hour.wind_speed}
+          windGust={metric ? hour.wind_gust * 3.6 : hour.wind_gust}
           uvi={hour.uvi}
           humidity={hour.humidity}
           clouds={hour.clouds}

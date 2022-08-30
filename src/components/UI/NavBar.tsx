@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import SettingsToggle from "./SettingsToggle";
 
 const NavBar = () => {
   let location = useLocation();
@@ -16,6 +17,7 @@ const NavBar = () => {
             Weather Ready
           </Link>
         </div>
+        <SettingsToggle />
       </div>
       <div className="mx-auto max-w-4xl">
         <ul className="menu menu-horizontal bg-base-100 rounded-box text-xl gap-8  ">

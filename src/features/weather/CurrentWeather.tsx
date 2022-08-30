@@ -18,6 +18,7 @@ interface Coords {
 const Weather = () => {
   const dispatch = useDispatch();
   const { lat, lon } = useSelector((state: RootState) => state.location);
+  const { metric } = useSelector((state: RootState) => state.settings);
 
   const {
     data: weatherData,
@@ -28,6 +29,7 @@ const Weather = () => {
   } = useGetOneCallQuery({
     lat: lat,
     lon: lon,
+    units: metric ? "metric" : "imperial",
   });
 
   const successCallback = (position: Coords) => {
@@ -49,22 +51,24 @@ const Weather = () => {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
     console.log(weatherData);
-
+    const current = weatherData.current;
     weatherEls = (
       <div>
         <CurrentWeatherCard
-          temp={weatherData.current.temp}
-          feelsLike={weatherData.current.feels_like}
-          humidity={weatherData.current.humidity}
-          clouds={weatherData.current.clouds}
-          windSpeed={weatherData.current.wind_speed}
-          windDeg={weatherData.current.wind_deg}
-          windGust={weatherData.current.wind_gust}
-          sunrise={weatherData.current.sunrise}
-          sunset={weatherData.current.sunset}
-          uvi={weatherData.current.uvi}
-          icon={weatherData.current.weather[0].icon}
-          description={weatherData.current.weather[0].description}
+          temp={current.temp}
+          feelsLike={current.feels_like}
+          humidity={current.humidity}
+          clouds={current.clouds}
+          windSpeed={metric ? current.wind_speed * 3.6 : current.wind_speed}
+          windDeg={current.wind_deg}
+          windGust={metric ? current.wind_gust * 3.6 : current.wind_gust}
+          sunrise={current.sunrise}
+          sunset={current.sunset}
+          uvi={current.uvi}
+          icon={current.weather[0].icon}
+          description={current.weather[0].description}
+          rain={metric ? current.rain || 0 : current.rain / 25.4 || 0}
+          snow={metric ? current.snow || 0 : current.snow / 25.4 || 0}
         />
         <PrecipitationChart data={weatherData.minutely} />
       </div>

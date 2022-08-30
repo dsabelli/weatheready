@@ -2,6 +2,8 @@ import React from "react";
 import Navigation from "../../assets/icons/static/Navigation";
 import { getAnimatedIcon } from "../../utils/getIcon";
 import { getUvDesc } from "../../utils/getUvDesc";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 interface WeatherCardData {
   temp: number;
@@ -16,8 +18,9 @@ interface WeatherCardData {
   icon: string;
   description: string;
   uvi: number;
+  rain: number;
+  snow: number;
 }
-let units: string = "°C";
 
 const CurrentWeatherCard: React.FC<WeatherCardData> = ({
   temp,
@@ -32,12 +35,14 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
   icon,
   description,
   uvi,
+  rain,
+  snow,
 }) => {
+  const { units } = useSelector((state: RootState) => state.settings);
   const sunriseHours: number = new Date(sunrise * 1000).getHours();
   const sunriseMinutes: number = new Date(sunrise * 1000).getMinutes();
   const sunsetHours: number = new Date(sunset * 1000).getHours();
   const sunsetMinutes: number = new Date(sunset * 1000).getMinutes();
-  const uv: number = Math.round(uvi);
   const desc: string = description
     .split(" ")
     .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
@@ -55,13 +60,13 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
           <div>
             <p className="text-4xl">
               {Math.round(temp)}
-              {units}
+              {units.temp}
             </p>
             <p className="text-sm">
               Feels like{" "}
               <span className="text-xl">
                 {Math.round(feelsLike)}
-                {units}
+                {units.temp}
               </span>
             </p>
           </div>
@@ -77,27 +82,45 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
       </div>
       <div className="w-full px-4">
         <ul className="mt-8">
+          {rain !== 0 && (
+            <li className="flex justify-between border-b-2 mb-4">
+              <p> Rain</p>
+              <p>
+                {Math.round(rain * 100) / 100} {units.precip}
+              </p>
+            </li>
+          )}
+          {snow !== 0 && (
+            <li className="flex justify-between border-b-2 mb-4">
+              <p>Snow</p>
+              <p>
+                {Math.round(snow * 100) / 100} {units.precip}
+              </p>
+            </li>
+          )}
           <li className="flex justify-between border-b-2 mb-4 ">
-            <p>Cloud Cover</p> <p>{clouds}%</p>
+            <p>Cloud Cover</p> <p>{Math.round(clouds)}%</p>
           </li>
           <li className="flex justify-between border-b-2 mb-4">
-            <p>Humidity</p> <p>{humidity}%</p>
+            <p>Humidity</p> <p>{Math.round(humidity)}%</p>
           </li>
           <li className="flex justify-between border-b-2 mb-4">
             <p>Wind Speed</p>
             <div className="flex gap-1">
               <Navigation className={`w-5 mb-1.5`} rotate={windDeg} />
-              {Math.round(windSpeed * 3.6)} km/h
+              {Math.round(windSpeed)} {units.wind}
             </div>
           </li>
           <li className="flex justify-between border-b-2 mb-4">
             <p>Wind Gust</p>
-            <p>{Math.round(windGust * 3.6)} km/h</p>
+            <p>
+              {Math.round(windGust)} {units.wind}
+            </p>
           </li>
           <li className="flex justify-between border-b-2 mb-4">
             <p>UV</p>{" "}
             <p>
-              {uv} {getUvDesc(uv)}
+              {Math.round(uvi)} {getUvDesc(Math.round(uvi))}
             </p>
           </li>
         </ul>
