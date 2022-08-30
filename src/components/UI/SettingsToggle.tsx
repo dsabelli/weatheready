@@ -14,8 +14,8 @@ const SettingsToggle = () => {
           type="checkbox"
           onChange={() => dispatch(setSettings(!metric))}
         />
-        <div className="swap-on">°F</div>
-        <div className="swap-off">°C</div>
+        <div className="swap-on">{metric ? "°C" : "°F"}</div>
+        <div className="swap-off">{metric ? "°C" : "°F"}</div>
       </label>
     </div>
   );

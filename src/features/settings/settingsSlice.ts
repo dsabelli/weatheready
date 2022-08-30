@@ -1,4 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { Storage } from "redux-persist";
 
 export interface Settings {
   metric: boolean;
@@ -9,6 +12,14 @@ export interface Settings {
     wind: string;
   };
 }
+interface Config {
+  key: string;
+  storage: Storage;
+}
+const persistConfig: Config = {
+  key: "root",
+  storage,
+};
 
 const initialState: Settings = {
   metric: true,
@@ -32,4 +43,4 @@ const settingsSlice = createSlice({
 
 export const { setSettings } = settingsSlice.actions;
 
-export default settingsSlice.reducer;
+export default persistReducer(persistConfig, settingsSlice.reducer);
