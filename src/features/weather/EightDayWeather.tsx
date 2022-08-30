@@ -37,11 +37,11 @@ const EightDayWeather = () => {
         description={day.weather[0].description}
         iconWidth={`w-24`}
         date={day.dt}
-        rain={metric ? day.rain || 0 : day.rain / 25.4 || 0}
-        snow={metric ? day.snow || 0 : day.snow / 25.4 || 0}
+        rain={day.rain || 0}
+        snow={day.snow || 0}
         pop={day.pop}
-        windSpeed={metric ? day.wind_speed * 3.6 : day.wind_speed}
-        windGust={metric ? day.wind_gust * 3.6 : day.wind_gust}
+        windSpeed={day.wind_speed}
+        windGust={day.wind_gust}
         uvi={day.uvi}
         humidity={day.humidity}
         clouds={day.clouds}

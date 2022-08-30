@@ -59,16 +59,16 @@ const Weather = () => {
           feelsLike={current.feels_like}
           humidity={current.humidity}
           clouds={current.clouds}
-          windSpeed={metric ? current.wind_speed * 3.6 : current.wind_speed}
+          windSpeed={current.wind_speed}
           windDeg={current.wind_deg}
-          windGust={metric ? current.wind_gust * 3.6 : current.wind_gust}
+          windGust={current.wind_gust}
           sunrise={current.sunrise}
           sunset={current.sunset}
           uvi={current.uvi}
           icon={current.weather[0].icon}
           description={current.weather[0].description}
-          rain={metric ? current.rain || 0 : current.rain / 25.4 || 0}
-          snow={metric ? current.snow || 0 : current.snow / 25.4 || 0}
+          rain={current.rain || 0}
+          snow={current.snow || 0}
         />
         <PrecipitationChart data={weatherData.minutely} />
       </div>

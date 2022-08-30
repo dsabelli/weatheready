@@ -40,18 +40,22 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   date,
 }) => {
   let location = useLocation();
-  const { units } = useSelector((state: RootState) => state.settings);
   const pathname = location.pathname;
+
+  const { metric, units } = useSelector((state: RootState) => state.settings);
+
   const desc: string = description
     .split(" ")
     .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
     .join(" ");
+
   const dayOfWeek: string = getDayOfWeek(new Date(date * 1000).getDay());
   const dayAndMonth = `${new Date(date * 1000).getMonth() + 1}/${new Date(
     date * 1000
   ).getDate()}`;
   const hours = new Date(date * 1000).getHours();
   const timeOfDay: string = getTimeOfDay(new Date(date * 1000).getHours());
+
   return (
     <div className="collapse collapse-arrow bg-base-100 shadow-xl p-4 mx-auto max-w-2xl mb-4">
       <input type="checkbox" />
@@ -120,23 +124,24 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
         <ul className="flex gap-4 justify-around">
           {rain !== 0 && (
             <li>
-              Rain {Math.round(rain * 100) / 100}
+              Rain {Math.round(metric ? rain * 100 : (rain / 25.4) * 100) / 100}
               {units.precip}
             </li>
           )}
           {snow !== 0 && (
             <li>
-              Snow {Math.round(snow * 100) / 100}
+              Snow {Math.round(metric ? snow * 100 : (snow / 25.4) * 100) / 100}
               {units.precip}
             </li>
           )}
           <li>Clouds {Math.round(clouds)}%</li>
           <li>Humidity {Math.round(humidity)}%</li>
           <li>
-            Wind {Math.round(windSpeed)} {units.wind}
+            Wind {Math.round(metric ? windSpeed * 3.6 : windSpeed)} {units.wind}
           </li>
           <li>
-            Wind Gust {Math.round(windGust)} {units.wind}
+            Wind Gust {Math.round(metric ? windGust * 3.6 : windGust)}{" "}
+            {units.wind}
           </li>
           <li>
             UV {Math.round(uvi)} {getUvDesc(uvi)}

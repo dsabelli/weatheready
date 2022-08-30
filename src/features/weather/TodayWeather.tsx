@@ -51,11 +51,11 @@ const TodayWeather = () => {
           description={hour.weather[0].description}
           iconWidth={`w-24`}
           date={hour.dt}
-          rain={metric ? hour.rain || 0 : hour.rain / 25.4 || 0}
-          snow={metric ? hour.snow || 0 : hour.snow / 25.4 || 0}
+          rain={hour.rain || 0}
+          snow={hour.snow || 0}
           pop={hour.pop || 0}
-          windSpeed={metric ? hour.wind_speed * 3.6 : hour.wind_speed}
-          windGust={metric ? hour.wind_gust * 3.6 : hour.wind_gust}
+          windSpeed={hour.wind_speed}
+          windGust={hour.wind_gust}
           uvi={hour.uvi}
           humidity={hour.humidity}
           clouds={hour.clouds}

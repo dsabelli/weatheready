@@ -38,7 +38,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
   rain,
   snow,
 }) => {
-  const { units } = useSelector((state: RootState) => state.settings);
+  const { metric, units } = useSelector((state: RootState) => state.settings);
   const sunriseHours: number = new Date(sunrise * 1000).getHours();
   const sunriseMinutes: number = new Date(sunrise * 1000).getMinutes();
   const sunsetHours: number = new Date(sunset * 1000).getHours();
@@ -86,7 +86,8 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             <li className="flex justify-between border-b-2 mb-4">
               <p> Rain</p>
               <p>
-                {Math.round(rain * 100) / 100} {units.precip}
+                {Math.round(metric ? rain * 100 : (rain / 25.4) * 100) / 100}{" "}
+                {units.precip}
               </p>
             </li>
           )}
@@ -94,7 +95,8 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             <li className="flex justify-between border-b-2 mb-4">
               <p>Snow</p>
               <p>
-                {Math.round(snow * 100) / 100} {units.precip}
+                {Math.round(metric ? snow * 100 : (snow / 25.4) * 100) / 100}{" "}
+                {units.precip}
               </p>
             </li>
           )}
@@ -108,13 +110,13 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             <p>Wind Speed</p>
             <div className="flex gap-1">
               <Navigation className={`w-5 mb-1.5`} rotate={windDeg} />
-              {Math.round(windSpeed)} {units.wind}
+              {Math.round(metric ? windSpeed * 3.6 : windSpeed)} {units.wind}
             </div>
           </li>
           <li className="flex justify-between border-b-2 mb-4">
             <p>Wind Gust</p>
             <p>
-              {Math.round(windGust)} {units.wind}
+              {Math.round(metric ? windGust * 3.6 : windGust)} {units.wind}
             </p>
           </li>
           <li className="flex justify-between border-b-2 mb-4">
