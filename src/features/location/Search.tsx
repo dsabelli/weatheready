@@ -8,6 +8,7 @@ import { useDebounce } from "use-debounce";
 import Loader from "../../components/UI/Loader";
 
 import { setLocation } from "../location/locationSlice";
+import { AutocompleteData, AutocompleteFeatures } from "../../types";
 const Search = () => {
   const dispatch = useDispatch();
 
@@ -29,22 +30,24 @@ const Search = () => {
   if (isAutocompleteLoading) {
     autocompleteEls = <Loader />;
   } else if (isAutocompleteSuccess) {
-    autocompleteEls = autocompleteData.features.map((data: any) => (
-      <div
-        onClick={() =>
-          dispatch(
-            setLocation({
-              lat: data.bbox[1].toString(),
-              lon: data.bbox[0].toString(),
-            })
-          )
-        }
-        key={nanoid()}
-        className="flex p-1 gap-2 justify-center mx-auto  max-w-3xl opacity-60 mb-2"
-      >
-        {`${data.properties.city}, ${data.properties.state}`}
-      </div>
-    ));
+    autocompleteEls = autocompleteData.features.map(
+      (data: AutocompleteFeatures) => (
+        <div
+          onClick={() =>
+            dispatch(
+              setLocation({
+                lat: data.properties.lat.toString(),
+                lon: data.properties.lon.toString(),
+              })
+            )
+          }
+          key={nanoid()}
+          className="flex p-1 gap-2 justify-center mx-auto  max-w-3xl opacity-60 mb-2"
+        >
+          {`${data.properties.city}, ${data.properties.state}`}
+        </div>
+      )
+    );
   }
   return (
     <div className="form-control w-full sm:w-64 ">

@@ -1,10 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { GeoData } from "../../types";
+import { AutocompleteData, GeoData } from "../../types";
 import { Location } from "../../types";
 import { nanoid } from "nanoid";
 
 const autocompleteApi: string = import.meta.env.VITE_AUTOCOMPLETE_API_KEY;
-const sessionToken: string = nanoid();
 
 export const autocompleteSlice = createApi({
   reducerPath: "autocompleteApi",
@@ -13,7 +12,7 @@ export const autocompleteSlice = createApi({
   }),
   // tagTypes: ["Geo"],
   endpoints: (builder) => ({
-    getAutocomplete: builder.query<any, any>({
+    getAutocomplete: builder.query<AutocompleteData, any>({
       query: (arg) => {
         const { input } = arg;
         return {
