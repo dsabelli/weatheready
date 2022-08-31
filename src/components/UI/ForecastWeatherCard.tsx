@@ -140,8 +140,9 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
             Wind {Math.round(metric ? windSpeed * 3.6 : windSpeed)} {units.wind}
           </li>
           <li>
-            Wind Gust {Math.round(metric ? windGust * 3.6 : windGust)}{" "}
-            {units.wind}
+            Wind Gust{" "}
+            {!isNaN ? Math.round(metric ? windGust * 3.6 : windGust) : "N/A"}{" "}
+            {!isNaN && units.wind}
           </li>
           <li>
             UV {Math.round(uvi)} {getUvDesc(uvi)}

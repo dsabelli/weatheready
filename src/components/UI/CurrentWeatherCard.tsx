@@ -116,7 +116,8 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
           <li className="flex justify-between border-b-2 mb-4">
             <p>Wind Gust</p>
             <p>
-              {Math.round(metric ? windGust * 3.6 : windGust)} {units.wind}
+              {!isNaN ? Math.round(metric ? windGust * 3.6 : windGust) : "N/A"}{" "}
+              {!isNaN && units.wind}
             </p>
           </li>
           <li className="flex justify-between border-b-2 mb-4">
