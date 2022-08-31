@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { weatherApiSlice } from "../features/weatherApi/weatherApiSlice";
 import { geoApiSlice } from "../features/geoApi/geoApiSlice";
+import { autocompleteSlice } from "../features/autocompleteApi/autocompleteSlice";
 import {
   persistStore,
   FLUSH,
@@ -17,6 +18,7 @@ export const store = configureStore({
   reducer: {
     [geoApiSlice.reducerPath]: geoApiSlice.reducer,
     [weatherApiSlice.reducerPath]: weatherApiSlice.reducer,
+    [autocompleteSlice.reducerPath]: autocompleteSlice.reducer,
     location: locationReducer,
     settings: settingsReducer,
   },
@@ -25,7 +27,11 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(geoApiSlice.middleware, weatherApiSlice.middleware),
+    }).concat(
+      geoApiSlice.middleware,
+      weatherApiSlice.middleware,
+      autocompleteSlice.middleware
+    ),
 });
 
 export const persistor = persistStore(store);
