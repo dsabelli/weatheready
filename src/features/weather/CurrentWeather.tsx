@@ -72,7 +72,9 @@ const Weather = () => {
           // rain={current.rain["1h"] || 0}
           // snow={current.snow["1h"] || 0}
         />
-        <PrecipitationChart data={weatherData.minutely} />
+        {weatherData.minutely && (
+          <PrecipitationChart data={weatherData.minutely} />
+        )}
       </div>
     );
   } else if (isWeatherError) {
