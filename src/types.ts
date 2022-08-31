@@ -1,3 +1,8 @@
+export interface IconProps {
+  className: string;
+  rotate: number;
+}
+
 export interface Location {
   city: string;
   state: string;
@@ -98,6 +103,57 @@ export interface OneCallData {
   minutely: MinuteWeather[];
   daily: DailyWeather[];
   alerts: Alerts[];
+}
+
+export interface AutocompleteFeatures {
+  bbox: number[];
+  geometry: {
+    coordinates: number[];
+    type: string;
+  };
+  properties: {
+    address_line1?: string;
+    address_line2?: string;
+    category?: string;
+    city?: string;
+    country?: string;
+    country_code?: string;
+    datasource?: {
+      attribution: string;
+      license: string;
+      sourcename: string;
+      url: string;
+    };
+    formatted?: string;
+    lat: number;
+    lon: number;
+    place_id?: string;
+    postcode?: string;
+    rank?: {
+      confidence: number;
+      confidence_city_level: number;
+      importance: number;
+      match_type: string;
+    };
+    result_type?: string;
+    state?: string;
+    state_code?: string;
+    village?: string;
+  };
+  type: string;
+}
+interface AutocompleteQuery {
+  parsed: {
+    city?: string;
+    expected_type?: string;
+  };
+  text: string;
+  type: string;
+}
+
+export interface AutocompleteData {
+  features: AutocompleteFeatures[];
+  query: AutocompleteQuery;
 }
 
 //export interface MainWeather {
