@@ -1,12 +1,9 @@
 import React from "react";
 import { IconProps } from "../../../types";
 
-const Navigation: React.FC<IconProps> = ({ className, rotate }) => {
+const Clouds: React.FC<IconProps> = ({ className }) => {
   return (
-    <div
-      className={` ${className}`}
-      style={{ transform: `rotate(${rotate - 180}deg)` }}
-    >
+    <div className={` ${className}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -15,12 +12,12 @@ const Navigation: React.FC<IconProps> = ({ className, rotate }) => {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="feather feather-navigation-2"
+        className="feather feather-cloud"
       >
-        <polygon points="12 2 19 21 12 17 5 21 12 2"></polygon>
+        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
       </svg>
     </div>
   );
 };
 
-export default Navigation;
+export default Clouds;
