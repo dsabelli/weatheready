@@ -13,6 +13,7 @@ import Humidity from "../../assets/icons/static/Humidity";
 import Navigation from "../../assets/icons/static/Navigation";
 import WindGust from "../../assets/icons/static/WindGust";
 import UVI from "../../assets/icons/static/UVI";
+import { Tooltip } from "@mantine/core";
 
 interface ForecastCardData {
   temp: number;
@@ -185,9 +186,8 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
           </li>
           <li>
             <div className="flex flex-col gap-2 items-center">
-              <UVI className="w-7" />
+              <UVI />
               <p>
-                {" "}
                 {Math.round(uvi)} {getUvDesc(Math.round(uvi))}
               </p>
             </div>
