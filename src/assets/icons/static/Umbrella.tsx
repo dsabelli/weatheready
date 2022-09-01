@@ -1,6 +1,6 @@
 import React from "react";
 import { IconProps } from "../../../types";
-const Umbrealla: React.FC<IconProps> = ({ className }) => {
+const Umbrella: React.FC<IconProps> = ({ className }) => {
   return (
     <div className={` ${className}`}>
       <svg
@@ -19,4 +19,4 @@ const Umbrealla: React.FC<IconProps> = ({ className }) => {
   );
 };
 
-export default Umbrealla;
+export default Umbrella;

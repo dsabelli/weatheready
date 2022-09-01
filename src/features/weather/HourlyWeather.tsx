@@ -49,6 +49,7 @@ const HourlyWeather = () => {
           pop={hour.pop || 0}
           windSpeed={hour.wind_speed}
           windGust={hour.wind_gust}
+          windDeg={hour.wind_deg}
           uvi={hour.uvi}
           humidity={hour.humidity}
           clouds={hour.clouds}

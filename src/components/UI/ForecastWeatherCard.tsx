@@ -6,6 +6,13 @@ import { useLocation } from "react-router-dom";
 import { getTimeOfDay } from "../../utils/getTimeOfDay";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import Umbrella from "../../assets/icons/static/Umbrella";
+import Snowflake from "../../assets/icons/static/Snowflake";
+import Clouds from "../../assets/icons/static/Clouds";
+import Humidity from "../../assets/icons/static/Humidity";
+import Navigation from "../../assets/icons/static/Navigation";
+import WindGust from "../../assets/icons/static/WindGust";
+import UVI from "../../assets/icons/static/UVI";
 
 interface ForecastCardData {
   temp: number;
@@ -19,6 +26,7 @@ interface ForecastCardData {
   pop: number;
   windSpeed: number;
   windGust: number;
+  windDeg: number;
   uvi: number;
   humidity: number;
   clouds: number;
@@ -34,6 +42,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   pop,
   windSpeed,
   windGust,
+  windDeg,
   uvi,
   humidity,
   clouds,
@@ -124,30 +133,64 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
         <ul className="flex gap-4 justify-around">
           {rain !== 0 && (
             <li>
-              Rain {Math.round(metric ? rain * 100 : (rain / 25.4) * 100) / 100}
-              {units.precip}
+              <div className="flex flex-col gap-2 items-center">
+                <Umbrella className="w-7" />
+                <p>
+                  {Math.round(metric ? rain * 100 : (rain / 25.4) * 100) / 100}{" "}
+                  {units.precip}
+                </p>
+              </div>
             </li>
           )}
           {snow !== 0 && (
             <li>
-              Snow {Math.round(metric ? snow * 100 : (snow / 25.4) * 100) / 100}
-              {units.precip}
+              <div className="flex flex-col gap-2 items-center">
+                <Snowflake className="w-7" />
+                <p>
+                  {Math.round(metric ? snow * 100 : (snow / 25.4) * 100) / 100}{" "}
+                  {units.precip}
+                </p>
+              </div>
             </li>
           )}
-          <li>Clouds {Math.round(clouds)}%</li>
-          <li>Humidity {Math.round(humidity)}%</li>
           <li>
-            Wind {Math.round(metric ? windSpeed * 3.6 : windSpeed)} {units.wind}
+            <div className="flex flex-col gap-2 items-center">
+              <Clouds className="w-7" /> <p>{Math.round(clouds)}%</p>
+            </div>
           </li>
           <li>
-            Wind Gust{" "}
-            {!isNaN(windGust)
-              ? Math.round(metric ? windGust * 3.6 : windGust)
-              : "N/A"}{" "}
-            {!isNaN(windGust) && units.wind}
+            <div className="flex flex-col gap-2 items-center">
+              <Humidity className="w-7" /> <p>{Math.round(humidity)}%</p>
+            </div>{" "}
           </li>
           <li>
-            UV {Math.round(uvi)} {getUvDesc(uvi)}
+            <div className="flex flex-col gap-2 items-center">
+              <Navigation className="w-7" rotate={windDeg} />
+              <p>
+                {Math.round(metric ? windSpeed * 3.6 : windSpeed)} {units.wind}
+              </p>
+            </div>
+          </li>
+          <li>
+            <div className="flex flex-col gap-2 items-center">
+              <WindGust className="w-7" />
+              {!isNaN(windGust) ? (
+                <p>
+                  {Math.round(metric ? windGust * 3.6 : windGust)} {units.wind}
+                </p>
+              ) : (
+                <p>N/A</p>
+              )}
+            </div>
+          </li>
+          <li>
+            <div className="flex flex-col gap-2 items-center">
+              <UVI className="w-7" />
+              <p>
+                {" "}
+                {Math.round(uvi)} {getUvDesc(uvi)}
+              </p>
+            </div>
           </li>
         </ul>
       </div>

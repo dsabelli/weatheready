@@ -42,6 +42,7 @@ const EightDayWeather = () => {
         pop={day.pop}
         windSpeed={day.wind_speed}
         windGust={day.wind_gust}
+        windDeg={day.wind_deg}
         uvi={day.uvi}
         humidity={day.humidity}
         clouds={day.clouds}
