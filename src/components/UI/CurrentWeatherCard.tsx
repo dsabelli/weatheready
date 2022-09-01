@@ -1,5 +1,5 @@
 import React from "react";
-import Navigation from "../../assets/icons/static/Navigation";
+import { NavIcon } from "../../assets/icons/static/Navigation";
 import { getAnimatedIcon } from "../../utils/getIcon";
 import { getUvDesc } from "../../utils/getUvDesc";
 import { useSelector } from "react-redux";
@@ -109,7 +109,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
           <li className="flex justify-between border-b-2 mb-4">
             <p>Wind Speed</p>
             <div className="flex gap-1">
-              <Navigation className={`w-5 mb-1.5`} rotate={windDeg} />
+              <NavIcon className={`w-5 mb-1.5`} rotate={windDeg} />
               {Math.round(metric ? windSpeed * 3.6 : windSpeed)} {units.wind}
             </div>
           </li>

@@ -1,5 +1,6 @@
 export interface IconProps {
   rotate: number;
+  className?: string;
 }
 
 export interface Location {
