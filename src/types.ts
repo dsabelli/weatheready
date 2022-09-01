@@ -3,20 +3,6 @@ export interface IconProps {
   className?: string;
 }
 
-export interface Location {
-  city: string;
-  state: string;
-  country: string;
-}
-
-export interface GeoData {
-  name: string;
-  local_names: { en: string };
-  lat: string;
-  lon: string;
-  country: string;
-}
-
 export interface Weather {
   id: number;
   main: string;

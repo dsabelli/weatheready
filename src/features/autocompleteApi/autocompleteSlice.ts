@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AutocompleteData, GeoData } from "../../types";
-import { Location } from "../../types";
-import { nanoid } from "nanoid";
+import { AutocompleteData } from "../../types";
 
 const autocompleteApi: string = import.meta.env.VITE_AUTOCOMPLETE_API_KEY;
 
