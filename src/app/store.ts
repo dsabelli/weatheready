@@ -11,6 +11,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import locationReducer from "../features/location/locationSlice";
+import previousLocationReducer from "../features/location/previousLocationSlice";
 import settingsReducer from "../features/settings/settingsSlice";
 
 export const store = configureStore({
@@ -18,6 +19,7 @@ export const store = configureStore({
     [weatherApiSlice.reducerPath]: weatherApiSlice.reducer,
     [autocompleteSlice.reducerPath]: autocompleteSlice.reducer,
     location: locationReducer,
+    previousLocation: previousLocationReducer,
     settings: settingsReducer,
   },
   middleware: (getDefaultMiddleware) =>

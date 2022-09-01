@@ -104,6 +104,7 @@ export interface AutocompleteFeatures {
     city?: string;
     country?: string;
     country_code?: string;
+    county?: string;
     datasource?: {
       attribution: string;
       license: string;
@@ -111,8 +112,10 @@ export interface AutocompleteFeatures {
       url: string;
     };
     formatted?: string;
+    hamlet?: string;
     lat: number;
     lon: number;
+    name?: string;
     place_id?: string;
     postcode?: string;
     rank?: {

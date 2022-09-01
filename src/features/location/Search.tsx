@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import Input from "../../components/UI/Input";
 import { nanoid } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useGetAutocompleteQuery } from "../autocompleteApi/autocompleteSlice";
-
 import { useDebounce } from "use-debounce";
 import Loader from "../../components/UI/Loader";
-
 import { setLocation } from "../location/locationSlice";
-import { AutocompleteData, AutocompleteFeatures } from "../../types";
+import { AutocompleteFeatures } from "../../types";
+import { RootState } from "../../app/store";
+import { setPreviousLocation } from "./previousLocationSlice";
 const Search = () => {
   const dispatch = useDispatch();
-
+  const { previousLocations } = useSelector(
+    (state: RootState) => state.previousLocation
+  );
   const [autocomplete, setAutocomplete] = useState("");
   const [visible, setVisible] = useState(false);
-  const [debouncedAutocomplete] = useDebounce(autocomplete, 300);
+  const [debouncedAutocomplete] = useDebounce(autocomplete, 200);
+  console.log(previousLocations);
 
   const {
     data: autocompleteData,
@@ -40,17 +43,54 @@ const Search = () => {
                 lon: data.properties.lon.toString(),
               })
             ),
+            dispatch(
+              setPreviousLocation({
+                city: data.properties.city,
+                name: data.properties.name,
+                state: data.properties.state,
+                lat: data.properties.lat.toString(),
+                lon: data.properties.lon.toString(),
+              })
+            ),
             setVisible(false),
-            setAutocomplete(`${data.properties.city}, ${data.properties.state}`)
+            setAutocomplete(
+              `${data.properties.city || data.properties.name}, ${
+                data.properties.state
+              }`
+            )
           )}
           key={nanoid()}
-          className="flex p-1 gap-2 justify-center mx-auto  max-w-3xl opacity-60 mb-2"
+          className="flex p-1 gap-2 justify-center mx-auto  max-w-3xl mb-2"
         >
-          {`${data.properties.city}, ${data.properties.state}`}
+          {`${data.properties.city || data.properties.name}, ${
+            data.properties.state
+          }`}
         </div>
       )
     );
   }
+  let previousLocationEls;
+  if (previousLocations) {
+    previousLocationEls = previousLocations.map((location) => (
+      <div
+        className="opacity-60"
+        key={nanoid()}
+        onClick={() => (
+          dispatch(
+            setLocation({
+              lat: location.lat,
+              lon: location.lon,
+            })
+          ),
+          setVisible(false),
+          setAutocomplete(
+            `${location.city || location.name}, ${location.state}`
+          )
+        )}
+      >{`${location.city || location.name}, ${location.state}`}</div>
+    ));
+  }
+
   return (
     <div className="form-control w-full sm:w-80 ">
       <Input
@@ -72,6 +112,7 @@ const Search = () => {
               setAutocomplete(""))
             : null
         }
+        onFocus={() => (setVisible(true), setAutocomplete(""))}
       />
 
       <div
@@ -85,6 +126,12 @@ const Search = () => {
         >
           <li className={`dropdown ${visible ? "" : "hidden"}`}>
             {autocompleteEls}
+            {!autocomplete && (
+              <>
+                <p className="p-0 text-sm opacity-60">Recent</p>
+                {previousLocationEls}
+              </>
+            )}
           </li>
         </ul>
       </div>
