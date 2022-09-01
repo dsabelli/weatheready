@@ -33,14 +33,16 @@ const Search = () => {
     autocompleteEls = autocompleteData.features.map(
       (data: AutocompleteFeatures) => (
         <div
-          onClick={() =>
+          onClick={() => (
             dispatch(
               setLocation({
                 lat: data.properties.lat.toString(),
                 lon: data.properties.lon.toString(),
               })
-            )
-          }
+            ),
+            setVisible(false),
+            setAutocomplete(`${data.properties.city}, ${data.properties.state}`)
+          )}
           key={nanoid()}
           className="flex p-1 gap-2 justify-center mx-auto  max-w-3xl opacity-60 mb-2"
         >
@@ -50,18 +52,16 @@ const Search = () => {
     );
   }
   return (
-    <div className="form-control w-full sm:w-64 ">
+    <div className="form-control w-full sm:w-80 ">
       <Input
         value={autocomplete || ""}
         type="text"
         placeholder="Search Location..."
         className="input w-full bg-base-200 focus:outline-none md:text-accent-content md:bg-accent-focus placeholder-opacity-50 placeholder-accent-content"
-        // if not an empty string, get didits with title of value,
-        // otherwise clear everything and focus input for next search
         onChange={(e) =>
           e.target.value !== ""
             ? (setAutocomplete(e.target.value), setVisible(true))
-            : (setVisible(false), setAutocomplete(""), e.target.focus())
+            : (setVisible(false), setAutocomplete(""))
         }
         //on escape or enter keypress, clear everything
         onKeyDown={(e) =>
