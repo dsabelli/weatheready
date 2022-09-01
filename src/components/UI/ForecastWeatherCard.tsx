@@ -13,7 +13,7 @@ import Humidity from "../../assets/icons/static/Humidity";
 import Navigation from "../../assets/icons/static/Navigation";
 import WindGust from "../../assets/icons/static/WindGust";
 import UVI from "../../assets/icons/static/UVI";
-import { Tooltip } from "@mantine/core";
+import Raindrops from "../../assets/icons/static/Raindrops";
 
 interface ForecastCardData {
   temp: number;
@@ -123,9 +123,13 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
             </div>
             <div className="flex justify-between items-center w-full">
               <p>{desc}</p>
-              <p className={`${pop === 0 ? "hidden" : ""}`}>
-                {Math.round(pop * 100)}%
-              </p>
+              {pop !== 0 && (
+                <div className="z-50">
+                  {" "}
+                  <Umbrella />
+                  <p>{Math.round(pop * 100)}%</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -135,10 +139,16 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
           {rain !== 0 && (
             <li>
               <div className="flex flex-col gap-2 items-center">
-                <Umbrella className="w-7" />
+                <Raindrops />
                 <p>
-                  {Math.round(metric ? rain * 100 : (rain / 25.4) * 100) / 100}{" "}
-                  {units.precip}
+                  {Math.round(
+                    metric
+                      ? rain * 100
+                      : rain / 25.4 < 0.1
+                      ? 0.1 * 100
+                      : (rain / 25.4) * 100
+                  ) / 100}{" "}
+                  {units.rain}
                 </p>
               </div>
             </li>
@@ -146,27 +156,33 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
           {snow !== 0 && (
             <li>
               <div className="flex flex-col gap-2 items-center">
-                <Snowflake className="w-7" />
+                <Snowflake />
                 <p>
-                  {Math.round(metric ? snow * 100 : (snow / 25.4) * 100) / 100}{" "}
-                  {units.precip}
+                  {Math.round(
+                    metric
+                      ? snow * 10
+                      : snow / 25.4 < 0.1
+                      ? 0.1 * 100
+                      : (snow / 25.4) * 100
+                  ) / 100}{" "}
+                  {units.snow}
                 </p>
               </div>
             </li>
           )}
           <li>
             <div className="flex flex-col gap-2 items-center">
-              <Clouds className="w-7" /> <p>{Math.round(clouds)}%</p>
+              <Clouds /> <p>{Math.round(clouds)}%</p>
             </div>
           </li>
           <li>
             <div className="flex flex-col gap-2 items-center">
-              <Humidity className="w-7" /> <p>{Math.round(humidity)}%</p>
+              <Humidity /> <p>{Math.round(humidity)}%</p>
             </div>{" "}
           </li>
           <li>
             <div className="flex flex-col gap-2 items-center">
-              <Navigation className="w-7" rotate={windDeg} />
+              <Navigation rotate={windDeg} />
               <p>
                 {Math.round(metric ? windSpeed * 3.6 : windSpeed)} {units.wind}
               </p>
@@ -174,7 +190,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
           </li>
           <li>
             <div className="flex flex-col gap-2 items-center">
-              <WindGust className="w-7" />
+              <WindGust />
               {!isNaN(windGust) ? (
                 <p>
                   {Math.round(metric ? windGust * 3.6 : windGust)} {units.wind}

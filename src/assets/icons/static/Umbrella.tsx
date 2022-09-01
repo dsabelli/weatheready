@@ -20,7 +20,7 @@ const UmbrellaIcon = forwardRef<HTMLDivElement>((props, ref) => (
 
 const Umbrella = () => {
   return (
-    <Tooltip label="Rain">
+    <Tooltip label="Chance of Precipitation">
       <UmbrellaIcon />
     </Tooltip>
   );

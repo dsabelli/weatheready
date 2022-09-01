@@ -8,7 +8,8 @@ export interface Settings {
   imperial: boolean;
   units: {
     temp: string;
-    precip: string;
+    rain: string;
+    snow: string;
     wind: string;
   };
 }
@@ -24,7 +25,7 @@ const persistConfig: Config = {
 const initialState: Settings = {
   metric: true,
   imperial: false,
-  units: { temp: "°C", precip: "mm", wind: "km/h" },
+  units: { temp: "°C", rain: "mm", snow: "cm", wind: "km/h" },
 };
 const settingsSlice = createSlice({
   name: "settings",
@@ -35,8 +36,8 @@ const settingsSlice = createSlice({
       state.metric = payload;
       state.imperial = !payload;
       state.metric
-        ? (state.units = { temp: "°C", precip: "mm", wind: "km/h" })
-        : (state.units = { temp: "°F", precip: "in", wind: "mph" });
+        ? (state.units = { temp: "°C", rain: "mm", snow: "cm", wind: "km/h" })
+        : (state.units = { temp: "°F", rain: "in", snow: "in", wind: "mph" });
     },
   },
 });

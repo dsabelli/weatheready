@@ -84,10 +84,16 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
         <ul className="mt-8">
           {rain !== 0 && (
             <li className="flex justify-between border-b-2 mb-4">
-              <p> Rain</p>
+              <p>Rain</p>
               <p>
-                {Math.round(metric ? rain * 100 : (rain / 25.4) * 100) / 100}{" "}
-                {units.precip}
+                {Math.round(
+                  metric
+                    ? rain * 100
+                    : rain / 25.4 < 0.1
+                    ? 0.1 * 100
+                    : (rain / 25.4) * 100
+                ) / 100}{" "}
+                {units.rain}
               </p>
             </li>
           )}
@@ -95,8 +101,14 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             <li className="flex justify-between border-b-2 mb-4">
               <p>Snow</p>
               <p>
-                {Math.round(metric ? snow * 100 : (snow / 25.4) * 100) / 100}{" "}
-                {units.precip}
+                {Math.round(
+                  metric
+                    ? snow * 10
+                    : snow / 25.4 < 0.1
+                    ? 0.1 * 100
+                    : (snow / 25.4) * 100
+                ) / 100}{" "}
+                {units.snow}
               </p>
             </li>
           )}
