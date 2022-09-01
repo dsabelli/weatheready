@@ -188,7 +188,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
               <UVI className="w-7" />
               <p>
                 {" "}
-                {Math.round(uvi)} {getUvDesc(uvi)}
+                {Math.round(uvi)} {getUvDesc(Math.round(uvi))}
               </p>
             </div>
           </li>
