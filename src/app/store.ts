@@ -1,6 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { weatherApiSlice } from "../features/weatherApi/weatherApiSlice";
 import { autocompleteSlice } from "../features/autocompleteApi/autocompleteSlice";
+import { reverseLocationSlice } from "../features/reverseLocationApi/reverseLocationSlice";
+import locationReducer from "../features/location/locationSlice";
+import previousLocationReducer from "../features/location/previousLocationSlice";
+import storedLocationReducer from "../features/location/storedLocationSlice";
+import settingsReducer from "../features/settings/settingsSlice";
 import {
   persistStore,
   FLUSH,
@@ -10,15 +15,12 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import locationReducer from "../features/location/locationSlice";
-import previousLocationReducer from "../features/location/previousLocationSlice";
-import storedLocationReducer from "../features/location/storedLocationSlice";
-import settingsReducer from "../features/settings/settingsSlice";
 
 export const store = configureStore({
   reducer: {
     [weatherApiSlice.reducerPath]: weatherApiSlice.reducer,
     [autocompleteSlice.reducerPath]: autocompleteSlice.reducer,
+    [reverseLocationSlice.reducerPath]: reverseLocationSlice.reducer,
     location: locationReducer,
     previousLocation: previousLocationReducer,
     storedLocation: storedLocationReducer,
@@ -29,7 +31,11 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(weatherApiSlice.middleware, autocompleteSlice.middleware),
+    }).concat(
+      weatherApiSlice.middleware,
+      autocompleteSlice.middleware,
+      reverseLocationSlice.middleware
+    ),
 });
 
 export const persistor = persistStore(store);

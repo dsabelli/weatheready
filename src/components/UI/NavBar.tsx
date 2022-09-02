@@ -1,11 +1,37 @@
+import { Loader } from "@mantine/core";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { RootState } from "../../app/store";
 import Search from "../../features/location/Search";
+import { useGetReverseLocationQuery } from "../../features/reverseLocationApi/reverseLocationSlice";
 import SettingsToggle from "./SettingsToggle";
 
 const NavBar = () => {
   let location = useLocation();
   const path = location.pathname;
+  const loc = useSelector((state: RootState) => state.location);
+  const {
+    data: reverseLocationData,
+    isLoading: isReverseLocationLoading,
+    isSuccess: isReverseLocationSuccess,
+    isError: isReverseLocationError,
+    error: reverseLocationError,
+  } = useGetReverseLocationQuery({
+    latitude: loc.lat,
+    longitude: loc.lon,
+  });
+
+  let reverseLocationEl;
+
+  if (isReverseLocationLoading) {
+    reverseLocationEl = <Loader />;
+  } else if (isReverseLocationSuccess) {
+    reverseLocationEl = (
+      <div>{reverseLocationData.features[0].properties.city}</div>
+    );
+    console.log(reverseLocationData);
+  }
 
   return (
     <nav className="">
@@ -18,6 +44,7 @@ const NavBar = () => {
             Weather Ready
           </Link>
         </div>
+        {reverseLocationEl}
         <Search />
         <SettingsToggle />
       </div>

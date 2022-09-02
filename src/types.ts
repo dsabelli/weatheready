@@ -153,6 +153,41 @@ export interface AutocompleteData {
   features: AutocompleteFeatures[];
   query: AutocompleteQuery;
 }
+interface ReverseLocationResults {
+  properties: {
+    datasource?: {
+      attribution: string;
+      license: string;
+      sourcename: string;
+      url: string;
+    };
+    name?: string;
+    street?: string;
+    housenumber?: string;
+    suburb?: string;
+    district?: string;
+    city?: string;
+    postcode?: string;
+    country?: string;
+    country_code?: string;
+    lon: number;
+    lat: number;
+    distance?: string;
+    result_type?: string;
+    formatted?: string;
+    address_line1?: string;
+    address_line2?: string;
+    category?: string;
+    rank: {
+      popularity?: string;
+    };
+    place_id?: string;
+  };
+  bbox?: number[];
+}
+export interface ReverseLocationData {
+  features: ReverseLocationResults[];
+}
 
 //export interface MainWeather {
 //   feels_like: number;
