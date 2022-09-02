@@ -29,7 +29,6 @@ const Weather = () => {
   if (isWeatherLoading) {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
-    console.log(weatherData);
     const current = weatherData.current;
     weatherEls = (
       <div>

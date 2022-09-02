@@ -30,7 +30,6 @@ const NavBar = () => {
     reverseLocationEl = (
       <div>{reverseLocationData.features[0].properties.city}</div>
     );
-    console.log(reverseLocationData);
   }
 
   return (

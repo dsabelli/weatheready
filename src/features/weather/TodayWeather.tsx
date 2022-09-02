@@ -20,15 +20,12 @@ const TodayWeather = () => {
     lon: lon,
     units: metric ? "metric" : "imperial",
   });
-  console.log(weatherData);
 
   let weatherEls;
 
   if (isWeatherLoading) {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
-    console.log(weatherData);
-
     weatherEls = weatherData.hourly
       //filter for 8am/2pm/8pm today and 2am tomorrow
       .filter((day) => {

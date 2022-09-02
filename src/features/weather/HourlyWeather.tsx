@@ -20,15 +20,12 @@ const HourlyWeather = () => {
     lon: lon,
     units: metric ? "metric" : "imperial",
   });
-  console.log(weatherData);
 
   let weatherEls;
 
   if (isWeatherLoading) {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
-    console.log(weatherData);
-
     weatherEls = weatherData.hourly
       .filter(
         (day) => new Date(day.dt * 1000).getDate() === new Date().getDate()
