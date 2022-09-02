@@ -21,6 +21,7 @@ const Search = () => {
   const [visible, setVisible] = useState(false);
   const [debouncedAutocomplete] = useDebounce(autocomplete, 200);
   console.log(previousLocations);
+  console.log(debouncedAutocomplete);
 
   const {
     data: autocompleteData,
@@ -36,42 +37,43 @@ const Search = () => {
   if (isAutocompleteLoading) {
     autocompleteEls = <Loader />;
   } else if (isAutocompleteSuccess) {
-    autocompleteEls = autocompleteData.features.map(
-      (data: AutocompleteFeatures) => (
-        <div
-          onClick={() => (
-            dispatch(
-              setLocation({
-                lat: data.properties.lat.toString(),
-                lon: data.properties.lon.toString(),
-              })
-            ),
-            dispatch(
-              setPreviousLocation({
-                city: data.properties.city,
-                name: data.properties.name,
-                state: data.properties.state,
-                country: data.properties.country,
-                lat: data.properties.lat.toString(),
-                lon: data.properties.lon.toString(),
-              })
-            ),
-            setVisible(false),
-            setAutocomplete(
-              `${data.properties.city || data.properties.name}, ${
-                data.properties.state || data.properties.country
-              }`
-            )
-          )}
-          key={nanoid()}
-          className="flex p-1 gap-2 justify-center mx-auto  max-w-3xl mb-2"
-        >
-          {`${data.properties.city || data.properties.name}, ${
-            data.properties.state || data.properties.country
-          }`}
-        </div>
-      )
+    const cities = autocompleteData.features.filter(
+      (data) => data.properties.city
     );
+    autocompleteEls = cities.map((data: AutocompleteFeatures) => (
+      <div
+        onClick={() => (
+          dispatch(
+            setLocation({
+              lat: data.properties.lat.toString(),
+              lon: data.properties.lon.toString(),
+            })
+          ),
+          dispatch(
+            setPreviousLocation({
+              city: data.properties.city,
+              name: data.properties.name,
+              state: data.properties.state,
+              country: data.properties.country,
+              lat: data.properties.lat.toString(),
+              lon: data.properties.lon.toString(),
+            })
+          ),
+          setVisible(false),
+          setAutocomplete(
+            `${data.properties.city}, ${
+              data.properties.state || data.properties.country
+            }`
+          )
+        )}
+        key={nanoid()}
+        className="flex p-1 gap-2 justify-center mx-auto  max-w-3xl mb-2"
+      >
+        {`${data.properties.city}, ${
+          data.properties.state || data.properties.country
+        }`}
+      </div>
+    ));
   }
   let previousLocationEls;
   if (previousLocations) {
@@ -141,7 +143,7 @@ const Search = () => {
         onFocus={() => (setVisible(true), setAutocomplete(""))}
         onBlur={(e) =>
           e.target.value === ""
-            ? setTimeout(() => setVisible(false), 100)
+            ? setTimeout(() => setVisible(false), 1000)
             : null
         }
       />
