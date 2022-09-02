@@ -113,6 +113,11 @@ const Search = () => {
             : null
         }
         onFocus={() => (setVisible(true), setAutocomplete(""))}
+        onBlur={(e) =>
+          e.target.value === ""
+            ? setTimeout(() => setVisible(false), 100)
+            : null
+        }
       />
 
       <div
