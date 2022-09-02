@@ -146,7 +146,7 @@ const Search = () => {
         onFocus={() => (setVisible(true), setAutocomplete(""))}
         onBlur={(e) =>
           e.target.value === ""
-            ? setTimeout(() => setVisible(false), 1000)
+            ? setTimeout(() => setVisible(false), 400)
             : null
         }
       />
