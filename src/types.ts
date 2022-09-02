@@ -1,3 +1,12 @@
+export interface Location {
+  city?: string;
+  name?: string;
+  state?: string;
+  country?: string;
+  lat: string;
+  lon: string;
+}
+
 export interface IconProps {
   rotate: number;
   className?: string;

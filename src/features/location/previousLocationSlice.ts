@@ -2,14 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { Storage } from "redux-persist";
-
-export interface Location {
-  city?: string;
-  name?: string;
-  state?: string;
-  lat: string;
-  lon: string;
-}
+import { Location } from "../../types";
 
 export interface LocationInitialState {
   previousLocations: Location[];

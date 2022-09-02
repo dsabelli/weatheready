@@ -12,6 +12,7 @@ import {
 } from "redux-persist";
 import locationReducer from "../features/location/locationSlice";
 import previousLocationReducer from "../features/location/previousLocationSlice";
+import storedLocationReducer from "../features/location/storedLocationSlice";
 import settingsReducer from "../features/settings/settingsSlice";
 
 export const store = configureStore({
@@ -20,6 +21,7 @@ export const store = configureStore({
     [autocompleteSlice.reducerPath]: autocompleteSlice.reducer,
     location: locationReducer,
     previousLocation: previousLocationReducer,
+    storedLocation: storedLocationReducer,
     settings: settingsReducer,
   },
   middleware: (getDefaultMiddleware) =>

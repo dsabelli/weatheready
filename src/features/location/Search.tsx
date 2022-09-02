@@ -14,6 +14,9 @@ const Search = () => {
   const { previousLocations } = useSelector(
     (state: RootState) => state.previousLocation
   );
+  const storedLocation = useSelector(
+    (state: RootState) => state.storedLocation
+  );
   const [autocomplete, setAutocomplete] = useState("");
   const [visible, setVisible] = useState(false);
   const [debouncedAutocomplete] = useDebounce(autocomplete, 200);
@@ -48,6 +51,7 @@ const Search = () => {
                 city: data.properties.city,
                 name: data.properties.name,
                 state: data.properties.state,
+                country: data.properties.country,
                 lat: data.properties.lat.toString(),
                 lon: data.properties.lon.toString(),
               })
@@ -55,7 +59,7 @@ const Search = () => {
             setVisible(false),
             setAutocomplete(
               `${data.properties.city || data.properties.name}, ${
-                data.properties.state
+                data.properties.state || data.properties.country
               }`
             )
           )}
@@ -63,7 +67,7 @@ const Search = () => {
           className="flex p-1 gap-2 justify-center mx-auto  max-w-3xl mb-2"
         >
           {`${data.properties.city || data.properties.name}, ${
-            data.properties.state
+            data.properties.state || data.properties.country
           }`}
         </div>
       )
@@ -84,13 +88,35 @@ const Search = () => {
           ),
           setVisible(false),
           setAutocomplete(
-            `${location.city || location.name}, ${location.state}`
+            `${location.city || location.name}, ${
+              location.state || location.country
+            }`
           )
         )}
-      >{`${location.city || location.name}, ${location.state}`}</div>
+      >{`${location.city || location.name}, ${
+        location.state || location.country
+      }`}</div>
     ));
   }
 
+  let currentLocationEl;
+  if (storedLocation.lat && storedLocation.lon) {
+    currentLocationEl = (
+      <div
+        onClick={() => (
+          dispatch(
+            setLocation({
+              lat: storedLocation.lat,
+              lon: storedLocation.lon,
+            })
+          ),
+          setVisible(false)
+        )}
+      >
+        Current Location
+      </div>
+    );
+  }
   return (
     <div className="form-control w-full sm:w-80 ">
       <Input
@@ -133,6 +159,7 @@ const Search = () => {
             {autocompleteEls}
             {!autocomplete && (
               <>
+                {currentLocationEl}
                 <p className="p-0 text-sm opacity-60">Recent</p>
                 {previousLocationEls}
               </>
