@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../components/UI/Input";
 import { nanoid } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,9 +19,12 @@ const Search = () => {
   );
   const [autocomplete, setAutocomplete] = useState("");
   const [visible, setVisible] = useState(false);
+  const [search, setSearch] = useState("");
   const [debouncedAutocomplete] = useDebounce(autocomplete, 200);
-  console.log(previousLocations);
-  console.log(debouncedAutocomplete);
+
+  useEffect(() => {
+    if (debouncedAutocomplete) setSearch(debouncedAutocomplete);
+  }, [debouncedAutocomplete]);
 
   const {
     data: autocompleteData,
@@ -29,8 +32,7 @@ const Search = () => {
     isSuccess: isAutocompleteSuccess,
     isError: isAutocompleteError,
     error: autocompleteError,
-  } = useGetAutocompleteQuery({ input: debouncedAutocomplete });
-  console.log(autocompleteData);
+  } = useGetAutocompleteQuery({ input: search });
 
   let autocompleteEls;
 
@@ -75,6 +77,7 @@ const Search = () => {
       </div>
     ));
   }
+
   let previousLocationEls;
   if (previousLocations) {
     previousLocationEls = previousLocations.map((location) => (
@@ -150,15 +153,15 @@ const Search = () => {
 
       <div
         className={` ${
-          visible ? "dropdown dropdown-end dropdown-open w-48" : "hidden"
+          visible ? "dropdown dropdown-end dropdown-open w-48 z-50" : "hidden"
         }`}
       >
         <ul
           tabIndex={0}
-          className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-full overflow-y-auto max-h-80 md:max-h-96"
+          className=" dropdown-content menu p-2 shadow bg-base-200 rounded-box w-full overflow-y-auto max-h-80 md:max-h-96"
         >
-          <li className={`dropdown ${visible ? "" : "hidden"}`}>
-            {autocompleteEls}
+          <li className={` dropdown ${visible ? "" : "hidden"}`}>
+            {autocomplete && autocompleteEls}
             {!autocomplete && (
               <>
                 {currentLocationEl}
