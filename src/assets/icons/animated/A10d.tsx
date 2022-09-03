@@ -10,6 +10,18 @@ const A10d = () => {
       >
         <defs>
           <linearGradient
+            id="f"
+            x1="22.53"
+            x2="25.47"
+            y1="42.95"
+            y2="48.05"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0" stopColor="#4286ee" />
+            <stop offset=".45" stopColor="#4286ee" />
+            <stop offset="1" stopColor="#0950bc" />
+          </linearGradient>
+          <linearGradient
             id="b"
             x1="16.5"
             x2="21.5"
@@ -33,46 +45,36 @@ const A10d = () => {
             <stop offset=".45" stopColor="#f3f7fe" />
             <stop offset="1" stopColor="#deeafb" />
           </linearGradient>
-          <linearGradient
-            id="a"
-            x1="22.53"
-            x2="25.47"
-            y1="42.95"
-            y2="48.05"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stopColor="#4286ee" />
-            <stop offset=".45" stopColor="#4286ee" />
-            <stop offset="1" stopColor="#0950bc" />
-          </linearGradient>
+
           <linearGradient
             id="d"
             x1="29.53"
             x2="32.47"
             y1="42.95"
             y2="48.05"
-            xlinkHref="#a"
+            xlinkHref="#f"
           />
+
           <linearGradient
             id="e"
             x1="36.53"
             x2="39.47"
             y1="42.95"
             y2="48.05"
-            xlinkHref="#a"
+            xlinkHref="#f"
           />
         </defs>
         <circle
           cx="19"
           cy="24"
           r="5"
-          fill="#f8af18"
+          fill="url(#b)"
           stroke="#f8af18"
           strokeMiterlimit="10"
           strokeWidth=".5"
         />
         <path
-          fill="#fbbf24"
+          fill="none"
           stroke="#fbbf24"
           strokeLinecap="round"
           strokeMiterlimit="10"
@@ -88,7 +90,7 @@ const A10d = () => {
           />
         </path>
         <path
-          fill="#e6effc"
+          fill="url(#c)"
           stroke="#e6effc"
           strokeMiterlimit="10"
           strokeWidth=".5"
@@ -96,7 +98,7 @@ const A10d = () => {
         />
         <path
           fill="none"
-          stroke="url(#a)"
+          stroke="url(#f)"
           strokeLinecap="round"
           strokeMiterlimit="10"
           strokeWidth="2"

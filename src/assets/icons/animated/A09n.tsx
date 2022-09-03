@@ -22,7 +22,7 @@ const A09n = () => {
             <stop offset="1" stopColor="#deeafb" />
           </linearGradient>
           <linearGradient
-            id="a"
+            id="f"
             x1="22.53"
             x2="25.47"
             y1="42.95"
@@ -39,7 +39,7 @@ const A09n = () => {
             x2="32.47"
             y1="42.95"
             y2="48.05"
-            xlinkHref="#a"
+            xlinkHref="#f"
           />
           <linearGradient
             id="d"
@@ -47,7 +47,7 @@ const A09n = () => {
             x2="39.47"
             y1="42.95"
             y2="48.05"
-            xlinkHref="#a"
+            xlinkHref="#f"
           />
         </defs>
         <path
@@ -59,7 +59,7 @@ const A09n = () => {
         />
         <path
           fill="none"
-          stroke="url(#a)"
+          stroke="url(#f)"
           strokeLinecap="round"
           strokeMiterlimit="10"
           strokeWidth="2"
