@@ -30,6 +30,8 @@ const Weather = () => {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
     const current = weatherData.current;
+    console.log(weatherData);
+
     weatherEls = (
       <div>
         <CurrentWeatherCard

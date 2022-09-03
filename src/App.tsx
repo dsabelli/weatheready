@@ -26,6 +26,7 @@ function App() {
     dispatch(
       setStoredLocation({ lat: latitude.toString(), lon: longitude.toString() })
     );
+
     if (lat === "0" && lon === "0")
       dispatch(
         setLocation({ lat: latitude.toString(), lon: longitude.toString() })
