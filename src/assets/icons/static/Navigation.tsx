@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Tooltip } from "@mantine/core";
 import { IconProps } from "../../../types";
 
-export const NavIcon: React.FC<IconProps> = ({ className, rotate }) => {
+export const NavIcon: React.FC<IconProps> = ({ className, rotate = 180 }) => {
   return (
     <div
       className={` ${className}`}
@@ -41,9 +41,9 @@ const NavigationIcon = forwardRef<HTMLDivElement>((props, ref) => (
   </div>
 ));
 
-const Navigation: React.FC<IconProps> = ({ rotate }) => {
+const Navigation: React.FC<IconProps> = ({ rotate = 180 }) => {
   return (
-    <Tooltip label="Wind Speed">
+    <Tooltip label="Wind Speed/Direction">
       <div style={{ transform: `rotate(${rotate - 180}deg)` }}>
         <NavigationIcon />
       </div>

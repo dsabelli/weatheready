@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, Outlet, Location, useLocation } from "react-router-dom";
+import AlertBanner from "../components/UI/AlertBanner";
 import ClothingCard from "../components/UI/ClothingCard";
 import NavBar from "../components/UI/NavBar";
 import CurrentWeather from "../features/weather/CurrentWeather";
@@ -11,10 +12,11 @@ const Landing = () => {
   return (
     <div>
       <NavBar />
+      <AlertBanner />
       <div className="flex mx-auto justify-center max-w-4xl">
         {!pathname.includes("8-day") && (
           <>
-            <Link className="" to="today/a/a">
+            <Link className="" to="today">
               <CurrentWeather />
             </Link>
             <ClothingCard />

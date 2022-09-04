@@ -8,8 +8,8 @@ import {
   Line,
   ResponsiveContainer,
 } from "recharts";
-import { DailyWeather } from "../types";
-import { getDayOfWeek } from "../utils/getDayOfWeek";
+import { DailyWeather } from "../../types";
+import { getDayOfWeek } from "../../utils/getDayOfWeek";
 
 interface PrecipitationData {
   data: DailyWeather[];

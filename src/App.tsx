@@ -10,6 +10,7 @@ import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
 import Today from "./pages/Today";
 import { RootState } from "./app/store";
+import Alert from "./pages/Alert";
 
 interface Coords {
   coords: {
@@ -46,6 +47,7 @@ function App() {
         <Route path="hourly" element={<Hourly />} />
         <Route path="8-day" element={<EightDay />} />
       </Route>
+      <Route path="alert" element={<Alert />} />
       <Route path="error" element={<Error />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

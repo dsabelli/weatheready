@@ -8,7 +8,7 @@ export interface Location {
 }
 
 export interface IconProps {
-  rotate: number;
+  rotate?: number;
   className?: string;
 }
 

@@ -6,7 +6,7 @@ import Loader from "../../components/UI/Loader";
 import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
 import Error from "../../pages/Error";
 import { nanoid } from "nanoid";
-import EightDayChart from "../../components/EightDayChart";
+import EightDayChart from "../../components/UI/EightDayChart";
 const EightDayWeather = () => {
   const { metric } = useSelector((state: RootState) => state.settings);
   const { lat, lon } = useSelector((state: RootState) => state.location);
