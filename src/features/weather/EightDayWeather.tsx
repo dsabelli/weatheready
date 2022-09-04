@@ -6,6 +6,7 @@ import Loader from "../../components/UI/Loader";
 import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
 import Error from "../../pages/Error";
 import { nanoid } from "nanoid";
+import EightDayChart from "../../components/EightDayChart";
 const EightDayWeather = () => {
   const { metric } = useSelector((state: RootState) => state.settings);
   const { lat, lon } = useSelector((state: RootState) => state.location);
@@ -50,7 +51,15 @@ const EightDayWeather = () => {
     weatherEls = <Error />;
   }
 
-  return <div>{weatherEls}</div>;
+  return (
+    <div>
+      <div className=" mx-auto mb-4 max-w-2xl">
+        {" "}
+        {weatherData && <EightDayChart data={weatherData.daily} />}
+      </div>
+      {weatherEls}
+    </div>
+  );
 };
 
 export default EightDayWeather;

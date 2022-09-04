@@ -67,7 +67,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   const timeOfDay: string = getTimeOfDay(new Date(date * 1000).getHours());
 
   return (
-    <div className="collapse collapse-arrow bg-base-100 shadow-xl p-4 mx-auto max-w-2xl mb-4">
+    <div className="collapse collapse-arrow bg-base-100 shadow-xl p-4 mx-auto max-w-2xl mb-4 ">
       <input type="checkbox" />
       <div className="collapse-title text-xl font-medium ">
         <div className="flex flex-col w-full">
