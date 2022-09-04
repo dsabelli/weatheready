@@ -124,7 +124,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
             <div className="flex justify-between items-center w-full">
               <p>{desc}</p>
               {pop !== 0 && (
-                <div className="z-50">
+                <div className="z-40">
                   {" "}
                   <Umbrella />
                   <p>{Math.round(pop * 100)}%</p>

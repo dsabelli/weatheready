@@ -1,15 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-
+import { setStoredLocation } from "./features/location/storedLocationSlice";
+import { setLocation } from "./features/location/locationSlice";
 import Error from "./pages/Error";
 import EightDay from "./pages/EightDay";
 import Hourly from "./pages/Hourly";
 import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
 import Today from "./pages/Today";
+import { RootState } from "./app/store";
 
+interface Coords {
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
+}
 function App() {
-  const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
+  const { lat, lon } = useSelector((state: RootState) => state.location);
+
+  const successCallback = (position: Coords) => {
+    const { latitude, longitude } = position.coords;
+    dispatch(
+      setStoredLocation({ lat: latitude.toString(), lon: longitude.toString() })
+    );
+
+    if (lat === "0" && lon === "0")
+      dispatch(
+        setLocation({ lat: latitude.toString(), lon: longitude.toString() })
+      );
+  };
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(successCallback, console.error, {
+      maximumAge: 600_000,
+    });
+  }, []);
 
   return (
     <Routes>

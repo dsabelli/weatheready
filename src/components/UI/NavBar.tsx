@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import Search from "../../features/location/Search";
+import ReverseLocation from "./ReverseLocation";
 import SettingsToggle from "./SettingsToggle";
 
 const NavBar = () => {
@@ -18,6 +19,7 @@ const NavBar = () => {
             Weather Ready
           </Link>
         </div>
+        <ReverseLocation />
         <Search />
         <SettingsToggle />
       </div>

@@ -26,8 +26,6 @@ const EightDayWeather = () => {
   if (isWeatherLoading) {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
-    console.log(weatherData);
-
     weatherEls = weatherData.daily.map((day) => (
       <ForecastWeatherCard
         key={nanoid()}

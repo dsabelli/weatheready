@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useGetOneCallQuery } from "../weatherApi/weatherApiSlice";
 import Loader from "../../components/UI/Loader";
 import Error from "../../pages/Error";
 import CurrentWeatherCard from "../../components/UI/CurrentWeatherCard";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { setLocation } from "../location/locationSlice";
+
 import PrecipitationChart from "../../components/UI/PrecipitationChart";
 
-interface Coords {
-  coords: {
-    latitude: number;
-    longitude: number;
-  };
-}
-
 const Weather = () => {
-  const dispatch = useDispatch();
   const { lat, lon } = useSelector((state: RootState) => state.location);
   const { metric } = useSelector((state: RootState) => state.settings);
 
@@ -32,26 +24,14 @@ const Weather = () => {
     units: metric ? "metric" : "imperial",
   });
 
-  const successCallback = (position: Coords) => {
-    const { latitude, longitude } = position.coords;
-    dispatch(
-      setLocation({ lat: latitude.toString(), lon: longitude.toString() })
-    );
-  };
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(successCallback, console.error, {
-      maximumAge: 600_000,
-    });
-  }, []);
-
   let weatherEls;
 
   if (isWeatherLoading) {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
-    console.log(weatherData);
     const current = weatherData.current;
+    console.log(weatherData);
+
     weatherEls = (
       <div>
         <CurrentWeatherCard

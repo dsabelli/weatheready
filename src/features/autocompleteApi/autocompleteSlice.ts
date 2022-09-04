@@ -1,22 +1,20 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { AutocompleteData } from "../../types";
 
-const autocompleteApi: string = import.meta.env.VITE_AUTOCOMPLETE_API_KEY;
+const geoApi: string = import.meta.env.VITE_GEO_API_KEY;
 
 export const autocompleteSlice = createApi({
   reducerPath: "autocompleteApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `https://api.geoapify.com/v1/geocode/autocomplete`,
+    baseUrl: `https://api.geoapify.com/v1/geocode/`,
   }),
-  // tagTypes: ["Geo"],
   endpoints: (builder) => ({
     getAutocomplete: builder.query<AutocompleteData, any>({
       query: (arg) => {
         const { input } = arg;
         return {
-          url: `?text=${input}&apiKey=${autocompleteApi}`,
+          url: `autocomplete?text=${input}&apiKey=${geoApi}`,
           params: { input },
-          // providesTags: ["Geo"],
         };
       },
     }),

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../components/UI/Input";
 import { nanoid } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,10 +14,17 @@ const Search = () => {
   const { previousLocations } = useSelector(
     (state: RootState) => state.previousLocation
   );
+  const storedLocation = useSelector(
+    (state: RootState) => state.storedLocation
+  );
   const [autocomplete, setAutocomplete] = useState("");
   const [visible, setVisible] = useState(false);
+  const [search, setSearch] = useState("");
   const [debouncedAutocomplete] = useDebounce(autocomplete, 200);
-  console.log(previousLocations);
+
+  useEffect(() => {
+    if (debouncedAutocomplete) setSearch(debouncedAutocomplete);
+  }, [debouncedAutocomplete]);
 
   const {
     data: autocompleteData,
@@ -25,50 +32,52 @@ const Search = () => {
     isSuccess: isAutocompleteSuccess,
     isError: isAutocompleteError,
     error: autocompleteError,
-  } = useGetAutocompleteQuery({ input: debouncedAutocomplete });
-  console.log(autocompleteData);
+  } = useGetAutocompleteQuery({ input: search });
 
   let autocompleteEls;
 
   if (isAutocompleteLoading) {
     autocompleteEls = <Loader />;
   } else if (isAutocompleteSuccess) {
-    autocompleteEls = autocompleteData.features.map(
-      (data: AutocompleteFeatures) => (
-        <div
-          onClick={() => (
-            dispatch(
-              setLocation({
-                lat: data.properties.lat.toString(),
-                lon: data.properties.lon.toString(),
-              })
-            ),
-            dispatch(
-              setPreviousLocation({
-                city: data.properties.city,
-                name: data.properties.name,
-                state: data.properties.state,
-                lat: data.properties.lat.toString(),
-                lon: data.properties.lon.toString(),
-              })
-            ),
-            setVisible(false),
-            setAutocomplete(
-              `${data.properties.city || data.properties.name}, ${
-                data.properties.state
-              }`
-            )
-          )}
-          key={nanoid()}
-          className="flex p-1 gap-2 justify-center mx-auto  max-w-3xl mb-2"
-        >
-          {`${data.properties.city || data.properties.name}, ${
-            data.properties.state
-          }`}
-        </div>
-      )
+    const cities = autocompleteData.features.filter(
+      (data) => data.properties.city
     );
+    autocompleteEls = cities.map((data: AutocompleteFeatures) => (
+      <div
+        onClick={() => (
+          dispatch(
+            setLocation({
+              lat: data.properties.lat.toString(),
+              lon: data.properties.lon.toString(),
+            })
+          ),
+          dispatch(
+            setPreviousLocation({
+              city: data.properties.city,
+              name: data.properties.name,
+              state: data.properties.state,
+              country: data.properties.country,
+              lat: data.properties.lat.toString(),
+              lon: data.properties.lon.toString(),
+            })
+          ),
+          setVisible(false),
+          setAutocomplete(
+            `${data.properties.city}, ${
+              data.properties.state || data.properties.country
+            }`
+          )
+        )}
+        key={nanoid()}
+        className="flex p-1 gap-2 justify-center mx-auto  max-w-3xl mb-2"
+      >
+        {`${data.properties.city}, ${
+          data.properties.state || data.properties.country
+        }`}
+      </div>
+    ));
   }
+
   let previousLocationEls;
   if (previousLocations) {
     previousLocationEls = previousLocations.map((location) => (
@@ -84,13 +93,35 @@ const Search = () => {
           ),
           setVisible(false),
           setAutocomplete(
-            `${location.city || location.name}, ${location.state}`
+            `${location.city || location.name}, ${
+              location.state || location.country
+            }`
           )
         )}
-      >{`${location.city || location.name}, ${location.state}`}</div>
+      >{`${location.city || location.name}, ${
+        location.state || location.country
+      }`}</div>
     ));
   }
 
+  let currentLocationEl;
+  if (storedLocation.lat && storedLocation.lon) {
+    currentLocationEl = (
+      <div
+        onClick={() => (
+          dispatch(
+            setLocation({
+              lat: storedLocation.lat,
+              lon: storedLocation.lon,
+            })
+          ),
+          setVisible(false)
+        )}
+      >
+        Current Location
+      </div>
+    );
+  }
   return (
     <div className="form-control w-full sm:w-80 ">
       <Input
@@ -115,24 +146,25 @@ const Search = () => {
         onFocus={() => (setVisible(true), setAutocomplete(""))}
         onBlur={(e) =>
           e.target.value === ""
-            ? setTimeout(() => setVisible(false), 100)
+            ? setTimeout(() => setVisible(false), 400)
             : null
         }
       />
 
       <div
         className={` ${
-          visible ? "dropdown dropdown-end dropdown-open w-48" : "hidden"
+          visible ? "dropdown dropdown-end dropdown-open w-48 z-50" : "hidden"
         }`}
       >
         <ul
           tabIndex={0}
-          className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-full overflow-y-auto max-h-80 md:max-h-96"
+          className=" dropdown-content menu p-2 shadow bg-base-200 rounded-box w-full overflow-y-auto max-h-80 md:max-h-96"
         >
-          <li className={`dropdown ${visible ? "" : "hidden"}`}>
-            {autocompleteEls}
+          <li className={` dropdown ${visible ? "" : "hidden"}`}>
+            {autocomplete && autocompleteEls}
             {!autocomplete && (
               <>
+                {currentLocationEl}
                 <p className="p-0 text-sm opacity-60">Recent</p>
                 {previousLocationEls}
               </>
