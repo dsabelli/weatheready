@@ -1,5 +1,4 @@
 import React from "react";
-import { Loader } from "@mantine/core";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { useGetReverseLocationQuery } from "../../features/reverseLocationApi/reverseLocationSlice";
@@ -41,8 +40,13 @@ const ReverseLocation = () => {
   let reverseLocationEl;
 
   if (isReverseLocationSuccess) {
+    const location = reverseLocationData.features[0].properties;
+
     reverseLocationEl = (
-      <div>{reverseLocationData.features[0].properties.city}</div>
+      <div>
+        {location.city}
+        {location.state || location.country}
+      </div>
     );
   }
   return (

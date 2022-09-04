@@ -25,17 +25,17 @@ const NavBar = () => {
       </div>
       <div className="mx-auto max-w-4xl">
         <ul className="menu menu-horizontal bg-base-100 rounded-box text-xl gap-8  ">
-          <Link to="/app/today/a/a">
+          <Link to="/app/today">
             <li className={` ${path.includes("today") ? "bordered" : "pb-1"}`}>
               <p>Today</p>
             </li>
           </Link>
-          <Link to="/app/hourly/a/a">
+          <Link to="/app/hourly">
             <li className={` ${path.includes("hourly") ? "bordered" : "pb-1"}`}>
               <p>Hourly</p>
             </li>
           </Link>
-          <Link to="/app/8-day/a/a">
+          <Link to="/app/8-day">
             <li className={` ${path.includes("8-day") ? "bordered" : "pb-1"}`}>
               <p>8-Day</p>
             </li>

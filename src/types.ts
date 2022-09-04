@@ -156,10 +156,10 @@ export interface AutocompleteData {
 interface ReverseLocationResults {
   properties: {
     datasource?: {
-      attribution: string;
-      license: string;
-      sourcename: string;
-      url: string;
+      attribution?: string;
+      license?: string;
+      sourcename?: string;
+      url?: string;
     };
     name?: string;
     street?: string;
@@ -182,6 +182,8 @@ interface ReverseLocationResults {
       popularity?: string;
     };
     place_id?: string;
+    state?: string;
+    state_code?: string;
   };
   bbox?: number[];
 }
