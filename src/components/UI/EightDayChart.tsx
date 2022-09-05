@@ -40,7 +40,7 @@ const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
           margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
         >
           {/* <XAxis dataKey="day" /> */}
-          <XAxis dataKey="dayAndMonth" />
+          <XAxis dataKey="dayAndMonth" padding={{ left: 10, right: 10 }} />
           <YAxis dataKey="High" />
           <Tooltip />
           <Line
@@ -48,13 +48,15 @@ const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
             dataKey="High"
             stroke="#f2644e"
             fill="#f2644e"
+            activeDot={{ r: 4 }}
             yAxisId={0}
           />
           <Line
             type="monotone"
             dataKey="Low"
             stroke="#2995d2"
-            fill="#0072bb"
+            fill="#2995d2"
+            activeDot={{ r: 4 }}
             yAxisId={0}
           />
         </LineChart>
