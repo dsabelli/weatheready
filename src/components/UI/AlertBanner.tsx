@@ -29,24 +29,29 @@ const AlertBanner = () => {
     const alerts = weatherData.alerts;
     console.log(alerts);
 
-    alertEls = alerts[0].event
-      .split(" ")
-      .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
-      .join(" ");
+    if (alerts)
+      alertEls = alerts[0].event
+        .split(" ")
+        .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
+        .join(" ");
   }
 
   return (
-    <div className="alert bg-red-800 text-primary-content shadow-lg my-4 mx-auto max-w-4xl">
-      <div className="flex w-full justify-between">
-        <div className="flex gap-2">
-          <Warning />
-          <p>{alertEls}</p>
+    <>
+      {alertEls && (
+        <div className="alert bg-red-800 text-primary-content shadow-lg my-4 mx-auto max-w-4xl">
+          <div className="flex w-full justify-between">
+            <div className="flex gap-2">
+              <Warning />
+              {alertEls}
+            </div>
+            <Link to="/alert">
+              <ArrowRight className="w-6" />
+            </Link>
+          </div>
         </div>
-        <Link to="/alert">
-          <ArrowRight className="w-6" />
-        </Link>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
