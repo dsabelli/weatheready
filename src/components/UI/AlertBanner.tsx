@@ -15,11 +15,14 @@ const AlertBanner = () => {
     isSuccess: isWeatherSuccess,
     isError: isWeatherError,
     error: weatherError,
-  } = useGetOneCallQuery({
-    lat: lat,
-    lon: lon,
-    units: "metric",
-  });
+  } = useGetOneCallQuery(
+    {
+      lat: lat,
+      lon: lon,
+      units: "metric",
+    },
+    { skip: !lat }
+  );
 
   let alertEls;
 
@@ -29,30 +32,37 @@ const AlertBanner = () => {
     const alerts = weatherData.alerts;
     console.log(alerts);
 
-    if (alerts)
-      alertEls = alerts[0].event
+    if (alerts) {
+      const alertEvent =
+        alerts[0].event === "weather"
+          ? "Special Weather Statement"
+          : alerts[0].event
+              .split(" ")
+              .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
+              .join(" ");
+      const alertDescription = alerts[0].description
         .split(" ")
-        .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
+        .slice(0, 7)
         .join(" ");
-  }
-
-  return (
-    <>
-      {alertEls && (
+      alertEls = (
         <div className="alert bg-red-800 text-primary-content shadow-lg my-4 mx-auto max-w-4xl">
           <div className="flex w-full justify-between">
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center ">
               <Warning />
-              {alertEls}
+              <span className="text-lg font-bold">{alertEvent}:</span>{" "}
+              {alertDescription}
+              ...
             </div>
             <Link to="/alert">
               <ArrowRight className="w-6" />
             </Link>
           </div>
         </div>
-      )}
-    </>
-  );
+      );
+    }
+  }
+
+  return <>{alertEls}</>;
 };
 
 export default AlertBanner;
