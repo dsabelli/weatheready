@@ -28,7 +28,7 @@ function App() {
       setStoredLocation({ lat: latitude.toString(), lon: longitude.toString() })
     );
 
-    if (lat === "0" && lon === "0")
+    if (lat === "" && lon === "")
       dispatch(
         setLocation({ lat: latitude.toString(), lon: longitude.toString() })
       );

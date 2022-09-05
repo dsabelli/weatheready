@@ -14,11 +14,14 @@ const ReverseLocation = () => {
     isSuccess: isWeatherSuccess,
     isError: isWeatherError,
     error: weatherError,
-  } = useGetOneCallQuery({
-    lat: location.lat,
-    lon: location.lon,
-    units: metric ? "metric" : "imperial",
-  });
+  } = useGetOneCallQuery(
+    {
+      lat: location.lat,
+      lon: location.lon,
+      units: metric ? "metric" : "imperial",
+    },
+    { skip: !location.lat }
+  );
 
   let weatherEls;
 
@@ -32,10 +35,13 @@ const ReverseLocation = () => {
     isSuccess: isReverseLocationSuccess,
     isError: isReverseLocationError,
     error: reverseLocationError,
-  } = useGetReverseLocationQuery({
-    latitude: location.lat,
-    longitude: location.lon,
-  });
+  } = useGetReverseLocationQuery(
+    {
+      latitude: location.lat,
+      longitude: location.lon,
+    },
+    { skip: !location.lat }
+  );
 
   let reverseLocationEl;
 

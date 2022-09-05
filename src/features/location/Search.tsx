@@ -9,6 +9,7 @@ import { setLocation } from "../location/locationSlice";
 import { AutocompleteFeatures } from "../../types";
 import { RootState } from "../../app/store";
 import { setPreviousLocation } from "./previousLocationSlice";
+import { skipToken } from "@reduxjs/toolkit/dist/query";
 const Search = () => {
   const dispatch = useDispatch();
   const { previousLocations } = useSelector(
@@ -32,7 +33,7 @@ const Search = () => {
     isSuccess: isAutocompleteSuccess,
     isError: isAutocompleteError,
     error: autocompleteError,
-  } = useGetAutocompleteQuery({ input: search });
+  } = useGetAutocompleteQuery({ input: search }, { skip: !search });
 
   let autocompleteEls;
 

@@ -16,11 +16,14 @@ const EightDayWeather = () => {
     isSuccess: isWeatherSuccess,
     isError: isWeatherError,
     error: weatherError,
-  } = useGetOneCallQuery({
-    lat: lat,
-    lon: lon,
-    units: metric ? "metric" : "imperial",
-  });
+  } = useGetOneCallQuery(
+    {
+      lat: lat,
+      lon: lon,
+      units: metric ? "metric" : "imperial",
+    },
+    { skip: !lat }
+  );
 
   let weatherEls;
 

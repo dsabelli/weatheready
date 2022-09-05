@@ -5,7 +5,7 @@ export interface Coords {
   lon: string;
 }
 
-const initialState: Coords = { lat: "0", lon: "0" };
+const initialState: Coords = { lat: "", lon: "" };
 
 const locationSlice = createSlice({
   name: "location",

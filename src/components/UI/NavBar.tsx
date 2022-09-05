@@ -10,7 +10,7 @@ const NavBar = () => {
 
   return (
     <nav className="">
-      <div className="navbar  bg-orange-900">
+      <div className="navbar px-8 bg-orange-900">
         <div className="w-full max-w-4xl mx-auto">
           <Link
             to="/app"
