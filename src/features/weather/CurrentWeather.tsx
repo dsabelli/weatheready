@@ -8,6 +8,8 @@ import { RootState } from "../../app/store";
 
 import PrecipitationChart from "../../components/UI/PrecipitationChart";
 import { useGetRadarQuery } from "../weatherRadarApi/weatherRadarApiSlice";
+import ClothingCard from "../../components/UI/ClothingCard";
+import { getClothing } from "../../utils/getClothing";
 
 const Weather = () => {
   const { lat, lon } = useSelector((state: RootState) => state.location);
@@ -29,13 +31,14 @@ const Weather = () => {
   );
 
   let weatherEls;
+  let clothing;
 
   if (isWeatherLoading) {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
     const current = weatherData.current;
     console.log(weatherData);
-
+    clothing = getClothing(current.feels_like, current.clouds);
     weatherEls = (
       <div>
         <CurrentWeatherCard
@@ -51,14 +54,13 @@ const Weather = () => {
           uvi={current.uvi}
           icon={current.weather[0].icon}
           description={current.weather[0].description}
-          rain={0}
-          snow={0}
-          // rain={current.rain["1h"] || 0}
-          // snow={current.snow["1h"] || 0}
+          rain={current.rain ? current.rain["1h"] : 0}
+          snow={current.snow ? current.snow["1h"] : 0}
         />
         {weatherData.minutely && (
           <PrecipitationChart data={weatherData.minutely} />
         )}
+        <ClothingCard clothing={clothing} />
       </div>
     );
   } else if (isWeatherError) {
@@ -85,7 +87,7 @@ const Weather = () => {
   //   console.log(radarData);
   // }
 
-  return <div>{weatherEls}</div>;
+  return <div className="flex">{weatherEls}</div>;
 };
 
 export default Weather;

@@ -6,7 +6,7 @@ const Today = () => {
   return (
     <div className="flex mx-auto justify-center max-w-4xl">
       <TodayWeather />
-      <ClothingCard />
+      {/* <ClothingCard /> */}
     </div>
   );
 };
