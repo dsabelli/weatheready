@@ -6,14 +6,14 @@ import { useLocation } from "react-router-dom";
 import { getTimeOfDay } from "../../utils/getTimeOfDay";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import Umbrella from "../../assets/icons/static/Umbrella";
-import Snowflake from "../../assets/icons/static/Snowflake";
-import Clouds from "../../assets/icons/static/Clouds";
-import Humidity from "../../assets/icons/static/Humidity";
-import Navigation from "../../assets/icons/static/Navigation";
-import WindGust from "../../assets/icons/static/WindGust";
-import UVI from "../../assets/icons/static/UVI";
-import Raindrops from "../../assets/icons/static/Raindrops";
+import Umbrella from "../../assets/icons/static/weather/Umbrella";
+import Snowflake from "../../assets/icons/static/weather/Snowflake";
+import Clouds from "../../assets/icons/static/weather/Clouds";
+import Humidity from "../../assets/icons/static/weather/Humidity";
+import Navigation from "../../assets/icons/static/weather/Navigation";
+import WindGust from "../../assets/icons/static/weather/WindGust";
+import UVI from "../../assets/icons/static/weather/UVI";
+import Raindrops from "../../assets/icons/static/weather/Raindrops";
 
 interface ForecastCardData {
   temp: number;

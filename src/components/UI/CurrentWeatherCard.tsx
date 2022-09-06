@@ -1,5 +1,5 @@
 import React from "react";
-import { NavIcon } from "../../assets/icons/static/Navigation";
+import { NavIcon } from "../../assets/icons/static/weather/Navigation";
 import { getAnimatedIcon } from "../../utils/getIcon";
 import { getUvDesc } from "../../utils/getUvDesc";
 import { useSelector } from "react-redux";

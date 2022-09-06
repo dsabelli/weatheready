@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { Tooltip } from "@mantine/core";
-import { IconProps } from "../../../types";
+import { IconProps } from "../../../../types";
 
 export const NavIcon: React.FC<IconProps> = ({ className, rotate = 180 }) => {
   return (
