@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { weatherApiSlice } from "../features/weatherApi/weatherApiSlice";
 import { autocompleteSlice } from "../features/autocompleteApi/autocompleteSlice";
 import { reverseLocationSlice } from "../features/reverseLocationApi/reverseLocationSlice";
+import { weatherRadarApiSlice } from "../features/weatherRadarApi/weatherRadarApiSlice";
 import locationReducer from "../features/location/locationSlice";
 import previousLocationReducer from "../features/location/previousLocationSlice";
 import storedLocationReducer from "../features/location/storedLocationSlice";
@@ -19,6 +20,7 @@ import {
 export const store = configureStore({
   reducer: {
     [weatherApiSlice.reducerPath]: weatherApiSlice.reducer,
+    [weatherRadarApiSlice.reducerPath]: weatherRadarApiSlice.reducer,
     [autocompleteSlice.reducerPath]: autocompleteSlice.reducer,
     [reverseLocationSlice.reducerPath]: reverseLocationSlice.reducer,
     location: locationReducer,
@@ -33,6 +35,7 @@ export const store = configureStore({
       },
     }).concat(
       weatherApiSlice.middleware,
+      weatherRadarApiSlice.middleware,
       autocompleteSlice.middleware,
       reverseLocationSlice.middleware
     ),

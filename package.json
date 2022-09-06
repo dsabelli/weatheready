@@ -12,6 +12,7 @@
     "@mantine/hooks": "^5.2.4",
     "@reduxjs/toolkit": "^1.8.5",
     "daisyui": "^2.24.0",
+    "leaflet": "^1.8.0",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

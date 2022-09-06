@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 
 import PrecipitationChart from "../../components/UI/PrecipitationChart";
+import { useGetRadarQuery } from "../weatherRadarApi/weatherRadarApiSlice";
 
 const Weather = () => {
   const { lat, lon } = useSelector((state: RootState) => state.location);
@@ -63,6 +64,26 @@ const Weather = () => {
   } else if (isWeatherError) {
     weatherEls = <Error />;
   }
+
+  // let radarEl;
+
+  // const {
+  //   data: radarData,
+  //   isLoading: isRadarLoading,
+  //   isSuccess: isRadarSuccess,
+  //   isError: isRadarError,
+  //   error: radarError,
+  // } = useGetRadarQuery({
+  //   lat: "42",
+  //   lon: "82",
+  //   layer: "clouds_new",
+  // });
+
+  // if (isRadarLoading) {
+  //   radarEl = <Loader />;
+  // } else if (isRadarSuccess) {
+  //   console.log(radarData);
+  // }
 
   return <div>{weatherEls}</div>;
 };
