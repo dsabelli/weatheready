@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Tooltip } from "@mantine/core";
 
 const JacketIcon = forwardRef<HTMLDivElement>((props, ref) => (
-  <div {...props} className="w-16 md:w-24" ref={ref}>
+  <div {...props} className="w-12 md:w-16 z-30" ref={ref}>
     <svg
       version="1.1"
       viewBox="0 0 700 700"
@@ -19,7 +19,7 @@ const JacketIcon = forwardRef<HTMLDivElement>((props, ref) => (
 
 const Jacket = () => {
   return (
-    <Tooltip label="Jacket">
+    <Tooltip label="Light Jacket or Sweater">
       <JacketIcon />
     </Tooltip>
   );

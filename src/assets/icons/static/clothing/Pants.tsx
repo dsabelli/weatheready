@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Popover, Text } from "@mantine/core";
 
 const PantsIcon = forwardRef<HTMLDivElement>((props, ref) => (
-  <div {...props} className="w-16 md:w-28" ref={ref}>
+  <div {...props} className="w-12 md:w-16 z-30" ref={ref}>
     <svg
       version="1.1"
       viewBox="0 0 700 700"
@@ -18,11 +18,28 @@ const PantsIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const Pants = () => {
-  return (
-    <Tooltip label="Pants">
-      <PantsIcon />
-    </Tooltip>
-  );
+  let pants: any;
+
+  if (window.innerWidth > 700) {
+    pants = (
+      <Tooltip label="Pants">
+        <PantsIcon />
+      </Tooltip>
+    );
+  } else if (window.innerWidth <= 700) {
+    pants = (
+      <Popover width={100} position="top">
+        <Popover.Target>
+          <PantsIcon />
+        </Popover.Target>
+        <Popover.Dropdown>
+          <Text className="text-current">Pants</Text>
+        </Popover.Dropdown>
+      </Popover>
+    );
+  }
+
+  return <> {pants}</>;
 };
 
 export default Pants;
