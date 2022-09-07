@@ -1,79 +1,84 @@
-interface Accessories {
-  umbrella?: boolean;
-  sunscreen?: boolean;
-  sunglasses?: boolean;
-  hat?: boolean;
-  toque?: boolean;
-  gloves?: boolean;
-  boots?: boolean;
-  scarf?: boolean;
-}
-interface Clothing {
-  top: string;
-  bottom: string;
-  accessories?: Accessories;
-}
+import Boots from "../assets/icons/static/clothing/Boots";
+import Hat from "../assets/icons/static/clothing/Hat";
+import Jacket from "../assets/icons/static/clothing/Jacket";
+import Mittens from "../assets/icons/static/clothing/Mittens";
+import Pants from "../assets/icons/static/clothing/Pants";
+import RainBoots from "../assets/icons/static/clothing/RainBoots";
+import Scarf from "../assets/icons/static/clothing/Scarf";
+import Shorts from "../assets/icons/static/clothing/Shorts";
+import Sunglasses from "../assets/icons/static/clothing/Sunglasses";
+import Sunscreen from "../assets/icons/static/clothing/Sunscreen";
+import Sweater from "../assets/icons/static/clothing/Sweater";
+import Toque from "../assets/icons/static/clothing/Toque";
+import TShirt from "../assets/icons/static/clothing/TShirt";
+import Umbrella from "../assets/icons/static/clothing/Umbrella";
+import WinterJacket from "../assets/icons/static/clothing/WinterJacket";
+import Info from "../assets/icons/static/Info";
 
-const getClothing = (temp: number, clouds: number): Clothing => {
-  let clothing: Clothing = {
-    top: "string",
-    bottom: "string",
-  };
+const getClothing = (
+  temp: number,
+  clouds: number,
+  uvi: number,
+  pop: number,
+  rain: number
+) => {
+  let clothing;
 
-  // switch (true) {
-  //   case clouds === 0:
-  //     temp += 2;
-  //     console.log(temp);
-  //     break;
-  //   case clouds > 0 && clouds <= 15:
-  //     temp += 1;
-  //     break;
-  //   case clouds > 15 && clouds <= 30:
-  //     temp += 0.5;
-  //     break;
-  //   case clouds > 30 && clouds <= 45:
-  //     temp += 0;
-  //     break;
-  //   case clouds > 45 && clouds <= 60:
-  //     temp -= 0.5;
-  //     break;
-  //   case clouds > 60 && clouds <= 75:
-  //     temp -= 1;
-  //     break;
-  //   case clouds > 75 && clouds <= 100:
-  //     temp -= 2;
-  //     break;
-  // }
   temp = Math.round(temp);
+
   switch (true) {
     case temp < 5:
-      clothing = {
-        top: "Winter Coat",
-        bottom: "Insulated Pants",
-        accessories: { toque: true, scarf: true, boots: true },
-      };
+      clothing = (
+        <>
+          <WinterJacket />
+          <Pants />
+        </>
+      );
       break;
     case temp >= 5 && temp <= 15:
-      clothing = {
-        top: "thick sweater",
-        bottom: "pants",
-      };
+      clothing = (
+        <>
+          <Sweater />
+          <Pants />
+        </>
+      );
       break;
     case temp > 15 && temp <= 20:
-      clothing = {
-        top: "thin sweater",
-        bottom: "pants",
-      };
+      clothing = (
+        <>
+          <Jacket />
+          <Pants />
+        </>
+      );
+
       break;
     case temp > 20:
-      clothing = {
-        top: "short-sleeve",
-        bottom: "shorts",
-      };
+      clothing = (
+        <>
+          <TShirt />
+          <Shorts />
+        </>
+      );
+
       break;
   }
 
-  return clothing;
+  return (
+    <div className="flex">
+      {clothing}
+      {
+        <Info>
+          <div>
+            <div className="flex ">
+              <Hat />
+              <Scarf />
+            </div>
+            <h3 className="text-center">Accessories</h3>
+          </div>
+        </Info>
+      }
+    </div>
+  );
 };
 
 export { getClothing };
