@@ -144,8 +144,8 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             </p>
           </li>
         </ul>
+        <div className="flex justify-center ">{clothing}</div>
       </div>
-      <div className="bg-base-200 p-4 ">{clothing}</div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Popover, Text } from "@mantine/core";
 
 const SweaterIcon = forwardRef<HTMLDivElement>((props, ref) => (
   <div {...props} className="w-12 md:w-16 z-30" ref={ref}>
@@ -20,11 +20,29 @@ const SweaterIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const Sweater = () => {
-  return (
-    <Tooltip label="Thick Sweater or Jacket">
-      <SweaterIcon />
-    </Tooltip>
-  );
+  let sweater;
+
+  if (window.innerWidth >= 768) {
+    sweater = (
+      <Tooltip label="Light Sweater or Sweater">
+        <SweaterIcon />
+      </Tooltip>
+    );
+  } else if (window.innerWidth < 768) {
+    sweater = (
+      <Popover width={100} position="top">
+        <Popover.Target>
+          <SweaterIcon />
+        </Popover.Target>
+        <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
+          <Text className="text-primary-content text-sm font-bold text-center">
+            Sweater
+          </Text>
+        </Popover.Dropdown>
+      </Popover>
+    );
+  }
+  return <>{sweater}</>;
 };
 
 export default Sweater;

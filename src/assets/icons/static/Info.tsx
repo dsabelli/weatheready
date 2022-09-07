@@ -1,13 +1,13 @@
 import React, { forwardRef } from "react";
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Popover, Text } from "@mantine/core";
 
 const InfoIcon = forwardRef<HTMLDivElement>((props, ref) => (
-  <div {...props} className="z-30" ref={ref}>
+  <div {...props} className="w-4 md:w-5 z-30" ref={ref}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      className="stroke-current flex-shrink-0 w-6 h-6"
+      className="stroke-current"
     >
       <path
         strokeLinecap="round"
@@ -20,11 +20,28 @@ const InfoIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const Info = ({ children }: { children: any }) => {
-  return (
-    <Tooltip label={children}>
-      <InfoIcon />
-    </Tooltip>
-  );
-};
+  let info;
 
+  if (window.innerWidth >= 768) {
+    info = (
+      <Tooltip label={children}>
+        <InfoIcon />
+      </Tooltip>
+    );
+  } else if (window.innerWidth < 768) {
+    info = (
+      <Popover width={100} position="top">
+        <Popover.Target>
+          <InfoIcon />
+        </Popover.Target>
+        <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
+          <Text className="text-primary-content text-sm font-bold text-center">
+            {children}
+          </Text>
+        </Popover.Dropdown>
+      </Popover>
+    );
+  }
+  return <>{info}</>;
+};
 export default Info;

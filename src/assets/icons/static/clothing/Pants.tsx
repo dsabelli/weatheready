@@ -18,28 +18,29 @@ const PantsIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const Pants = () => {
-  let pants: any;
+  let pants;
 
-  if (window.innerWidth > 700) {
+  if (window.innerWidth >= 768) {
     pants = (
       <Tooltip label="Pants">
         <PantsIcon />
       </Tooltip>
     );
-  } else if (window.innerWidth <= 700) {
+  } else if (window.innerWidth < 768) {
     pants = (
       <Popover width={100} position="top">
         <Popover.Target>
           <PantsIcon />
         </Popover.Target>
-        <Popover.Dropdown>
-          <Text className="text-current">Pants</Text>
+        <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
+          <Text className="text-primary-content text-sm font-bold text-center">
+            Pants
+          </Text>
         </Popover.Dropdown>
       </Popover>
     );
   }
-
-  return <> {pants}</>;
+  return <>{pants}</>;
 };
 
 export default Pants;
