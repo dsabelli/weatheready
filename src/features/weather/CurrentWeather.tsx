@@ -5,10 +5,7 @@ import Error from "../../pages/Error";
 import CurrentWeatherCard from "../../components/UI/CurrentWeatherCard";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-
 import PrecipitationChart from "../../components/UI/PrecipitationChart";
-import { useGetRadarQuery } from "../weatherRadarApi/weatherRadarApiSlice";
-import ClothingCard from "../../components/UI/ClothingCard";
 import { getClothing } from "../../utils/getClothing";
 
 const Weather = () => {
@@ -37,10 +34,9 @@ const Weather = () => {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
     const current = weatherData.current;
-    console.log(weatherData);
-    clothing = getClothing(current.feels_like, current.clouds);
+
     weatherEls = (
-      <div>
+      <div className="w-full">
         <CurrentWeatherCard
           temp={current.temp}
           feelsLike={current.feels_like}
@@ -60,7 +56,6 @@ const Weather = () => {
         {weatherData.minutely && (
           <PrecipitationChart data={weatherData.minutely} />
         )}
-        <ClothingCard clothing={clothing} />
       </div>
     );
   } else if (isWeatherError) {
@@ -87,7 +82,7 @@ const Weather = () => {
   //   console.log(radarData);
   // }
 
-  return <div className="flex">{weatherEls}</div>;
+  return <div className="flex w-full">{weatherEls}</div>;
 };
 
 export default Weather;

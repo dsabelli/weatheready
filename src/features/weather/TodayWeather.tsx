@@ -68,7 +68,7 @@ const TodayWeather = () => {
     weatherEls = <Error />;
   }
 
-  return <div>{weatherEls}</div>;
+  return <div className="w-full">{weatherEls}</div>;
 };
 
 export default TodayWeather;
