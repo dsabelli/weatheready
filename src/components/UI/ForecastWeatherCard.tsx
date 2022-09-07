@@ -32,6 +32,7 @@ interface ForecastCardData {
   uvi: number;
   humidity: number;
   clouds: number;
+  sunset: number;
 }
 const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   temp,
@@ -49,6 +50,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   humidity,
   clouds,
   date,
+  sunset,
 }) => {
   let location = useLocation();
   const pathname = location.pathname;
@@ -67,7 +69,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   const hours = new Date(date * 1000).getHours();
   const timeOfDay: string = getTimeOfDay(new Date(date * 1000).getHours());
 
-  const clothing = getClothing(feelsLike, clouds, uvi, pop, 0);
+  const clothing = getClothing(feelsLike, clouds, uvi, sunset, pop, 0);
 
   return (
     <div className="collapse collapse-arrow bg-base-100 shadow-xl p-4 mx-auto max-w-2xl mb-4 ">

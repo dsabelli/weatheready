@@ -53,6 +53,7 @@ const HourlyWeather = () => {
           uvi={hour.uvi}
           humidity={hour.humidity}
           clouds={hour.clouds}
+          sunset={weatherData.current.sunset}
         />
       ));
   } else if (isWeatherError) {
