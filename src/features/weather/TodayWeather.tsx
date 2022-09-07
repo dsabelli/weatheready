@@ -62,13 +62,14 @@ const TodayWeather = () => {
           uvi={hour.uvi}
           humidity={hour.humidity}
           clouds={hour.clouds}
+          sunset={weatherData.current.sunset}
         />
       ));
   } else if (isWeatherError) {
     weatherEls = <Error />;
   }
 
-  return <div>{weatherEls}</div>;
+  return <div className="w-full">{weatherEls}</div>;
 };
 
 export default TodayWeather;

@@ -27,6 +27,7 @@ const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
       dayAndMonth,
       High: Math.round(d.temp.max),
       Low: Math.round(d.temp.min),
+      Average: Math.round((d.temp.max + d.temp.min) / 2),
     };
   });
 
@@ -41,7 +42,8 @@ const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
         >
           {/* <XAxis dataKey="day" /> */}
           <XAxis dataKey="dayAndMonth" />
-          <YAxis dataKey="High" />
+          <YAxis />
+
           <CartesianGrid horizontal={false} strokeDasharray={"4 3"} />
           <Tooltip />
           <Line

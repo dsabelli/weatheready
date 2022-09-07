@@ -1,9 +1,10 @@
 import React from "react";
-import { NavIcon } from "../../assets/icons/static/Navigation";
+import { NavIcon } from "../../assets/icons/static/weather/Navigation";
 import { getAnimatedIcon } from "../../utils/getIcon";
 import { getUvDesc } from "../../utils/getUvDesc";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import { getClothing } from "../../utils/getClothing";
 
 interface WeatherCardData {
   temp: number;
@@ -48,8 +49,10 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
     .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
     .join(" ");
 
+  const clothing = getClothing(feelsLike, clouds, uvi, sunset, 0, rain);
+
   return (
-    <div className="flex bg-base-100 shadow-xl p-4 mx-auto">
+    <div className="flex bg-base-100 shadow-xl p-4 mx-auto max-w-4xl">
       <div className="flex flex-col w-full">
         <div className="text-2xl ">
           <h2>Current Weather - </h2>
@@ -141,6 +144,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             </p>
           </li>
         </ul>
+        <div className="flex justify-center ">{clothing}</div>
       </div>
     </div>
   );

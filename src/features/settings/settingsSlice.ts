@@ -3,6 +3,15 @@ import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { Storage } from "redux-persist";
 
+interface Preferences {
+  runsCold: boolean;
+  runsHot: boolean;
+  prefersShade: boolean;
+  prefersSun: boolean;
+  prefersSleeves: boolean;
+  prefersSweater: boolean;
+}
+
 export interface Settings {
   metric: boolean;
   imperial: boolean;
@@ -12,6 +21,8 @@ export interface Settings {
     snow: string;
     wind: string;
   };
+  quizTaken: boolean;
+  preferences: Preferences;
 }
 interface Config {
   key: string;
@@ -26,12 +37,21 @@ const initialState: Settings = {
   metric: true,
   imperial: false,
   units: { temp: "°C", rain: "mm", snow: "cm", wind: "km/h" },
+  quizTaken: false,
+  preferences: {
+    runsCold: false,
+    runsHot: false,
+    prefersShade: false,
+    prefersSun: false,
+    prefersSleeves: false,
+    prefersSweater: false,
+  },
 };
 const settingsSlice = createSlice({
   name: "settings",
   initialState,
   reducers: {
-    setSettings: (state, action: PayloadAction<boolean>) => {
+    setUnits: (state, action: PayloadAction<boolean>) => {
       const payload = action.payload;
       state.metric = payload;
       state.imperial = !payload;
@@ -39,9 +59,16 @@ const settingsSlice = createSlice({
         ? (state.units = { temp: "°C", rain: "mm", snow: "cm", wind: "km/h" })
         : (state.units = { temp: "°F", rain: "in", snow: "in", wind: "mph" });
     },
+    setQuiz: (state, action: PayloadAction<boolean>) => {
+      state.quizTaken = action.payload;
+    },
+    setPreferences: (state, action: PayloadAction<Preferences>) => {
+      const payload = action.payload;
+      state.preferences = { ...payload };
+    },
   },
 });
 
-export const { setSettings } = settingsSlice.actions;
+export const { setUnits, setQuiz, setPreferences } = settingsSlice.actions;
 
 export default persistReducer(persistConfig, settingsSlice.reducer);

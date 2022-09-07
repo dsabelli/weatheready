@@ -30,7 +30,6 @@ const AlertBanner = () => {
     alertEls = <Loader />;
   } else if (isWeatherSuccess) {
     const alerts = weatherData.alerts;
-    console.log(alerts);
 
     if (alerts) {
       const alertEvent =

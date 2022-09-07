@@ -6,14 +6,15 @@ import { useLocation } from "react-router-dom";
 import { getTimeOfDay } from "../../utils/getTimeOfDay";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import Umbrella from "../../assets/icons/static/Umbrella";
-import Snowflake from "../../assets/icons/static/Snowflake";
-import Clouds from "../../assets/icons/static/Clouds";
-import Humidity from "../../assets/icons/static/Humidity";
-import Navigation from "../../assets/icons/static/Navigation";
-import WindGust from "../../assets/icons/static/WindGust";
-import UVI from "../../assets/icons/static/UVI";
-import Raindrops from "../../assets/icons/static/Raindrops";
+import Umbrella from "../../assets/icons/static/weather/Umbrella";
+import Snowflake from "../../assets/icons/static/weather/Snowflake";
+import Clouds from "../../assets/icons/static/weather/Clouds";
+import Humidity from "../../assets/icons/static/weather/Humidity";
+import Navigation from "../../assets/icons/static/weather/Navigation";
+import WindGust from "../../assets/icons/static/weather/WindGust";
+import UVI from "../../assets/icons/static/weather/UVI";
+import Raindrops from "../../assets/icons/static/weather/Raindrops";
+import { getClothing } from "../../utils/getClothing";
 
 interface ForecastCardData {
   temp: number;
@@ -31,6 +32,7 @@ interface ForecastCardData {
   uvi: number;
   humidity: number;
   clouds: number;
+  sunset: number;
 }
 const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   temp,
@@ -48,6 +50,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   humidity,
   clouds,
   date,
+  sunset,
 }) => {
   let location = useLocation();
   const pathname = location.pathname;
@@ -66,9 +69,11 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   const hours = new Date(date * 1000).getHours();
   const timeOfDay: string = getTimeOfDay(new Date(date * 1000).getHours());
 
+  const clothing = getClothing(feelsLike, clouds, uvi, sunset, pop, 0);
+
   return (
     <div className="collapse collapse-arrow bg-base-100 shadow-xl p-4 mx-auto max-w-2xl mb-4 ">
-      <input type="checkbox" />
+      <input type="checkbox" className="z-20" />
       <div className="collapse-title text-xl font-medium ">
         <div className="flex flex-col w-full">
           <div className="flex justify-between items-center">
@@ -85,7 +90,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
               </>
             )}
           </div>
-          <div className="flex w-full">
+          <div className="flex w-full justify-center items-center">
             <div className="flex justify-center items-center w-full">
               <div className={` ${iconWidth}`}>{getAnimatedIcon(icon)}</div>
               <div
@@ -130,6 +135,10 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
                   <p>{Math.round(pop * 100)}%</p>
                 </div>
               )}
+            </div>
+            <div className="w-full">
+              {/* <h3 className="text-xs mb-2">Weather Ready Recommends</h3> */}
+              {clothing}
             </div>
           </div>
         </div>

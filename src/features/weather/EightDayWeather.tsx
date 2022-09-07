@@ -48,6 +48,7 @@ const EightDayWeather = () => {
         uvi={day.uvi}
         humidity={day.humidity}
         clouds={day.clouds}
+        sunset={day.sunset}
       />
     ));
   } else if (isWeatherError) {
