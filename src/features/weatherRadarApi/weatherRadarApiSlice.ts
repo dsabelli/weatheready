@@ -9,25 +9,25 @@ type Layer =
   | "wind_new"
   | "temperature_new";
 
-export interface Coords {
-  lat: string;
-  lon: string;
-  layer: Layer;
-}
-const zoom = "13";
+// export interface Coords {
+//   lat: string;
+//   lon: string;
+//   layer: Layer;
+// }
+const zoom = "9";
 
 export const weatherRadarApiSlice = createApi({
   reducerPath: "weatherRadarApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: ` https://tile.openweathermap.org/map/`,
+    baseUrl: `https://api.rainviewer.com/public/weather-maps.json`,
   }),
   // tagTypes: ["Weather"],
   endpoints: (builder) => ({
-    getRadar: builder.query<OneCallData, Coords>({
-      query: (arg) => {
-        const { lat, lon, layer } = arg;
+    getRadar: builder.query<any, any>({
+      query: () => {
+        // const { lat, lon, layer } = arg;
         return {
-          url: `${layer}/${zoom}/${lat}/${lon}.png?appid=${weatherApi}`,
+          url: ``,
 
           // providesTags: ["Weather"],
         };

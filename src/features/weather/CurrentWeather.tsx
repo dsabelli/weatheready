@@ -6,6 +6,7 @@ import CurrentWeatherCard from "../../components/UI/CurrentWeatherCard";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import PrecipitationChart from "../../components/UI/PrecipitationChart";
+import { useGetRadarQuery } from "../weatherRadarApi/weatherRadarApiSlice";
 
 const Weather = () => {
   const { lat, lon } = useSelector((state: RootState) => state.location);
@@ -61,7 +62,7 @@ const Weather = () => {
     weatherEls = <Error />;
   }
 
-  // let radarEl;
+  let radarEl;
 
   // const {
   //   data: radarData,
@@ -78,10 +79,10 @@ const Weather = () => {
   // if (isRadarLoading) {
   //   radarEl = <Loader />;
   // } else if (isRadarSuccess) {
-  //   console.log(radarData);
+  //   // L.tileLayer(radarData).addTo(map);
   // }
 
-  return <div className="flex w-full">{weatherEls}</div>;
+  return <div className="w-full">{weatherEls}</div>;
 };
 
 export default Weather;
