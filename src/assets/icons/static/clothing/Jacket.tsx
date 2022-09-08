@@ -22,7 +22,7 @@ const Jacket = () => {
 
   if (window.innerWidth >= 768) {
     jacket = (
-      <Tooltip label="Light Jacket or Sweater">
+      <Tooltip label="Light Jacket or Thin Sweater">
         <JacketIcon />
       </Tooltip>
     );

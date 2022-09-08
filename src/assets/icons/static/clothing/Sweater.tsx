@@ -24,7 +24,7 @@ const Sweater = () => {
 
   if (window.innerWidth >= 768) {
     sweater = (
-      <Tooltip label="Light Sweater or Sweater">
+      <Tooltip label="Heavy Jacket or Sweater">
         <SweaterIcon />
       </Tooltip>
     );

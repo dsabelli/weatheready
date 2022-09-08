@@ -21,7 +21,7 @@ const Shorts = () => {
 
   if (window.innerWidth >= 768) {
     shorts = (
-      <Tooltip label="Light Shorts or Sweater">
+      <Tooltip label="Shorts">
         <ShortsIcon />
       </Tooltip>
     );
