@@ -8,8 +8,6 @@ const QuizModal = () => {
   const dispatch = useDispatch();
   const { preferences } = useSelector((state: RootState) => state.settings);
   const [radioOne, setRadioOne] = useState("");
-  const [radioTwo, setRadioTwo] = useState("");
-  console.log(preferences);
 
   useEffect(() => {
     if (radioOne === "cold")
@@ -48,10 +46,23 @@ const QuizModal = () => {
                 orientation="vertical"
                 label="Sweater in Summer or shorts in Winter?"
                 withAsterisk
+                classNames={{ label: "text-current" }}
               >
-                <Radio value="cold" label="Sweater in Summer" />
-                <Radio value="hot" label="Shorts in Winter" />
-                <Radio value="na" label="Neither" />
+                <Radio
+                  value="cold"
+                  label="Sweater in Summer"
+                  classNames={{ label: "text-current" }}
+                />
+                <Radio
+                  value="hot"
+                  label="Shorts in Winter"
+                  classNames={{ label: "text-current" }}
+                />
+                <Radio
+                  value="na"
+                  label="Neither"
+                  classNames={{ label: "text-current" }}
+                />
               </Radio.Group>
             </div>
             <div className="">
