@@ -49,7 +49,15 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
     .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
     .join(" ");
 
-  const clothing = getClothing(feelsLike, clouds, uvi, sunset, 0, rain);
+  const clothing = getClothing(
+    feelsLike,
+    clouds,
+    uvi,
+    new Date().getHours(),
+    sunset,
+    0,
+    rain
+  );
 
   return (
     <div className="flex bg-base-100 shadow-xl p-4 mx-auto max-w-4xl">

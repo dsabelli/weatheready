@@ -19,6 +19,7 @@ const getClothing = (
   temp: number,
   clouds: number,
   uvi: number,
+  date: number,
   sunset: number,
   pop: number,
   rain: number
@@ -26,6 +27,12 @@ const getClothing = (
   let clothing;
 
   temp = Math.round(temp);
+
+  if (
+    clouds <= 25 &&
+    new Date(date * 1000).getHours() < new Date(sunset * 1000).getHours() - 2
+  )
+    temp += 2;
 
   switch (true) {
     case temp < 5:
