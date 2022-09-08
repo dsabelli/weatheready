@@ -8,8 +8,6 @@ interface Preferences {
   runsHot: boolean;
   prefersShade: boolean;
   prefersSun: boolean;
-  prefersSleeves: boolean;
-  prefersSweater: boolean;
 }
 
 export interface Settings {
@@ -43,8 +41,6 @@ const initialState: Settings = {
     runsHot: false,
     prefersShade: false,
     prefersSun: false,
-    prefersSleeves: false,
-    prefersSweater: false,
   },
 };
 const settingsSlice = createSlice({
