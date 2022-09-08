@@ -54,7 +54,8 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
 }) => {
   let location = useLocation();
   const pathname = location.pathname;
-
+  const { preferences } = useSelector((state: RootState) => state.settings);
+  const { runsHot, runsCold } = preferences;
   const { metric, units } = useSelector((state: RootState) => state.settings);
 
   const desc: string = description
@@ -69,7 +70,22 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   const hours = new Date(date * 1000).getHours();
   const timeOfDay: string = getTimeOfDay(new Date(date * 1000).getHours());
 
-  const clothing = getClothing(feelsLike, clouds, uvi, date, sunset, pop, 0);
+  const getTemp = (feelsLike: number): number => {
+    let temp = feelsLike;
+    if (!metric) temp = (temp - 32) * (5 / 9);
+    runsHot ? (temp += 1) : runsCold ? (temp -= 1) : temp;
+    return temp;
+  };
+
+  const clothing = getClothing(
+    getTemp(feelsLike),
+    clouds,
+    uvi,
+    date,
+    sunset,
+    pop,
+    0
+  );
 
   return (
     <div className="collapse collapse-arrow bg-base-100 shadow-xl p-4 mx-auto max-w-2xl mb-4 ">

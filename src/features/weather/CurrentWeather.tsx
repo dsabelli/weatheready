@@ -50,6 +50,7 @@ const Weather = () => {
           description={current.weather[0].description}
           rain={current.rain ? current.rain["1h"] : 0}
           snow={current.snow ? current.snow["1h"] : 0}
+          date={current.dt}
         />
         {weatherData.minutely && (
           <PrecipitationChart data={weatherData.minutely} />

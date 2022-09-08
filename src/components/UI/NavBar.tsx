@@ -3,8 +3,12 @@ import { Link, useLocation } from "react-router-dom";
 import Search from "../../features/location/Search";
 import ReverseLocation from "./ReverseLocation";
 import SettingsToggle from "./SettingsToggle";
+import QuizModal from "./QuizModal";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 const NavBar = () => {
+  const { quizTaken } = useSelector((state: RootState) => state.settings);
   let location = useLocation();
   const path = location.pathname;
 
@@ -19,6 +23,7 @@ const NavBar = () => {
             Weather Ready
           </Link>
         </div>
+        {!quizTaken && <QuizModal />}
         <ReverseLocation />
         <Search />
         <SettingsToggle />

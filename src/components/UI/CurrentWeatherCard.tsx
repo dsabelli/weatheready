@@ -21,6 +21,7 @@ interface WeatherCardData {
   uvi: number;
   rain: number;
   snow: number;
+  date: number;
 }
 
 const CurrentWeatherCard: React.FC<WeatherCardData> = ({
@@ -38,7 +39,10 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
   uvi,
   rain,
   snow,
+  date,
 }) => {
+  const { preferences } = useSelector((state: RootState) => state.settings);
+  const { runsHot, runsCold } = preferences;
   const { metric, units } = useSelector((state: RootState) => state.settings);
   const sunriseHours: number = new Date(sunrise * 1000).getHours();
   const sunriseMinutes: number = new Date(sunrise * 1000).getMinutes();
@@ -49,11 +53,18 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
     .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
     .join(" ");
 
+  const getTemp = (feelsLike: number): number => {
+    let temp = feelsLike;
+    if (!metric) temp = (temp - 32) * (5 / 9);
+    runsHot ? (temp += 1) : runsCold ? (temp -= 1) : temp;
+    return temp;
+  };
+
   const clothing = getClothing(
-    feelsLike,
+    getTemp(feelsLike),
     clouds,
     uvi,
-    new Date().getHours(),
+    date,
     sunset,
     0,
     rain

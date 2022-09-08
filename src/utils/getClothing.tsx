@@ -84,7 +84,7 @@ const getClothing = (
         </>
       )}
       {rain ||
-        (pop * 100 >= 60 && (
+        (pop * 100 >= 50 && temp > 5 && (
           <>
             <Umbrella />
             <RainBoots />

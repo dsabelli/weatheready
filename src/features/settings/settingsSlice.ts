@@ -6,8 +6,6 @@ import { Storage } from "redux-persist";
 interface Preferences {
   runsCold: boolean;
   runsHot: boolean;
-  prefersShade: boolean;
-  prefersSun: boolean;
 }
 
 export interface Settings {
@@ -39,8 +37,6 @@ const initialState: Settings = {
   preferences: {
     runsCold: false,
     runsHot: false,
-    prefersShade: false,
-    prefersSun: false,
   },
 };
 const settingsSlice = createSlice({
