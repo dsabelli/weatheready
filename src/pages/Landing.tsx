@@ -12,13 +12,7 @@ const Landing = () => {
       <NavBar />
       <AlertBanner />
       <div className="flex mx-auto justify-center max-w-4xl">
-        {!pathname.includes("app/") && (
-          <>
-            <Link className="w-full" to="today">
-              <CurrentWeather />
-            </Link>
-          </>
-        )}
+        {!pathname.includes("app/") && <CurrentWeather />}
       </div>
       <Outlet />
     </div>
