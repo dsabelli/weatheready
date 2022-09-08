@@ -6,7 +6,6 @@ import CurrentWeatherCard from "../../components/UI/CurrentWeatherCard";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import PrecipitationChart from "../../components/UI/PrecipitationChart";
-import { getClothing } from "../../utils/getClothing";
 
 const Weather = () => {
   const { lat, lon } = useSelector((state: RootState) => state.location);
@@ -28,7 +27,6 @@ const Weather = () => {
   );
 
   let weatherEls;
-  let clothing;
 
   if (isWeatherLoading) {
     weatherEls = <Loader />;
