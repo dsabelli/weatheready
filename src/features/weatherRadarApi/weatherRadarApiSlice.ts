@@ -1,20 +1,22 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OneCallData } from "../../types";
 
-const weatherApi: string = import.meta.env.VITE_WEATHER_API_KEY;
-type Layer =
-  | "clouds_new"
-  | "precipitation_new"
-  | "pressure_new"
-  | "wind_new"
-  | "temperature_new";
+export interface Radar {
+  time: number;
+  path: string;
+}
 
-// export interface Coords {
-//   lat: string;
-//   lon: string;
-//   layer: Layer;
-// }
-const zoom = "9";
+export interface RadarData {
+  generated: number;
+  host: string;
+  radar: {
+    past: Radar[];
+    nowcast: Radar[];
+  };
+  satellite: {
+    infrared: Radar[];
+  };
+  version: string;
+}
 
 export const weatherRadarApiSlice = createApi({
   reducerPath: "weatherRadarApi",
@@ -23,13 +25,10 @@ export const weatherRadarApiSlice = createApi({
   }),
   // tagTypes: ["Weather"],
   endpoints: (builder) => ({
-    getRadar: builder.query<any, any>({
+    getRadar: builder.query<RadarData, any>({
       query: () => {
-        // const { lat, lon, layer } = arg;
         return {
-          url: ``,
-
-          // providesTags: ["Weather"],
+          url: "",
         };
       },
     }),
