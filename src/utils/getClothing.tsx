@@ -78,7 +78,7 @@ const getClothing = (
         new Date().getHours() < new Date(sunset * 1000).getHours() && (
           <Sunglasses />
         )}
-      {uvi >= 5 && (
+      {uvi >= 4 && (
         <>
           <Sunscreen />
           <Hat />
