@@ -97,7 +97,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
           <p>{`Sunrise ${sunriseHours}:${
             sunriseMinutes < 10 ? 0 : ""
           }${sunriseMinutes} AM`}</p>
-          <p>{`Sunset ${sunsetHours}:${
+          <p>{`Sunset ${sunsetHours - 12}:${
             sunsetMinutes < 10 ? 0 : ""
           }${sunsetMinutes} PM`}</p>
         </div>
