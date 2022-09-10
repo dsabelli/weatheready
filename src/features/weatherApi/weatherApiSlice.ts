@@ -16,33 +16,12 @@ export const weatherApiSlice = createApi({
   }),
   // tagTypes: ["Weather"],
   endpoints: (builder) => ({
-    // getWeather: builder.query<WeatherData, Coords>({
-    //   query: (arg) => {
-    //     const { lat, lon } = arg;
-    //     return {
-    //       url: `2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
-    //       params: { lat, lon },
-    //       // providesTags: ["Weather"],
-    //     };
-    //   },
-    // }),
-    // getForecast: builder.query<ForecastData, Coords>({
-    //   query: (arg) => {
-    //     const { lat, lon } = arg;
-    //     return {
-    //       url: `2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
-    //       params: { lat, lon },
-    //       // providesTags: ["Weather"],
-    //     };
-    //   },
-    // }),
     getOneCall: builder.query<OneCallData, Coords>({
       query: (arg) => {
         const { lat, lon, units } = arg;
         return {
           url: `3.0/onecall?lat=${lat}&lon=${lon}&units=${units}&appid=${weatherApi}`,
           params: { lat, lon, units },
-          // providesTags: ["Weather"],
         };
       },
     }),

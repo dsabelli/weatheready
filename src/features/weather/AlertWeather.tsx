@@ -36,7 +36,10 @@ const AlertWeather = () => {
         <AlertWeatherCard
           key={nanoid()}
           sender_name={alert.sender_name}
-          event={alert.event}
+          event={alert.event
+            .split(" ")
+            .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
+            .join(" ")}
           start={alert.start}
           end={alert.end}
           description={alert.description}

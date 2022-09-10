@@ -61,27 +61,7 @@ const Weather = () => {
     weatherEls = <Error />;
   }
 
-  // let radarEl;
-
-  // const {
-  //   data: radarData,
-  //   isLoading: isRadarLoading,
-  //   isSuccess: isRadarSuccess,
-  //   isError: isRadarError,
-  //   error: radarError,
-  // } = useGetRadarQuery({
-  //   lat: "42",
-  //   lon: "82",
-  //   layer: "clouds_new",
-  // });
-
-  // if (isRadarLoading) {
-  //   radarEl = <Loader />;
-  // } else if (isRadarSuccess) {
-  //   console.log(radarData);
-  // }
-
-  return <div className="flex w-full">{weatherEls}</div>;
+  return <div className="w-full">{weatherEls}</div>;
 };
 
 export default Weather;

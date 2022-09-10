@@ -42,10 +42,8 @@ const HourlyWeather = () => {
           description={hour.weather[0].description}
           iconWidth={`w-24`}
           date={hour.dt}
-          rain={0}
-          snow={0}
-          // rain={hour.rain["1h"] || 0}
-          // snow={hour.snow["1h"] || 0}
+          rain={hour.rain ? hour.rain["1h"] : 0}
+          snow={hour.snow ? hour.snow["1h"] : 0}
           pop={hour.pop || 0}
           windSpeed={hour.wind_speed}
           windGust={hour.wind_gust}

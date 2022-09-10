@@ -30,7 +30,8 @@ const getClothing = (
 
   if (
     clouds <= 25 &&
-    new Date(date * 1000).getHours() < new Date(sunset * 1000).getHours() - 2
+    new Date(date * 1000).getHours() < new Date(sunset * 1000).getHours() - 2 &&
+    new Date(date * 1000).getHours() > 9
   )
     temp += 2;
 
@@ -77,7 +78,7 @@ const getClothing = (
         new Date().getHours() < new Date(sunset * 1000).getHours() && (
           <Sunglasses />
         )}
-      {uvi >= 5 && (
+      {uvi >= 4 && (
         <>
           <Sunscreen />
           <Hat />
