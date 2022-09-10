@@ -1,6 +1,6 @@
-import React, { useState, useEffect, ReactElement } from "react";
+import React, { useState, useEffect } from "react";
 import Loader from "./Loader";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import {
@@ -10,15 +10,22 @@ import {
 import Play from "../../assets/icons/static/Play";
 import Pause from "../../assets/icons/static/Pause";
 import { Slider } from "@mantine/core";
+import { LatLngExpression } from "leaflet";
+
+const UpdateMapCenter = ({ mapCenter }: { mapCenter: LatLngExpression }) => {
+  const map = useMap();
+  map.panTo(mapCenter);
+  return null;
+};
 
 const Map = () => {
-  const [stepCounter, setStepCounter] = useState(-1);
+  const [stepCounter, setStepCounter] = useState(0);
   const [delay, setDelay] = useState(4);
   const [step, setStep] = useState(false);
   const location = useSelector((state: RootState) => state.storedLocation);
 
   let radarEls: any;
-  let radarTime: any;
+  let radarTime;
 
   const {
     data: radarData,
@@ -59,7 +66,6 @@ const Map = () => {
       return () => clearTimeout(timeoutID);
     }
   }, [stepCounter, step]);
-  console.log(+location.lat, +location.lon);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -68,8 +74,8 @@ const Map = () => {
         zoom={8}
         scrollWheelZoom={true}
         className="h-80"
-        // style={{ minHeight: 800 }}
       >
+        <UpdateMapCenter mapCenter={[+location.lat, +location.lon]} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
