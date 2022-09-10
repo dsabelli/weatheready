@@ -13,7 +13,7 @@ const persistConfig: Config = {
   storage,
 };
 
-const initialState: Location = { lat: "0", lon: "0" };
+const initialState: Location = { lat: "", lon: "" };
 
 const storedLocationSlice = createSlice({
   name: "storedLocation",
