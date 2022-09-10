@@ -9,11 +9,11 @@ import {
 } from "../../features/weatherRadarApi/weatherRadarApiSlice";
 import Play from "../../assets/icons/static/Play";
 import Pause from "../../assets/icons/static/Pause";
-import { RangeSlider, Slider } from "@mantine/core";
+import { Slider } from "@mantine/core";
 
 const Map = () => {
   const [stepCounter, setStepCounter] = useState(-1);
-  const [delay, setDelay] = useState(3);
+  const [delay, setDelay] = useState(4);
   const [step, setStep] = useState(false);
   const location = useSelector((state: RootState) => state.storedLocation);
 
@@ -55,11 +55,11 @@ const Map = () => {
         stepCounter >= 16
           ? setStepCounter(0)
           : setStepCounter((prevVal) => prevVal + 1);
-      }, delay * 200);
+      }, 1200 / delay);
       return () => clearTimeout(timeoutID);
     }
   }, [stepCounter, step]);
-  console.log(step);
+  console.log(+location.lat, +location.lon);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -67,7 +67,7 @@ const Map = () => {
         center={[+location.lat, +location.lon]}
         zoom={8}
         scrollWheelZoom={true}
-        className="h-60"
+        className="h-80"
         // style={{ minHeight: 800 }}
       >
         <TileLayer
@@ -76,59 +76,67 @@ const Map = () => {
         />
         {radarEls[stepCounter]}
       </MapContainer>
-      <div className="flex justify-start items-center gap-4">
-        <label className="swap" onChange={() => setStep((prevVal) => !prevVal)}>
-          <input type="checkbox" />
-          <div className="swap-off">
-            <Play />
-          </div>
-          <div className="swap-on">
-            <Pause />
-          </div>
-        </label>
+      <div className="flex justify-between items-center ">
+        <div className="flex items-center gap-4">
+          <label
+            className="swap"
+            onChange={() => setStep((prevVal) => !prevVal)}
+          >
+            <input type="checkbox" />
+            <div className="swap-off">
+              <Play />
+            </div>
+            <div className="swap-on">
+              <Pause />
+            </div>
+          </label>
 
-        <Slider
-          value={stepCounter}
-          onChange={setStepCounter}
-          max={15}
-          classNames={{ root: "w-56" }}
-        />
-        {radarTime && radarTime[stepCounter]}
+          <Slider
+            value={stepCounter}
+            onChange={setStepCounter}
+            max={15}
+            classNames={{ root: "w-56" }}
+          />
+          {radarTime && radarTime[stepCounter]}
+        </div>
+        <div className="flex items-center gap-3">
+          <p>Slow</p>
+          <Slider
+            value={delay}
+            onChange={setDelay}
+            min={1}
+            max={6}
+            classNames={{ root: "w-56" }}
+          />
+          <p>Fast</p>
+        </div>
       </div>
-      <div>
-        {" "}
-        <Slider
-          value={delay}
-          onChange={setDelay}
-          min={1}
-          max={6}
-          classNames={{ root: "w-56" }}
-        />
+      <div className="flex items-center">
+        <p>Rain</p>
+        <div
+          className="w-36 h-3 mr-4 ml-1"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(162,212,125,1) 0%, rgba(96,162,34,1) 25%, rgba(227,228,37,1) 50%, rgba(249,182,14,1) 75%, rgba(235,63,27,1) 90%, rgba(237,101,76,1) 100%) ",
+          }}
+        ></div>
+        <p>Ice</p>
+        <div
+          className="w-20 h-3 mr-4 ml-1"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(249,214,218,1) 0%, rgba(246,163,173,1) 50%, rgba(250,135,150,1) 100%)",
+          }}
+        ></div>
+        <p>Snow</p>
+        <div
+          className="w-20 h-3 ml-1"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(168,217,227,1) 0%, rgba(129,198,212,1) 50%, rgba(49,156,174,1) 100%)",
+          }}
+        ></div>
       </div>
-      Rain
-      <div
-        className="w-36 h-3"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(162,212,125,1) 0%, rgba(96,162,34,1) 25%, rgba(227,228,37,1) 50%, rgba(249,182,14,1) 75%, rgba(235,63,27,1) 90%, rgba(237,101,76,1) 100%) ",
-        }}
-      ></div>
-      Ice
-      <div
-        className="w-20 h-3"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(249,214,218,1) 0%, rgba(246,163,173,1) 50%, rgba(250,135,150,1) 100%)",
-        }}
-      ></div>
-      Snow
-      <div
-        className="w-20 h-3"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(168,217,227,1) 0%, rgba(129,198,212,1) 50%, rgba(49,156,174,1) 100%)",
-        }}
-      ></div>
     </div>
   );
 };
