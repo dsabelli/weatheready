@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Popover, Text } from "@mantine/core";
 
 const UVIIcon = forwardRef<HTMLDivElement>((props, ref) => (
   <div {...props} className="w-5 md:w-7" ref={ref}>
@@ -27,11 +27,29 @@ const UVIIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const UVI = () => {
-  return (
-    <Tooltip label="UVI">
-      <UVIIcon />
-    </Tooltip>
-  );
+  let uvi;
+
+  if (window.innerWidth >= 768) {
+    uvi = (
+      <Tooltip label="UVI">
+        <UVIIcon />
+      </Tooltip>
+    );
+  } else if (window.innerWidth < 768) {
+    uvi = (
+      <Popover width={100} position="top">
+        <Popover.Target>
+          <UVIIcon />
+        </Popover.Target>
+        <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
+          <Text className="text-primary-content text-sm font-bold text-center">
+            UVI
+          </Text>
+        </Popover.Dropdown>
+      </Popover>
+    );
+  }
+  return <>{uvi}</>;
 };
 
 export default UVI;

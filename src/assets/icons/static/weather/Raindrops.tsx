@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Popover, Text } from "@mantine/core";
 
 const RaindropsIcon = forwardRef<HTMLDivElement>((props, ref) => (
   <div {...props} className="w-5 md:w-7" ref={ref}>
@@ -22,11 +22,29 @@ const RaindropsIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const Raindrops = () => {
-  return (
-    <Tooltip label="Rain">
-      <RaindropsIcon />
-    </Tooltip>
-  );
+  let raindrops;
+
+  if (window.innerWidth >= 768) {
+    raindrops = (
+      <Tooltip label="Rain">
+        <RaindropsIcon />
+      </Tooltip>
+    );
+  } else if (window.innerWidth < 768) {
+    raindrops = (
+      <Popover width={100} position="top">
+        <Popover.Target>
+          <RaindropsIcon />
+        </Popover.Target>
+        <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
+          <Text className="text-primary-content text-sm font-bold text-center">
+            Rain
+          </Text>
+        </Popover.Dropdown>
+      </Popover>
+    );
+  }
+  return <>{raindrops}</>;
 };
 
 export default Raindrops;

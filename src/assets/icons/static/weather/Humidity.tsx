@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Popover, Text } from "@mantine/core";
 
 const HumidityIcon = forwardRef<HTMLDivElement>((props, ref) => (
   <div {...props} className="w-5 md:w-7" ref={ref}>
@@ -58,11 +58,29 @@ const HumidityIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const Humidity = () => {
-  return (
-    <Tooltip label="Relative Humidity">
-      <HumidityIcon />
-    </Tooltip>
-  );
+  let humidity;
+
+  if (window.innerWidth >= 768) {
+    humidity = (
+      <Tooltip label="Humidity">
+        <HumidityIcon />
+      </Tooltip>
+    );
+  } else if (window.innerWidth < 768) {
+    humidity = (
+      <Popover width={100} position="top">
+        <Popover.Target>
+          <HumidityIcon />
+        </Popover.Target>
+        <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
+          <Text className="text-primary-content text-sm font-bold text-center">
+            Humidity
+          </Text>
+        </Popover.Dropdown>
+      </Popover>
+    );
+  }
+  return <>{humidity}</>;
 };
 
 export default Humidity;

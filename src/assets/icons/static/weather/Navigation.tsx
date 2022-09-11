@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Popover, Text } from "@mantine/core";
 import { IconProps } from "../../../../types";
 
 export const NavIcon: React.FC<IconProps> = ({ className, rotate = 180 }) => {
@@ -42,13 +42,33 @@ const NavigationIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const Navigation: React.FC<IconProps> = ({ rotate = 180 }) => {
-  return (
-    <Tooltip label="Wind Speed/Direction">
-      <div style={{ transform: `rotate(${rotate - 180}deg)` }}>
-        <NavigationIcon />
-      </div>
-    </Tooltip>
-  );
+  let navigation;
+
+  if (window.innerWidth >= 768) {
+    navigation = (
+      <Tooltip label="Wind Speed / Direction">
+        <div style={{ transform: `rotate(${rotate - 180}deg)` }}>
+          <NavigationIcon />
+        </div>
+      </Tooltip>
+    );
+  } else if (window.innerWidth < 768) {
+    navigation = (
+      <Popover width={100} position="top">
+        <Popover.Target>
+          <div style={{ transform: `rotate(${rotate - 180}deg)` }}>
+            <NavigationIcon />
+          </div>
+        </Popover.Target>
+        <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
+          <Text className="text-primary-content text-sm font-bold text-center">
+            Wind Speed / Direction
+          </Text>
+        </Popover.Dropdown>
+      </Popover>
+    );
+  }
+  return <>{navigation}</>;
 };
 
 export default Navigation;

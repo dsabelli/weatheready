@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Popover, Text } from "@mantine/core";
 
 const UmbrellaIcon = forwardRef<HTMLDivElement>((props, ref) => (
   <div {...props} className="w-5 md:w-7" ref={ref}>
@@ -19,11 +19,29 @@ const UmbrellaIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const Umbrella = () => {
-  return (
-    <Tooltip label="Chance of Precipitation">
-      <UmbrellaIcon />
-    </Tooltip>
-  );
+  let umbrella;
+
+  if (window.innerWidth >= 768) {
+    umbrella = (
+      <Tooltip label="Chance of Precipitation">
+        <UmbrellaIcon />
+      </Tooltip>
+    );
+  } else if (window.innerWidth < 768) {
+    umbrella = (
+      <Popover width={100} position="top">
+        <Popover.Target>
+          <UmbrellaIcon />
+        </Popover.Target>
+        <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
+          <Text className="text-primary-content text-sm font-bold text-center">
+            Chance of Precipitation
+          </Text>
+        </Popover.Dropdown>
+      </Popover>
+    );
+  }
+  return <>{umbrella}</>;
 };
 
 export default Umbrella;

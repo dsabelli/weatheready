@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Popover, Text } from "@mantine/core";
 
 const SunsetIcon = forwardRef<HTMLDivElement>((props, ref) => (
   <div {...props} className="w-5 md:w-7" ref={ref}>
@@ -26,11 +26,29 @@ const SunsetIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const Sunset = () => {
-  return (
-    <Tooltip label="Sunset">
-      <SunsetIcon />
-    </Tooltip>
-  );
+  let sunset;
+
+  if (window.innerWidth >= 768) {
+    sunset = (
+      <Tooltip label="Sunset">
+        <SunsetIcon />
+      </Tooltip>
+    );
+  } else if (window.innerWidth < 768) {
+    sunset = (
+      <Popover width={100} position="top">
+        <Popover.Target>
+          <SunsetIcon />
+        </Popover.Target>
+        <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
+          <Text className="text-primary-content text-sm font-bold text-center">
+            Sunset
+          </Text>
+        </Popover.Dropdown>
+      </Popover>
+    );
+  }
+  return <>{sunset}</>;
 };
 
 export default Sunset;

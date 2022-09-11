@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Popover, Text } from "@mantine/core";
 
 const SnowflakeIcon = forwardRef<HTMLDivElement>((props, ref) => (
   <div {...props} className="w-5 md:w-7" ref={ref}>
@@ -25,11 +25,29 @@ const SnowflakeIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const Snowflake = () => {
-  return (
-    <Tooltip label="Snow">
-      <SnowflakeIcon />
-    </Tooltip>
-  );
+  let snowflake;
+
+  if (window.innerWidth >= 768) {
+    snowflake = (
+      <Tooltip label="Snow">
+        <SnowflakeIcon />
+      </Tooltip>
+    );
+  } else if (window.innerWidth < 768) {
+    snowflake = (
+      <Popover width={100} position="top">
+        <Popover.Target>
+          <SnowflakeIcon />
+        </Popover.Target>
+        <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
+          <Text className="text-primary-content text-sm font-bold text-center">
+            Snow
+          </Text>
+        </Popover.Dropdown>
+      </Popover>
+    );
+  }
+  return <>{snowflake}</>;
 };
 
 export default Snowflake;

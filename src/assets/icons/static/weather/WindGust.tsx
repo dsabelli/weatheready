@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { Tooltip } from "@mantine/core";
+import { Tooltip, Popover, Text } from "@mantine/core";
 
 const WindGustIcon = forwardRef<HTMLDivElement>((props, ref) => (
   <div {...props} className="w-5 md:w-7" ref={ref}>
@@ -19,11 +19,29 @@ const WindGustIcon = forwardRef<HTMLDivElement>((props, ref) => (
 ));
 
 const WindGust = () => {
-  return (
-    <Tooltip label="Wind Gust">
-      <WindGustIcon />
-    </Tooltip>
-  );
+  let windGust;
+
+  if (window.innerWidth >= 768) {
+    windGust = (
+      <Tooltip label="Wind Gust">
+        <WindGustIcon />
+      </Tooltip>
+    );
+  } else if (window.innerWidth < 768) {
+    windGust = (
+      <Popover width={100} position="top">
+        <Popover.Target>
+          <WindGustIcon />
+        </Popover.Target>
+        <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
+          <Text className="text-primary-content text-sm font-bold text-center">
+            Wind Gust
+          </Text>
+        </Popover.Dropdown>
+      </Popover>
+    );
+  }
+  return <>{windGust}</>;
 };
 
 export default WindGust;
