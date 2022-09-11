@@ -10,11 +10,14 @@ import {
 import Play from "../../assets/icons/static/Play";
 import Pause from "../../assets/icons/static/Pause";
 import { Slider } from "@mantine/core";
-import { LatLngExpression } from "leaflet";
 
-const UpdateMapCenter = ({ mapCenter }: { mapCenter: LatLngExpression }) => {
+const UpdateMapCenter = ({ mapCenter }: { mapCenter: [number, number] }) => {
+  const location = useSelector((state: RootState) => state.storedLocation);
   const map = useMap();
-  map.panTo(mapCenter);
+  useEffect(() => {
+    map.panTo(mapCenter);
+  }, [location]);
+
   return null;
 };
 
@@ -76,6 +79,7 @@ const Map = () => {
         className="h-80"
       >
         <UpdateMapCenter mapCenter={[+location.lat, +location.lon]} />
+
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
