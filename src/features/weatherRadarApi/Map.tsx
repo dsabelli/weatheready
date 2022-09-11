@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Loader from "./Loader";
+import Loader from "../../components/UI/Loader";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import {
-  Radar,
-  useGetRadarQuery,
-} from "../../features/weatherRadarApi/weatherRadarApiSlice";
+import { Radar, useGetRadarQuery } from "./weatherRadarApiSlice";
 import Play from "../../assets/icons/static/Play";
 import Pause from "../../assets/icons/static/Pause";
 import { Slider } from "@mantine/core";
@@ -21,7 +18,7 @@ const UpdateMapCenter = ({ mapCenter }: { mapCenter: [number, number] }) => {
   return null;
 };
 
-const Map = () => {
+const Map = ({ height }: { height: string }) => {
   const [stepCounter, setStepCounter] = useState(0);
   const [delay, setDelay] = useState(4);
   const [opacity, setOpacity] = useState(70);
@@ -78,7 +75,7 @@ const Map = () => {
         center={[+location.lat, +location.lon]}
         zoom={8}
         scrollWheelZoom={true}
-        className="h-80"
+        style={{ height: height }}
       >
         <UpdateMapCenter mapCenter={[+location.lat, +location.lon]} />
 

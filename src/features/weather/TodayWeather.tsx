@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import ForecastWeatherCard from "../../components/UI/ForecastWeatherCard";
+import ForecastWeatherCard from "../../components/layout/ForecastWeatherCard";
 import Loader from "../../components/UI/Loader";
 import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
 import Error from "../../pages/Error";

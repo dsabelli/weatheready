@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, Outlet, Location, useLocation } from "react-router-dom";
 import AlertBanner from "../components/UI/AlertBanner";
-import Map from "../components/UI/Map";
-import NavBar from "../components/UI/NavBar";
+import Map from "../features/weatherRadarApi/Map";
+import NavBar from "../components/layout/NavBar";
 import CurrentWeather from "../features/weather/CurrentWeather";
 
 const Landing = () => {
@@ -15,7 +15,7 @@ const Landing = () => {
       <div className="flex mx-auto justify-center max-w-4xl">
         {!pathname.includes("app/") && <CurrentWeather />}
       </div>
-      {!pathname.includes("app/") && <Map />}
+      {!pathname.includes("app/") && <Map height={"33vh"} />}
       <Outlet />
     </div>
   );

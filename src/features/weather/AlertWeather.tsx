@@ -4,7 +4,7 @@ import Loader from "../../components/UI/Loader";
 import Error from "../../pages/Error";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import AlertWeatherCard from "../../components/UI/AlertWeatherCard";
+import AlertWeatherCard from "../../components/layout/AlertWeatherCard";
 import { nanoid } from "nanoid";
 
 const AlertWeather = () => {

@@ -2,7 +2,7 @@ import React from "react";
 import { useGetOneCallQuery } from "../weatherApi/weatherApiSlice";
 import Loader from "../../components/UI/Loader";
 import Error from "../../pages/Error";
-import CurrentWeatherCard from "../../components/UI/CurrentWeatherCard";
+import CurrentWeatherCard from "../../components/layout/CurrentWeatherCard";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import PrecipitationChart from "../../components/UI/PrecipitationChart";
