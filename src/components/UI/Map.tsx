@@ -24,6 +24,7 @@ const UpdateMapCenter = ({ mapCenter }: { mapCenter: [number, number] }) => {
 const Map = () => {
   const [stepCounter, setStepCounter] = useState(0);
   const [delay, setDelay] = useState(4);
+  const [opacity, setOpacity] = useState(70);
   const [step, setStep] = useState(false);
   const location = useSelector((state: RootState) => state.storedLocation);
 
@@ -45,6 +46,7 @@ const Map = () => {
 
     radarEls = radarImage.map((image: Radar) => (
       <TileLayer
+        opacity={opacity / 100}
         key={image.time}
         url={`${radarData.host}${image.path}/256/{z}/{x}/{y}/4/1_1.png`}
       />
@@ -120,6 +122,14 @@ const Map = () => {
           />
           <p>Fast</p>
         </div>
+        <p>Opacity</p>
+        <Slider
+          value={opacity}
+          onChange={setOpacity}
+          min={10}
+          max={100}
+          classNames={{ root: "w-56" }}
+        />
       </div>
       <div className="flex items-center">
         <p>Rain</p>
