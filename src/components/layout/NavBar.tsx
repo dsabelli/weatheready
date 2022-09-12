@@ -13,8 +13,8 @@ const NavBar = () => {
   const path = location.pathname;
 
   return (
-    <nav className="mb-2">
-      <div className="navbar px-8 bg-accent">
+    <nav className="w-full">
+      <div className="navbar px-8 bg-accent w-full">
         <div className="w-full max-w-4xl mx-auto">
           <Link
             to="/app"
@@ -28,8 +28,8 @@ const NavBar = () => {
         <Search />
         <SettingsToggle />
       </div>
-      <div className="mx-auto px-8 max-w-4xl">
-        <ul className="menu menu-horizontal bg-base-100 rounded-box text-xl gap-8  ">
+      <div className="mx-auto max-w-xl  my-2 w-full">
+        <ul className="menu menu-horizontal bg-base-100 rounded-box justify-center text-base font-semibold md:text-xl gap-2 md:gap-8 w-full px-4">
           <Link to="/app/today">
             <li className={` ${path.includes("today") ? "bordered" : "pb-1"}`}>
               <p>Today</p>
