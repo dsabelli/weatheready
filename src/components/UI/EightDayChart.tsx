@@ -33,7 +33,9 @@ const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
 
   return (
     <div className={` bg-base-100 shadow-xl p-4 mx-auto `}>
-      <h2 className="text-2xl py-4 font-bold">8 Day Temperature Trend</h2>
+      <h2 className="text-xl md:text-2xl py-4 font-bold">
+        8 Day Temperature Trend
+      </h2>
       <ResponsiveContainer aspect={4}>
         <LineChart
           width={600}
