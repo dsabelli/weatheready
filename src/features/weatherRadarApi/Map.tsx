@@ -7,6 +7,7 @@ import { Radar, useGetRadarQuery } from "./weatherRadarApiSlice";
 import Play from "../../assets/icons/static/Play";
 import Pause from "../../assets/icons/static/Pause";
 import { Slider } from "@mantine/core";
+import Error from "../../pages/Error";
 
 const UpdateMapCenter = ({ mapCenter }: { mapCenter: [number, number] }) => {
   const { lat, lon } = useSelector((state: RootState) => state.location);
@@ -19,7 +20,7 @@ const UpdateMapCenter = ({ mapCenter }: { mapCenter: [number, number] }) => {
 };
 
 const Map = ({ height }: { height: string }) => {
-  const [stepCounter, setStepCounter] = useState(0);
+  const [stepCounter, setStepCounter] = useState(12);
   const [delay, setDelay] = useState(4);
   const [opacity, setOpacity] = useState(70);
   const [step, setStep] = useState(false);
@@ -56,6 +57,9 @@ const Map = ({ height }: { height: string }) => {
             : new Date(time.time * 1000).getMinutes()
         }`
     );
+  } else if (isRadarError) {
+    radarEls = <Error />;
+    console.log(radarError);
   }
 
   useEffect(() => {
@@ -82,7 +86,7 @@ const Map = ({ height }: { height: string }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {radarEls[stepCounter]}
+        {radarEls && radarEls[stepCounter]}
       </MapContainer>
       <div className="flex flex-col gap-4 justify-center items-start py-4">
         <div className="flex items-center gap-4 w-full">
@@ -134,7 +138,7 @@ const Map = ({ height }: { height: string }) => {
           </div>
         </div>
 
-        <div className="flex items-center">
+        <div className="flex items-center w-full">
           <p>Rain</p>
           <div
             className="w-36 h-3 mr-4 ml-1"
