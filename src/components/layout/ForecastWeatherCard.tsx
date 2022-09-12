@@ -88,31 +88,31 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   );
 
   return (
-    <div className="collapse collapse-arrow bg-base-100 shadow-xl p-4 mx-auto max-w-2xl mb-4 ">
-      <input type="checkbox" className="z-20" />
-      <div className="collapse-title text-base md:text-xl font-semibold ">
-        <div className="flex flex-col w-full">
+    <div className="collapse collapse-arrow bg-base-100 shadow-xl py-4 mx-auto max-w-3xl mb-4 ">
+      <input type="checkbox" className="z-20 p-0" />
+      <div className="collapse-title text-base md:text-xl font-semibold py-3 pr-8">
+        <div className="flex flex-col w-full ">
           <div className="flex justify-between items-center">
             {pathname.includes("today") && (
-              <p className="text-lg md:text-2xl">{timeOfDay}</p>
+              <p className="text-base md:text-2xl">{timeOfDay}</p>
             )}
             {pathname.includes("hourly") && (
-              <p className="text-lg md:text-2xl">{`${hours}:00`}</p>
+              <p className="text-base md:text-2xl">{`${hours}:00`}</p>
             )}
             {pathname.includes("8-day") && (
               <>
-                <p className="text-lg md:text-2xl">{dayOfWeek}</p>
+                <p className="text-base md:text-2xl">{dayOfWeek}</p>
                 <p className="text-sm md:text-base">{dayAndMonth}</p>
               </>
             )}
           </div>
-          <div className="flex gap-6 items-center">
-            <div className="flex justify-center items-center ">
-              <div className={`w-16 md:w-24`}>{getAnimatedIcon(icon)}</div>
+          <div className="flex gap-4 items-center">
+            <div className="flex justify-center items-center">
+              <div className={`w-14 md:w-24`}>{getAnimatedIcon(icon)}</div>
               <div>
                 {pathname.includes("8-day") && (
                   <>
-                    <p className="text-2xl md:text-4xl">
+                    <p className="text-xl md:text-4xl">
                       {Math.round(temp)}
                       {units.temp}
                     </p>
@@ -124,7 +124,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
                 )}
                 {!pathname.includes("8-day") && (
                   <>
-                    <p className="text-2xl md:text-4xl">
+                    <p className="text-xl md:text-4xl">
                       {Math.round(temp)}
                       {units.temp}
                     </p>
@@ -134,7 +134,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
                         <p>like</p>
                       </div>
                       <div className="self-end">
-                        <span className="text-lg md:text-2xl">
+                        <span className="text-base md:text-2xl">
                           {Math.round(feelsLike)}
                           {units.temp}
                         </span>
@@ -144,11 +144,11 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
                 )}
               </div>
             </div>
-            <div className="flex w-full justify-between items-center">
-              <div className="text-lg md:text-2xl"> {desc}</div>
+            <div className="flex w-full justify-between items-center gap-1">
+              <div className="text-sm md:text-2xl"> {desc}</div>
               {clothing}
               {pop !== 0 && (
-                <div className="flex items-center gap-1 z-40">
+                <div className="flex flex-col md:flex-row items-center gap-1 z-40">
                   <Umbrella />
                   <p className="text-xs md:text-base">
                     {Math.round(pop * 100)}%
@@ -160,7 +160,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
         </div>
       </div>
       <div className="collapse-content ">
-        <ul className="flex text-xs md:text-sm font-bold justify-around">
+        <ul className="flex text-xs md:text-sm font-bold justify-around w-full">
           {rain !== 0 && (
             <li>
               <div className="flex flex-col gap-2 items-center">

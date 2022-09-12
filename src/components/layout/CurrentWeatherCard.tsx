@@ -71,41 +71,37 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
   );
 
   return (
-    <div className="flex bg-base-100 shadow-xl p-4 mx-auto max-w-4xl">
-      <div className="flex flex-col w-full">
-        <div className="text-2xl ">
-          <h2>Current Weather - </h2>
-          <div>{desc}</div>
+    <div className="flex bg-base-100 gap-4 mx-auto max-w-3xl px-2">
+      <div className="flex flex-col w-2/5">
+        <div className="flex justify-between items-center">
+          <div className="text-lg md:text-2xl">
+            <h2>Current Weather - </h2>
+            <div>{desc}</div>
+          </div>
+          <div className="justify-center hidden md:flex">{clothing}</div>
         </div>
         <div className="flex justify-center items-center">
-          <div className="w-48 ">{getAnimatedIcon(icon)}</div>
+          <div className="w-32 md:w-48 ">{getAnimatedIcon(icon)}</div>
           <div>
-            <p className="text-4xl">
+            <p className="text-2xl md:text-4xl font-semibold">
               {Math.round(temp)}
               {units.temp}
             </p>
-            <p className="text-sm">
+            <p className="text-xs md:text-sm">
               Feels like{" "}
-              <span className="text-xl">
+              <span className="text-base md:text-xl">
                 {Math.round(feelsLike)}
                 {units.temp}
               </span>
             </p>
           </div>
         </div>
-        <div className="flex justify-between  mb-4">
-          <p>{`Sunrise ${sunriseHours}:${
-            sunriseMinutes < 10 ? 0 : ""
-          }${sunriseMinutes} AM`}</p>
-          <p>{`Sunset ${sunsetHours - 12}:${
-            sunsetMinutes < 10 ? 0 : ""
-          }${sunsetMinutes} PM`}</p>
-        </div>
+        <div className="justify-center md:hidden flex">{clothing}</div>
       </div>
-      <div className="w-full px-4">
-        <ul className="mt-8">
+      <div className="w-3/5">
+        <ul className="text-xs sm:text-sm md:text-base">
           {rain !== 0 && (
-            <li className="flex justify-between border-b-2 mb-4">
+            <li className="flex justify-between border-b-2 mb-3 md:mb-4">
               <p>Rain</p>
               <p>
                 {Math.round(
@@ -120,7 +116,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             </li>
           )}
           {snow !== 0 && (
-            <li className="flex justify-between border-b-2 mb-4">
+            <li className="flex justify-between border-b-2 mb-3 md:mb-4">
               <p>Snow</p>
               <p>
                 {Math.round(
@@ -134,20 +130,20 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
               </p>
             </li>
           )}
-          <li className="flex justify-between border-b-2 mb-4 ">
+          <li className="flex justify-between border-b-2 mb-3 md:mb-4 ">
             <p>Cloud Cover</p> <p>{Math.round(clouds)}%</p>
           </li>
-          <li className="flex justify-between border-b-2 mb-4">
+          <li className="flex justify-between border-b-2 mb-3 md:mb-4">
             <p>Humidity</p> <p>{Math.round(humidity)}%</p>
           </li>
-          <li className="flex justify-between border-b-2 mb-4">
+          <li className="flex justify-between border-b-2 mb-3 md:mb-4">
             <p>Wind Speed</p>
-            <div className="flex gap-1">
-              <NavIcon className={`w-5 mb-1.5`} rotate={windDeg} />
+            <div className="flex items-center gap-1">
+              <NavIcon className={`w-5 sm:mb-1.5`} rotate={windDeg} />
               {Math.round(metric ? windSpeed * 3.6 : windSpeed)} {units.wind}
             </div>
           </li>
-          <li className="flex justify-between border-b-2 mb-4">
+          <li className="flex justify-between border-b-2 mb-3 md:mb-4">
             <p>Wind Gust</p>
             <p>
               {!isNaN(windGust)
@@ -156,14 +152,21 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
               {!isNaN(windGust) && units.wind}
             </p>
           </li>
-          <li className="flex justify-between border-b-2 mb-4">
-            <p>UV</p>{" "}
+          <li className="flex justify-between border-b-2 mb-3 md:mb-4">
+            <p>UVI</p>{" "}
             <p>
               {Math.round(uvi)} {getUvDesc(Math.round(uvi))}
             </p>
           </li>
+          <li className="flex justify-between border-b-2 mb-3 md:mb-4">
+            <p>{`Sunrise ${sunriseHours}:${
+              sunriseMinutes < 10 ? 0 : ""
+            }${sunriseMinutes} AM`}</p>
+            <p>{`Sunset ${sunsetHours - 12}:${
+              sunsetMinutes < 10 ? 0 : ""
+            }${sunsetMinutes} PM`}</p>
+          </li>
         </ul>
-        <div className="flex justify-center ">{clothing}</div>
       </div>
     </div>
   );
