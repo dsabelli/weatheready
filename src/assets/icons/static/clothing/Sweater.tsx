@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Tooltip, Popover, Text } from "@mantine/core";
 
 const SweaterIcon = forwardRef<HTMLDivElement>((props, ref) => (
-  <div {...props} className="w-10 md:w-14 z-30" ref={ref}>
+  <div {...props} className="w-9 md:w-14 z-30" ref={ref}>
     <svg
       version="1.1"
       viewBox="75 0 550 550"

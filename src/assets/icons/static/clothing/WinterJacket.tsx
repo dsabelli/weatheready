@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Tooltip, Popover, Text } from "@mantine/core";
 
 const WinterJacketIcon = forwardRef<HTMLDivElement>((props, ref) => (
-  <div {...props} className="w-10 md:w-14 z-30" ref={ref}>
+  <div {...props} className="w-9 md:w-14 z-30" ref={ref}>
     <svg
       version="1.1"
       viewBox="75 0 550 550"
@@ -125,7 +125,7 @@ const WinterJacket = () => {
         </Popover.Target>
         <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
           <Text className="text-primary-content text-sm font-bold text-center">
-            WinterJacket
+            Winter Jacket
           </Text>
         </Popover.Dropdown>
       </Popover>

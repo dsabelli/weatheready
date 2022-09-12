@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Tooltip, Popover, Text } from "@mantine/core";
 
 const UmbrellaIcon = forwardRef<HTMLDivElement>((props, ref) => (
-  <div {...props} className="w-5 md:w-6" ref={ref}>
+  <div {...props} className="w-4 md:w-6" ref={ref}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
