@@ -61,7 +61,7 @@ const AlertBanner = () => {
     }
   }
 
-  return <>{alertEls}</>;
+  return <div className="px-8">{alertEls}</div>;
 };
 
 export default AlertBanner;

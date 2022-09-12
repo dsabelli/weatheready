@@ -50,7 +50,7 @@ const AlertWeather = () => {
     weatherEls = <Error />;
   }
 
-  return <div>{weatherEls}</div>;
+  return <div className="px-4">{weatherEls}</div>;
 };
 
 export default AlertWeather;
