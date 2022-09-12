@@ -6,6 +6,8 @@ import SettingsToggle from "../UI/SettingsToggle";
 import QuizModal from "../UI/QuizModal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import Settings from "../../assets/icons/static/Settings";
+import Logo from "../../assets/icons/static/Logo";
 
 const NavBar = () => {
   const { quizTaken } = useSelector((state: RootState) => state.settings);
@@ -14,18 +16,24 @@ const NavBar = () => {
 
   return (
     <nav className="w-full">
-      <div className="navbar px-8 bg-accent w-full">
+      <div className="navbar px-2 md:px-4 bg-accent w-full">
         <div className="w-full max-w-4xl mx-auto">
           <Link
             to="/app"
-            className="btn btn-ghost hover:bg-opacity-0  normal-case text-xl p-0"
+            className="btn btn-ghost hover:bg-opacity-0  normal-case text-xl p-0 relative"
           >
-            Weather Ready
+            <Logo />
+            <p
+              className={`hidden sm:block sm:ml-2 text-2xl text-primary-content`}
+            >
+              Weather Ready
+            </p>
           </Link>
         </div>
         {!quizTaken && <QuizModal />}
         <ReverseLocation />
         <Search />
+
         <SettingsToggle />
       </div>
       <div className="mx-auto max-w-xl  my-2 w-full">
