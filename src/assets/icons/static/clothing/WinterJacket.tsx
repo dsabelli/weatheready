@@ -2,10 +2,10 @@ import React, { forwardRef } from "react";
 import { Tooltip, Popover, Text } from "@mantine/core";
 
 const WinterJacketIcon = forwardRef<HTMLDivElement>((props, ref) => (
-  <div {...props} className="w-12 md:w-16 z-30" ref={ref}>
+  <div {...props} className="w-10 md:w-12 z-30" ref={ref}>
     <svg
       version="1.1"
-      viewBox="0 0 700 700"
+      viewBox="75 0 550 550"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       fill="currentColor"
