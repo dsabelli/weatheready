@@ -38,14 +38,12 @@ const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
       </h2>
       <ResponsiveContainer aspect={4}>
         <LineChart
-          width={600}
-          height={100}
           data={weatherData}
           margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
         >
           {/* <XAxis dataKey="day" /> */}
-          <XAxis dataKey="dayAndMonth" />
-          <YAxis />
+          <XAxis stroke="#e2e2e2" dataKey="dayAndMonth" />
+          <YAxis stroke="#e2e2e2" />
 
           <CartesianGrid horizontal={false} strokeDasharray={"4 3"} />
           <Tooltip />
