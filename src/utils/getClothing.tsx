@@ -1,4 +1,3 @@
-import Boots from "../assets/icons/static/clothing/Boots";
 import Hat from "../assets/icons/static/clothing/Hat";
 import Jacket from "../assets/icons/static/clothing/Jacket";
 import Mittens from "../assets/icons/static/clothing/Mittens";
@@ -75,9 +74,8 @@ const getClothing = (
   const accessories = (
     <>
       {clouds < 50 &&
-        new Date().getHours() < new Date(sunset * 1000).getHours() && (
-          <Sunglasses />
-        )}
+        new Date(date * 1000).getHours() <
+          new Date(sunset * 1000).getHours() && <Sunglasses />}
       {(uvi >= 4 && !rain && (
         <>
           <Sunscreen />
