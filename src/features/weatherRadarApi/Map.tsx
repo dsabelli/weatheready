@@ -9,11 +9,11 @@ import Pause from "../../assets/icons/static/Pause";
 import { Slider } from "@mantine/core";
 
 const UpdateMapCenter = ({ mapCenter }: { mapCenter: [number, number] }) => {
-  const location = useSelector((state: RootState) => state.storedLocation);
+  const { lat, lon } = useSelector((state: RootState) => state.location);
   const map = useMap();
   useEffect(() => {
     map.panTo(mapCenter);
-  }, [location]);
+  }, [lat, lon]);
 
   return null;
 };
@@ -23,7 +23,7 @@ const Map = ({ height }: { height: string }) => {
   const [delay, setDelay] = useState(4);
   const [opacity, setOpacity] = useState(70);
   const [step, setStep] = useState(false);
-  const location = useSelector((state: RootState) => state.storedLocation);
+  const { lat, lon } = useSelector((state: RootState) => state.location);
 
   let radarEls: any;
   let radarTime;
@@ -69,14 +69,14 @@ const Map = ({ height }: { height: string }) => {
   }, [stepCounter, step]);
 
   return (
-    <div className="max-w-4xl mx-auto z-10">
+    <div className="max-w-3xl mx-auto mt-2">
       <MapContainer
-        center={[+location.lat, +location.lon]}
+        center={[+lat, +lon]}
         zoom={8}
         scrollWheelZoom={true}
         style={{ height: height }}
       >
-        <UpdateMapCenter mapCenter={[+location.lat, +location.lon]} />
+        <UpdateMapCenter mapCenter={[+lat, +lon]} />
 
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -84,8 +84,8 @@ const Map = ({ height }: { height: string }) => {
         />
         {radarEls[stepCounter]}
       </MapContainer>
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col gap-4 justify-center items-start py-4">
+        <div className="flex items-center gap-4 w-full">
           <label
             className="swap"
             onChange={() => setStep((prevVal) => !prevVal)}
@@ -98,63 +98,68 @@ const Map = ({ height }: { height: string }) => {
               <Pause />
             </div>
           </label>
-
           <Slider
             value={stepCounter}
             onChange={setStepCounter}
             max={15}
-            classNames={{ root: "w-56" }}
+            classNames={{ root: "w-full" }}
             label={null}
           />
-          {radarTime && radarTime[stepCounter]}
+          {radarTime && <p className="text-xl">{radarTime[stepCounter]}</p>}
         </div>
-        <div className="flex items-center gap-3">
-          <p>Slow</p>
-          <Slider
-            value={delay}
-            onChange={setDelay}
-            min={1}
-            max={6}
-            classNames={{ root: "w-56" }}
-            label={null}
-          />
-          <p>Fast</p>
+
+        <div className="flex items-center gap-6 w-full">
+          <div className="flex items-center gap-2 w-full">
+            <p>Slow</p>
+            <Slider
+              value={delay}
+              onChange={setDelay}
+              min={1}
+              max={6}
+              classNames={{ root: "w-full" }}
+              label={null}
+            />
+            <p>Fast</p>
+          </div>
+          <div className="flex items-center gap-2 w-full">
+            <p>Opacity</p>
+            <Slider
+              value={opacity}
+              onChange={setOpacity}
+              min={10}
+              max={100}
+              classNames={{ root: "w-full" }}
+              label={null}
+            />
+          </div>
         </div>
-        <p>Opacity</p>
-        <Slider
-          value={opacity}
-          onChange={setOpacity}
-          min={10}
-          max={100}
-          classNames={{ root: "w-56" }}
-          label={null}
-        />
-      </div>
-      <div className="flex items-center">
-        <p>Rain</p>
-        <div
-          className="w-36 h-3 mr-4 ml-1"
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(162,212,125,1) 0%, rgba(96,162,34,1) 25%, rgba(227,228,37,1) 50%, rgba(249,182,14,1) 75%, rgba(235,63,27,1) 90%, rgba(237,101,76,1) 100%) ",
-          }}
-        ></div>
-        <p>Ice</p>
-        <div
-          className="w-20 h-3 mr-4 ml-1"
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(249,214,218,1) 0%, rgba(246,163,173,1) 50%, rgba(250,135,150,1) 100%)",
-          }}
-        ></div>
-        <p>Snow</p>
-        <div
-          className="w-20 h-3 ml-1"
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(168,217,227,1) 0%, rgba(129,198,212,1) 50%, rgba(49,156,174,1) 100%)",
-          }}
-        ></div>
+
+        <div className="flex items-center">
+          <p>Rain</p>
+          <div
+            className="w-36 h-3 mr-4 ml-1"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(162,212,125,1) 0%, rgba(96,162,34,1) 25%, rgba(227,228,37,1) 50%, rgba(249,182,14,1) 75%, rgba(235,63,27,1) 90%, rgba(237,101,76,1) 100%) ",
+            }}
+          ></div>
+          <p>Ice</p>
+          <div
+            className="w-20 h-3 mr-4 ml-1"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(249,214,218,1) 0%, rgba(246,163,173,1) 50%, rgba(250,135,150,1) 100%)",
+            }}
+          ></div>
+          <p>Snow</p>
+          <div
+            className="w-20 h-3 ml-1"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(168,217,227,1) 0%, rgba(129,198,212,1) 50%, rgba(49,156,174,1) 100%)",
+            }}
+          ></div>
+        </div>
       </div>
     </div>
   );
