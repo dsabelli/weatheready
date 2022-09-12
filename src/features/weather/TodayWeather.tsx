@@ -29,12 +29,16 @@ const TodayWeather = () => {
   if (isWeatherLoading) {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
+    const offset =
+      weatherData.timezone_offset + new Date().getTimezoneOffset() * 60;
     weatherEls = weatherData.hourly
       //filter for 8am/2pm/8pm today and 2am tomorrow
       .filter((day) => {
         const hours = new Date(day.dt * 1000).getHours();
         const currentDay = new Date(day.dt * 1000).getDate();
         const today = new Date().getDate();
+        console.log(currentDay, today);
+
         return (
           (hours === 2 && currentDay === today + 1) ||
           (hours === 8 && currentDay === today) ||
@@ -49,7 +53,7 @@ const TodayWeather = () => {
           feelsLike={hour.feels_like}
           icon={hour.weather[0].icon}
           description={hour.weather[0].description}
-          date={hour.dt}
+          date={hour.dt + offset}
           rain={hour.rain ? hour.rain["1h"] : 0}
           snow={hour.snow ? hour.snow["1h"] : 0}
           pop={hour.pop || 0}
@@ -59,7 +63,7 @@ const TodayWeather = () => {
           uvi={hour.uvi}
           humidity={hour.humidity}
           clouds={hour.clouds}
-          sunset={weatherData.current.sunset}
+          sunset={weatherData.current.sunset + offset}
         />
       ));
   } else if (isWeatherError) {

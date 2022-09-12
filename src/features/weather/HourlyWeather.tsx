@@ -6,6 +6,7 @@ import Loader from "../../components/UI/Loader";
 import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
 import Error from "../../pages/Error";
 import { nanoid } from "nanoid";
+import { off } from "process";
 const HourlyWeather = () => {
   const { lat, lon } = useSelector((state: RootState) => state.location);
   const { metric } = useSelector((state: RootState) => state.settings);
@@ -29,6 +30,8 @@ const HourlyWeather = () => {
   if (isWeatherLoading) {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
+    const offset =
+      weatherData.timezone_offset + new Date().getTimezoneOffset() * 60;
     weatherEls = weatherData.hourly
       .filter(
         (day) => new Date(day.dt * 1000).getDate() === new Date().getDate()
@@ -40,7 +43,7 @@ const HourlyWeather = () => {
           feelsLike={hour.feels_like}
           icon={hour.weather[0].icon}
           description={hour.weather[0].description}
-          date={hour.dt}
+          date={hour.dt + offset}
           rain={hour.rain ? hour.rain["1h"] : 0}
           snow={hour.snow ? hour.snow["1h"] : 0}
           pop={hour.pop || 0}
@@ -50,7 +53,7 @@ const HourlyWeather = () => {
           uvi={hour.uvi}
           humidity={hour.humidity}
           clouds={hour.clouds}
-          sunset={weatherData.current.sunset}
+          sunset={weatherData.current.sunset + offset}
         />
       ));
   } else if (isWeatherError) {

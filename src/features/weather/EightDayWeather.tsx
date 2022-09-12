@@ -30,6 +30,8 @@ const EightDayWeather = () => {
   if (isWeatherLoading) {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
+    const offset =
+      weatherData.timezone_offset + new Date().getTimezoneOffset() * 60;
     weatherEls = weatherData.daily.map((day) => (
       <ForecastWeatherCard
         key={nanoid()}
@@ -37,7 +39,7 @@ const EightDayWeather = () => {
         feelsLike={day.temp.min}
         icon={day.weather[0].icon}
         description={day.weather[0].description}
-        date={day.dt}
+        date={day.dt + offset}
         rain={day.rain || 0}
         snow={day.snow || 0}
         pop={day.pop}
@@ -47,7 +49,7 @@ const EightDayWeather = () => {
         uvi={day.uvi}
         humidity={day.humidity}
         clouds={day.clouds}
-        sunset={day.sunset}
+        sunset={day.sunset + offset}
       />
     ));
   } else if (isWeatherError) {

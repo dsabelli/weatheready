@@ -32,6 +32,8 @@ const Weather = () => {
     weatherEls = <Loader />;
   } else if (isWeatherSuccess) {
     const current = weatherData.current;
+    const offset =
+      weatherData.timezone_offset + new Date().getTimezoneOffset() * 60;
 
     weatherEls = (
       <div className="w-full">
@@ -43,14 +45,14 @@ const Weather = () => {
           windSpeed={current.wind_speed}
           windDeg={current.wind_deg}
           windGust={current.wind_gust}
-          sunrise={current.sunrise}
-          sunset={current.sunset}
+          sunrise={current.sunrise + offset}
+          sunset={current.sunset + offset}
           uvi={current.uvi}
           icon={current.weather[0].icon}
           description={current.weather[0].description}
           rain={current.rain ? current.rain["1h"] : 0}
           snow={current.snow ? current.snow["1h"] : 0}
-          date={current.dt}
+          date={current.dt + offset}
         />
         {weatherData.minutely && (
           <PrecipitationChart data={weatherData.minutely} />
