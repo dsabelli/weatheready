@@ -103,12 +103,12 @@ const getClothing = (
   );
 
   return (
-    <div className="flex">
+    <div className="flex gap-1">
       {clothing}
       {
         <Info>
           <div>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center gap-1">
               {accessories}
             </div>
             <h3 className="text-center text-xs">Accessories</h3>
