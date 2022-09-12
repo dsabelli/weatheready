@@ -4,19 +4,27 @@ import AlertBanner from "../components/UI/AlertBanner";
 import Map from "../features/weatherRadarApi/Map";
 import NavBar from "../components/layout/NavBar";
 import CurrentWeather from "../features/weather/CurrentWeather";
+import Footer from "../components/UI/Footer";
 
 const Landing = () => {
   let location = useLocation();
   const pathname = location.pathname;
   return (
-    <div className="">
-      <NavBar />
-      <AlertBanner />
-      <div className="flex mx-auto justify-center max-w-4xl">
-        {!pathname.includes("app/") && <CurrentWeather />}
+    <div className="flex flex-col justify-between h-screen">
+      <div className="w-full">
+        <NavBar />
+        <AlertBanner />
+        {!pathname.includes("app/") && (
+          <div className="mx-auto px-4">
+            <CurrentWeather />
+            <Map height={"33vh"} />
+          </div>
+        )}
+        <div className="px-4">
+          <Outlet />
+        </div>
       </div>
-      {!pathname.includes("app/") && <Map height={"33vh"} />}
-      <Outlet />
+      <Footer />
     </div>
   );
 };
