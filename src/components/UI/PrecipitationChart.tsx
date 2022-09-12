@@ -32,15 +32,13 @@ const PrecipitationChart: React.FC<PrecipitationData> = ({ data }) => {
   const hidePrecipData = precipData.every((d) => d.precipitation === 0);
   return (
     <div
-      className={` bg-base-100 shadow-xl p-4 mx-auto ${
+      className={`bg-base-100 shadow-xl p-4 mx-auto max-w-3xl ${
         hidePrecipData ? "hidden" : ""
       }`}
     >
       {!hidePrecipData && (
-        <ResponsiveContainer aspect={4}>
+        <ResponsiveContainer aspect={window.innerWidth > 768 ? 6 : 3}>
           <AreaChart
-            width={600}
-            height={100}
             data={precipData}
             margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
           >

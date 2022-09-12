@@ -56,7 +56,7 @@ const EightDayWeather = () => {
 
   return (
     <div>
-      <div className=" mx-auto mb-4 max-w-2xl">
+      <div className=" mx-auto mb-4 max-w-3xl">
         {" "}
         {weatherData && <EightDayChart data={weatherData.daily} />}
       </div>
