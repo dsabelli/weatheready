@@ -37,7 +37,6 @@ const EightDayWeather = () => {
         feelsLike={day.temp.min}
         icon={day.weather[0].icon}
         description={day.weather[0].description}
-        iconWidth={`w-24`}
         date={day.dt}
         rain={day.rain || 0}
         snow={day.snow || 0}

@@ -49,7 +49,6 @@ const TodayWeather = () => {
           feelsLike={hour.feels_like}
           icon={hour.weather[0].icon}
           description={hour.weather[0].description}
-          iconWidth={`w-24`}
           date={hour.dt}
           rain={hour.rain ? hour.rain["1h"] : 0}
           snow={hour.snow ? hour.snow["1h"] : 0}
