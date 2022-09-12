@@ -60,17 +60,16 @@ const Map = ({ height }: { height: string }) => {
 
   useEffect(() => {
     if (step) {
-      let timeoutID = setTimeout(() => {
+      setTimeout(() => {
         stepCounter >= 16
           ? setStepCounter(0)
           : setStepCounter((prevVal) => prevVal + 1);
       }, 1200 / delay);
-      return () => clearTimeout(timeoutID);
     }
   }, [stepCounter, step]);
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto z-10">
       <MapContainer
         center={[+location.lat, +location.lon]}
         zoom={8}
@@ -85,7 +84,7 @@ const Map = ({ height }: { height: string }) => {
         />
         {radarEls[stepCounter]}
       </MapContainer>
-      <div className="flex justify-between items-center ">
+      <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <label
             className="swap"
@@ -105,6 +104,7 @@ const Map = ({ height }: { height: string }) => {
             onChange={setStepCounter}
             max={15}
             classNames={{ root: "w-56" }}
+            label={null}
           />
           {radarTime && radarTime[stepCounter]}
         </div>
@@ -116,6 +116,7 @@ const Map = ({ height }: { height: string }) => {
             min={1}
             max={6}
             classNames={{ root: "w-56" }}
+            label={null}
           />
           <p>Fast</p>
         </div>
@@ -126,6 +127,7 @@ const Map = ({ height }: { height: string }) => {
           min={10}
           max={100}
           classNames={{ root: "w-56" }}
+          label={null}
         />
       </div>
       <div className="flex items-center">
