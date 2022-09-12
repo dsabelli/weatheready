@@ -15,13 +15,13 @@ import WindGust from "../../assets/icons/static/weather/WindGust";
 import UVI from "../../assets/icons/static/weather/UVI";
 import Raindrops from "../../assets/icons/static/weather/Raindrops";
 import { getClothing } from "../../utils/getClothing";
+import { nanoid } from "nanoid";
 
 interface ForecastCardData {
   temp: number;
   feelsLike: number;
   icon: string;
   description: string;
-  iconWidth: string;
   date: number;
   rain: number;
   snow: number;
@@ -39,7 +39,6 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   feelsLike,
   icon,
   description,
-  iconWidth,
   rain,
   snow,
   pop,
@@ -53,21 +52,22 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   sunset,
 }) => {
   let location = useLocation();
-  const pathname = location.pathname;
+  const pathname: string = location.pathname;
   const { preferences } = useSelector((state: RootState) => state.settings);
   const { runsHot, runsCold } = preferences;
   const { metric, units } = useSelector((state: RootState) => state.settings);
 
-  const desc: string = description
+  const desc = description
     .split(" ")
-    .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
-    .join(" ");
+    .map((word) => (
+      <p key={nanoid()}>{word.slice(0, 1).toUpperCase() + word.slice(1)}</p>
+    ));
 
   const dayOfWeek: string = getDayOfWeek(new Date(date * 1000).getDay());
-  const dayAndMonth = `${new Date(date * 1000).getMonth() + 1}/${new Date(
-    date * 1000
-  ).getDate()}`;
-  const hours = new Date(date * 1000).getHours();
+  const dayAndMonth: string = `${
+    new Date(date * 1000).getMonth() + 1
+  }/${new Date(date * 1000).getDate()}`;
+  const hours: number = new Date(date * 1000).getHours();
   const timeOfDay: string = getTimeOfDay(new Date(date * 1000).getHours());
 
   const getTemp = (feelsLike: number): number => {
@@ -77,7 +77,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
     return temp;
   };
 
-  const clothing = getClothing(
+  const clothing: JSX.Element = getClothing(
     getTemp(feelsLike),
     clouds,
     uvi,
@@ -90,77 +90,77 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   return (
     <div className="collapse collapse-arrow bg-base-100 shadow-xl p-4 mx-auto max-w-2xl mb-4 ">
       <input type="checkbox" className="z-20" />
-      <div className="collapse-title text-xl font-medium ">
+      <div className="collapse-title text-base md:text-xl font-semibold ">
         <div className="flex flex-col w-full">
           <div className="flex justify-between items-center">
             {pathname.includes("today") && (
-              <p className="text-2xl">{timeOfDay}</p>
+              <p className="text-lg md:text-2xl">{timeOfDay}</p>
             )}
             {pathname.includes("hourly") && (
-              <p className="text-2xl">{`${hours}:00`}</p>
+              <p className="text-lg md:text-2xl">{`${hours}:00`}</p>
             )}
             {pathname.includes("8-day") && (
               <>
-                <p className="text-2xl">{dayOfWeek}</p>
-                <p className="text-md">{dayAndMonth}</p>
+                <p className="text-lg md:text-2xl">{dayOfWeek}</p>
+                <p className="text-sm md:text-base">{dayAndMonth}</p>
               </>
             )}
           </div>
-          <div className="flex w-full justify-center items-center">
-            <div className="flex justify-center items-center w-full">
-              <div className={` ${iconWidth}`}>{getAnimatedIcon(icon)}</div>
-              <div
-                className={`${pathname.includes("8-day") ? "flex gap-2" : ""}`}
-              >
+          <div className="flex gap-6 items-center">
+            <div className="flex justify-center items-center ">
+              <div className={`w-16 md:w-24`}>{getAnimatedIcon(icon)}</div>
+              <div>
                 {pathname.includes("8-day") && (
                   <>
-                    {" "}
-                    <p className="text-4xl">
+                    <p className="text-2xl md:text-4xl">
                       {Math.round(temp)}
                       {units.temp}
-                    </p>{" "}
-                    <p className="text-lg opacity-70 self-end">
+                    </p>
+                    <p className="text-xs md:text-lg opacity-70 pb-1 ">
                       /{Math.round(feelsLike)}
-                      {units.temp}{" "}
+                      {units.temp}
                     </p>
                   </>
                 )}
                 {!pathname.includes("8-day") && (
                   <>
-                    <p className="text-4xl">
+                    <p className="text-2xl md:text-4xl">
                       {Math.round(temp)}
                       {units.temp}
                     </p>
-                    <p className="text-sm">
-                      Feels like{" "}
-                      <span className="text-xl">
-                        {Math.round(feelsLike)}
-                        {units.temp}
-                      </span>
-                    </p>
+                    <div className="flex gap-1">
+                      <div className="text-2xs md:text-xs leading-tight">
+                        <p>Feels</p>
+                        <p>like</p>
+                      </div>
+                      <div className="self-end">
+                        <span className="text-lg md:text-2xl">
+                          {Math.round(feelsLike)}
+                          {units.temp}
+                        </span>
+                      </div>
+                    </div>
                   </>
                 )}
               </div>
             </div>
-            <div className="flex justify-between items-center w-full">
-              <p>{desc}</p>
+            <div className="flex w-full justify-between items-center">
+              <div className="text-lg md:text-2xl"> {desc}</div>
+              {clothing}
               {pop !== 0 && (
-                <div className="z-40">
-                  {" "}
+                <div className="flex items-center gap-1 z-40">
                   <Umbrella />
-                  <p>{Math.round(pop * 100)}%</p>
+                  <p className="text-xs md:text-base">
+                    {Math.round(pop * 100)}%
+                  </p>
                 </div>
               )}
-            </div>
-            <div className="w-full">
-              {/* <h3 className="text-xs mb-2">Weather Ready Recommends</h3> */}
-              {clothing}
             </div>
           </div>
         </div>
       </div>
       <div className="collapse-content ">
-        <ul className="flex gap-4 justify-around">
+        <ul className="flex text-xs md:text-sm font-bold justify-around">
           {rain !== 0 && (
             <li>
               <div className="flex flex-col gap-2 items-center">
