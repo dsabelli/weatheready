@@ -78,12 +78,13 @@ const getClothing = (
         new Date().getHours() < new Date(sunset * 1000).getHours() && (
           <Sunglasses />
         )}
-      {uvi >= 4 && (
-        <>
-          <Sunscreen />
-          <Hat />
-        </>
-      )}
+      {(uvi >= 4 && !rain) ||
+        (uvi >= 4 && pop * 100 < 20 && (
+          <>
+            <Sunscreen />
+            <Hat />
+          </>
+        ))}
       {rain ||
         (pop * 100 >= 50 && temp > 5 && (
           <>
