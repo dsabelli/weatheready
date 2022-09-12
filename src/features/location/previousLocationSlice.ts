@@ -22,7 +22,7 @@ const initialState: LocationInitialState = {
 };
 
 const previousLocationSlice = createSlice({
-  name: "location",
+  name: "previousLocation",
   initialState,
   reducers: {
     setPreviousLocation: (state, action: PayloadAction<Location>) => {
