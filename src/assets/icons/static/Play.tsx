@@ -2,7 +2,7 @@ import React from "react";
 
 const Play = () => {
   return (
-    <div className="w-5 md:w-7">
+    <div className="w-7">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
