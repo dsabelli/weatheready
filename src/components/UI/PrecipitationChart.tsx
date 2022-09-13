@@ -41,11 +41,7 @@ const PrecipitationChart: React.FC<PrecipitationData> = ({
 
   const hidePrecipData = precipData.every((d) => d.precipitation === 0);
   return (
-    <div
-      className={`bg-base-100  p-4 mx-auto max-w-3xl ${
-        hidePrecipData ? "hidden" : ""
-      }`}
-    >
+    <div className={`mx-auto max-w-3xl p-2 ${hidePrecipData ? "hidden" : ""}`}>
       {!hidePrecipData && (
         <ResponsiveContainer aspect={window.innerWidth > 768 ? 6 : 3}>
           <AreaChart
