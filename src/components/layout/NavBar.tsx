@@ -6,7 +6,6 @@ import SettingsToggle from "../UI/SettingsToggle";
 import QuizModal from "../UI/QuizModal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import Settings from "../../assets/icons/static/Settings";
 import Logo from "../../assets/icons/static/Logo";
 
 const NavBar = () => {
@@ -17,7 +16,7 @@ const NavBar = () => {
   return (
     <nav className="w-full">
       <div className="navbar px-2 md:px-4 bg-accent w-full">
-        <div className="w-full max-w-4xl mx-auto">
+        <div className="w-1/2">
           <Link
             to="/app"
             className="btn btn-ghost hover:bg-opacity-0  normal-case text-xl p-0 relative"
@@ -30,12 +29,11 @@ const NavBar = () => {
             </p>
           </Link>
         </div>
-        {!quizTaken && <QuizModal />}
         <ReverseLocation />
-        <Search />
-
-        <SettingsToggle />
+        {window.innerWidth > 768 && <Search />}
+        {!quizTaken && <QuizModal />}
       </div>
+      {window.innerWidth <= 768 && <Search />}
       <div className="mx-auto max-w-xl  my-2 w-full">
         <ul className="menu menu-horizontal bg-base-100 rounded-box justify-center text-base font-semibold md:text-xl gap-2 md:gap-8 w-full px-4">
           <Link to="/app/today">
@@ -50,7 +48,7 @@ const NavBar = () => {
           </Link>
           <Link to="/app/8-day">
             <li className={` ${path.includes("8-day") ? "bordered" : "pb-1"}`}>
-              <p>8-Day</p>
+              <p className="whitespace-nowrap">8-Day</p>
             </li>
           </Link>
           <Link to="/app/radar">
