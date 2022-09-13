@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { useGetReverseLocationQuery } from "../../features/reverseLocationApi/reverseLocationSlice";
 import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
+import { getAnimatedIcon } from "../../utils/getIcon";
 
 const ReverseLocation = () => {
   const location = useSelector((state: RootState) => state.location);
-  const { metric } = useSelector((state: RootState) => state.settings);
+  const { metric, units } = useSelector((state: RootState) => state.settings);
 
   const {
     data: weatherData,
@@ -27,7 +28,18 @@ const ReverseLocation = () => {
 
   if (isWeatherSuccess) {
     const current = weatherData.current;
-    weatherEls = <div>{current.temp}</div>;
+
+    weatherEls = (
+      <>
+        <p>
+          {Math.round(current.temp)}
+          {units.temp}
+        </p>
+        <div className={`w-10 md:w-12`}>
+          {getAnimatedIcon(current.weather[0].icon)}
+        </div>
+      </>
+    );
   }
   const {
     data: reverseLocationData,
@@ -49,16 +61,12 @@ const ReverseLocation = () => {
     const location = reverseLocationData.features[0].properties;
 
     reverseLocationEl = (
-      <div>
-        {location.city}
-        {location.state || location.country}
-      </div>
+      <p>{`${location.city}, ${location.state || location.country}`}</p>
     );
   }
   return (
-    <div>
-      {reverseLocationEl}
-      {weatherEls}
+    <div className="flex w-full gap-2 justify-end items-center">
+      {reverseLocationEl} {weatherEls}
     </div>
   );
 };
