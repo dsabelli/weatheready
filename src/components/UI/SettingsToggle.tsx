@@ -8,11 +8,15 @@ const SettingsToggle = () => {
   const { metric } = useSelector((state: RootState) => state.settings);
 
   return (
-    <div>
-      <label className="swap">
-        <input type="checkbox" onChange={() => dispatch(setUnits(!metric))} />
-        <div className="swap-on">{metric ? "°C" : "°F"}</div>
-        <div className="swap-off">{metric ? "°C" : "°F"}</div>
+    <div className="form-control">
+      <label className="label cursor-pointer gap-1">
+        <p>°C</p>
+        <input
+          className="toggle"
+          type="checkbox"
+          onChange={() => dispatch(setUnits(!metric))}
+        />
+        <p>°F</p>
       </label>
     </div>
   );
