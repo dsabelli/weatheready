@@ -1,0 +1,34 @@
+import React, { useState, useEffect } from "react";
+import Refresh from "../../assets/icons/static/Refresh";
+
+const RefreshBanner = () => {
+  const [refresh, setRefresh] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setRefresh(true);
+    }, 1800000);
+  }, []);
+
+  return (
+    <>
+      {refresh && (
+        <div className="px-4">
+          <div
+            className="alert alert-success shadow-lg mb-4 mx-auto max-w-3xl p-2 md:p-4 cursor-pointer"
+            onClick={() => window.location.reload()}
+          >
+            <div className="w-full">
+              <Refresh />
+              <span className="font-semibold">
+                New weather data is available, click to refresh!
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default RefreshBanner;
