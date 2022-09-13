@@ -44,16 +44,18 @@ const AlertBanner = () => {
         .slice(0, 7)
         .join(" ");
       alertEls = (
-        <div className="alert bg-red-800 text-primary-content shadow-lg my-4 mx-auto max-w-3xl">
+        <div className="alert bg-red-800 text-primary-content shadow-lg mb-4 mx-auto max-w-3xl p-2 md:p-4">
           <div className="flex w-full justify-between">
             <div className="flex gap-2 items-center ">
               <Warning />
-              <span className="text-lg font-bold">{alertEvent}:</span>{" "}
-              {alertDescription}
-              ...
+              <span className="text-sm md:text-lg font-bold">
+                {alertEvent}:
+              </span>
+              <p className="hidden sm:block">{alertDescription} </p>
+              <p>...</p>
             </div>
             <Link to="/alert">
-              <ArrowRight className="w-6" />
+              <ArrowRight className="w-5 md:w-7" />
             </Link>
           </div>
         </div>
