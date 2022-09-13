@@ -73,7 +73,7 @@ const Humidity = () => {
           <HumidityIcon />
         </Popover.Target>
         <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
-          <Text className="text-primary-content text-sm font-bold text-center">
+          <Text className="text-base-content text-sm font-bold text-center">
             Humidity
           </Text>
         </Popover.Dropdown>
