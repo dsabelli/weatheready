@@ -2,7 +2,7 @@ import React from "react";
 
 const Logo = () => {
   return (
-    <div className="flex w-12">
+    <div className="w-12">
       <svg
         data-name="Layer 1"
         xmlns="http://www.w3.org/2000/svg"
