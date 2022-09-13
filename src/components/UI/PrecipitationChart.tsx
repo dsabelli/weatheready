@@ -42,7 +42,7 @@ const PrecipitationChart: React.FC<PrecipitationData> = ({
   const hidePrecipData = precipData.every((d) => d.precipitation === 0);
   return (
     <div
-      className={`bg-base-100 shadow-xl p-4 mx-auto max-w-3xl ${
+      className={`bg-base-100  p-4 mx-auto max-w-3xl ${
         hidePrecipData ? "hidden" : ""
       }`}
     >
@@ -52,8 +52,8 @@ const PrecipitationChart: React.FC<PrecipitationData> = ({
             data={precipData}
             margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
           >
-            <XAxis dataKey="dt" />
-            <YAxis dataKey="precipitation">
+            <XAxis dataKey="dt" stroke="currentColor" />
+            <YAxis dataKey="precipitation" stroke="currentColor">
               <Label
                 value={snow ? units.snow : units.rain}
                 dx={-25}
