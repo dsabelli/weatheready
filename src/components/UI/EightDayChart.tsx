@@ -21,7 +21,7 @@ interface PrecipitationData {
 const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
   const { units } = useSelector((state: RootState) => state.settings);
   const weatherData = data.map((d) => {
-    const day = getDayOfWeek(new Date(d.dt * 1000).getDay());
+    const day = getDayOfWeek(new Date(d.dt * 1000).getDay()).slice(0, 3);
     const dayAndMonth = `${new Date(d.dt * 1000).getMonth() + 1}/${new Date(
       d.dt * 1000
     ).getDate()}`;
@@ -45,9 +45,15 @@ const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
           data={weatherData}
           margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
         >
-          {/* <XAxis dataKey="day" /> */}
-          <XAxis stroke="#e2e2e2" dataKey="dayAndMonth" />
-          <YAxis stroke="#e2e2e2">
+          <XAxis
+            dataKey="day"
+            xAxisId={1}
+            stroke="currentColor"
+            axisLine={false}
+            tickLine={false}
+          />
+          <XAxis stroke="currentColor" dataKey="dayAndMonth" xAxisId={0} />
+          <YAxis stroke="currentColor">
             <Label
               value={units.temp}
               dx={-20}
