@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import {
   AreaChart,
   XAxis,
@@ -7,10 +8,14 @@ import {
   CartesianGrid,
   Area,
   ResponsiveContainer,
+  Label,
 } from "recharts";
+import { RootState } from "../../app/store";
 
 interface PrecipitationData {
   data: MinuteData[];
+  rain: number;
+  snow: number;
 }
 
 interface MinuteData {
@@ -18,7 +23,12 @@ interface MinuteData {
   precipitation: number;
 }
 
-const PrecipitationChart: React.FC<PrecipitationData> = ({ data }) => {
+const PrecipitationChart: React.FC<PrecipitationData> = ({
+  data,
+  rain,
+  snow,
+}) => {
+  const { units } = useSelector((state: RootState) => state.settings);
   const precipData = data.map((d) => {
     const hours = new Date(d.dt * 1000).getHours();
     const minutes = new Date(d.dt * 1000).getMinutes();
@@ -43,7 +53,16 @@ const PrecipitationChart: React.FC<PrecipitationData> = ({ data }) => {
             margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
           >
             <XAxis dataKey="dt" />
-            <YAxis dataKey="precipitation" />
+            <YAxis dataKey="precipitation">
+              <Label
+                value={snow ? units.snow : units.rain}
+                dx={-25}
+                angle={270}
+                style={{
+                  fill: "currentcolor",
+                }}
+              />
+            </YAxis>
             <Tooltip />
             <Area
               type="monotone"

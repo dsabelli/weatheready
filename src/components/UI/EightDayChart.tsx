@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import {
   LineChart,
   XAxis,
@@ -7,7 +8,9 @@ import {
   CartesianGrid,
   Line,
   ResponsiveContainer,
+  Label,
 } from "recharts";
+import { RootState } from "../../app/store";
 import { DailyWeather } from "../../types";
 import { getDayOfWeek } from "../../utils/getDayOfWeek";
 
@@ -16,6 +19,7 @@ interface PrecipitationData {
 }
 
 const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
+  const { units } = useSelector((state: RootState) => state.settings);
   const weatherData = data.map((d) => {
     const day = getDayOfWeek(new Date(d.dt * 1000).getDay());
     const dayAndMonth = `${new Date(d.dt * 1000).getMonth() + 1}/${new Date(
@@ -36,14 +40,24 @@ const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
       <h2 className="text-xl md:text-2xl py-4 font-bold">
         8 Day Temperature Trend
       </h2>
-      <ResponsiveContainer aspect={4}>
+      <ResponsiveContainer aspect={window.innerWidth > 768 ? 5 : 3}>
         <LineChart
           data={weatherData}
           margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
         >
           {/* <XAxis dataKey="day" /> */}
           <XAxis stroke="#e2e2e2" dataKey="dayAndMonth" />
-          <YAxis stroke="#e2e2e2" />
+          <YAxis stroke="#e2e2e2">
+            <Label
+              value={units.temp}
+              dx={-20}
+              angle={270}
+              style={{
+                fill: "currentcolor",
+                fontSize: "1.25rem",
+              }}
+            />
+          </YAxis>
 
           <CartesianGrid horizontal={false} strokeDasharray={"4 3"} />
           <Tooltip />
