@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../app/store";
 import { setQuiz, setPreferences } from "../../features/settings/settingsSlice";
 import { Radio } from "@mantine/core";
+import Barometer from "../../assets/icons/static/Barometer";
 
 const QuizModal = () => {
   const dispatch = useDispatch();
@@ -26,14 +27,14 @@ const QuizModal = () => {
 
   return (
     <div>
-      <label htmlFor="my-modal" className="btn modal-button">
-        hot or cold
+      <label htmlFor="my-modal" className="cursor-pointer modal-button">
+        <Barometer />
       </label>
 
       <input type="checkbox" id="my-modal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">
+          <h3 className="text-lg">
             Please answer the following question to help us determine your
             temperature preferences.
           </h3>
@@ -46,7 +47,7 @@ const QuizModal = () => {
                 orientation="vertical"
                 label="Sweater in Summer or shorts in Winter?"
                 withAsterisk
-                classNames={{ label: "text-current" }}
+                classNames={{ label: "text-current text-base mb-2" }}
               >
                 <Radio
                   value="cold"
@@ -73,7 +74,7 @@ const QuizModal = () => {
           <div className="modal-action">
             <label
               htmlFor="my-modal"
-              className="btn"
+              className={`btn ${radioOne ? "" : "btn-disabled"}`}
               onClick={() => dispatch(setQuiz(true))}
             >
               Submit!
