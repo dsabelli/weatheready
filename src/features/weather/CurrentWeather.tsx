@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGetOneCallQuery } from "../weatherApi/weatherApiSlice";
 import Loader from "../../components/UI/Loader";
 import Error from "../../pages/Error";
@@ -8,6 +9,7 @@ import { RootState } from "../../app/store";
 import PrecipitationChart from "../../components/UI/PrecipitationChart";
 
 const Weather = () => {
+  let navigate = useNavigate();
   const { lat, lon } = useSelector((state: RootState) => state.location);
   const { metric } = useSelector((state: RootState) => state.settings);
 
@@ -64,10 +66,11 @@ const Weather = () => {
       </div>
     );
   } else if (isWeatherError) {
-    weatherEls = <Error />;
     console.log(weatherError);
   }
-
+  useEffect(() => {
+    isWeatherError && navigate("/error");
+  }, []);
   return <div className="w-full">{weatherEls}</div>;
 };
 

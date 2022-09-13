@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import ForecastWeatherCard from "../../components/layout/ForecastWeatherCard";
@@ -7,6 +8,7 @@ import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
 import Error from "../../pages/Error";
 import { nanoid } from "nanoid";
 const TodayWeather = () => {
+  let navigate = useNavigate();
   const { lat, lon } = useSelector((state: RootState) => state.location);
   const { metric } = useSelector((state: RootState) => state.settings);
   const {
@@ -66,10 +68,12 @@ const TodayWeather = () => {
         />
       ));
   } else if (isWeatherError) {
-    weatherEls = <Error />;
     console.log(weatherError);
   }
 
+  useEffect(() => {
+    isWeatherError && navigate("/error");
+  }, []);
   return <div className="w-full">{weatherEls}</div>;
 };
 

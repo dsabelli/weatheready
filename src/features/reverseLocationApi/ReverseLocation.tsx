@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { useGetReverseLocationQuery } from "../../features/reverseLocationApi/reverseLocationSlice";
-import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
+import { useGetReverseLocationQuery } from "./reverseLocationSlice";
+import { useGetOneCallQuery } from "../weatherApi/weatherApiSlice";
 import Error from "../../pages/Error";
 import { getAnimatedIcon } from "../../utils/getIcon";
 
 const ReverseLocation = () => {
+  let navigate = useNavigate();
   const location = useSelector((state: RootState) => state.location);
   const { metric, units } = useSelector((state: RootState) => state.settings);
 
@@ -46,7 +48,6 @@ const ReverseLocation = () => {
       </>
     );
   } else if (isWeatherError) {
-    weatherEls = <Error />;
     console.log(weatherError);
   }
 
@@ -77,9 +78,14 @@ const ReverseLocation = () => {
       >{`${location.city}, ${location.state || location.country}`}</p>
     );
   } else if (isReverseLocationError) {
-    reverseLocationEl = <Error />;
     console.log(reverseLocationError);
   }
+
+  useEffect(() => {
+    (isWeatherError && navigate("/error")) ||
+      (isReverseLocationError && navigate("/error"));
+  }, []);
+
   return (
     <div className="flex w-full gap-2 justify-end items-center">
       {reverseLocationEl} {weatherEls}

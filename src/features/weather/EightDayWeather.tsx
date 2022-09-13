@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import ForecastWeatherCard from "../../components/layout/ForecastWeatherCard";
@@ -8,6 +9,7 @@ import Error from "../../pages/Error";
 import { nanoid } from "nanoid";
 import EightDayChart from "../../components/UI/EightDayChart";
 const EightDayWeather = () => {
+  let navigate = useNavigate();
   const { metric } = useSelector((state: RootState) => state.settings);
   const { lat, lon } = useSelector((state: RootState) => state.location);
   const {
@@ -53,10 +55,11 @@ const EightDayWeather = () => {
       />
     ));
   } else if (isWeatherError) {
-    weatherEls = <Error />;
     console.log(weatherError);
   }
-
+  useEffect(() => {
+    isWeatherError && navigate("/error");
+  }, []);
   return (
     <div>
       <div className=" mx-auto mb-4 max-w-3xl">

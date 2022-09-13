@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../../components/UI/Input";
 import { nanoid } from "@reduxjs/toolkit";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,6 +13,7 @@ import { setPreviousLocation } from "./previousLocationSlice";
 import Error from "../../pages/Error";
 
 const Search = () => {
+  let navigate = useNavigate();
   const dispatch = useDispatch();
   const { previousLocations } = useSelector(
     (state: RootState) => state.previousLocation
@@ -79,7 +81,6 @@ const Search = () => {
       </div>
     ));
   } else if (isAutocompleteError) {
-    autocompleteEls = <Error />;
     console.log(autocompleteError);
   }
 
@@ -127,6 +128,11 @@ const Search = () => {
       </div>
     );
   }
+
+  useEffect(() => {
+    isAutocompleteError && navigate("/error");
+  }, []);
+
   return (
     <div className="form-control w-full md:w-3/5 md:max-w-md text-base-content">
       <Input

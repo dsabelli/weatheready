@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import Search from "../../features/location/Search";
-import ReverseLocation from "../UI/ReverseLocation";
+import ReverseLocation from "../../features/reverseLocationApi/ReverseLocation";
 import QuizModal from "../UI/QuizModal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
@@ -17,7 +17,7 @@ const NavBar = () => {
       <div className="navbar px-2 md:px-4 bg-accent text-accent-content w-full">
         <div className="w-1/2">
           <Link
-            to="/app"
+            to="/"
             className="btn btn-ghost hover:bg-opacity-0  normal-case text-xl p-0 relative"
           >
             <Logo />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Loader from "../../components/UI/Loader";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import { useSelector } from "react-redux";
@@ -7,7 +8,6 @@ import { Radar, useGetRadarQuery } from "./weatherRadarApiSlice";
 import Play from "../../assets/icons/static/Play";
 import Pause from "../../assets/icons/static/Pause";
 import { Slider } from "@mantine/core";
-import Error from "../../pages/Error";
 
 const UpdateMapCenter = ({ mapCenter }: { mapCenter: [number, number] }) => {
   const { lat, lon } = useSelector((state: RootState) => state.location);
@@ -20,6 +20,7 @@ const UpdateMapCenter = ({ mapCenter }: { mapCenter: [number, number] }) => {
 };
 
 const Map = ({ height }: { height: string }) => {
+  let navigate = useNavigate();
   const [stepCounter, setStepCounter] = useState(12);
   const [delay, setDelay] = useState(3);
   const [opacity, setOpacity] = useState(70);
@@ -58,9 +59,11 @@ const Map = ({ height }: { height: string }) => {
         }`
     );
   } else if (isRadarError) {
-    radarEls = <Error />;
     console.log(radarError);
   }
+  useEffect(() => {
+    isRadarError && navigate("/error");
+  }, []);
 
   useEffect(() => {
     if (step) {
