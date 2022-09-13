@@ -113,7 +113,7 @@ const getClothing = (
         <Info>
           <div>
             <div className="flex justify-center items-center gap-1">
-              {accessories}
+              {accessories.props.children[0] ? accessories : "N/A"}
             </div>
             <h3 className="text-center text-xs">Accessories</h3>
           </div>
