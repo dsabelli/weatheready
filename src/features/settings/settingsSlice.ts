@@ -32,7 +32,7 @@ const persistConfig: Config = {
 const initialState: Settings = {
   metric: true,
   imperial: false,
-  units: { temp: "°C", rain: "mm", snow: "cm", wind: "km/h" },
+  units: { temp: "°C", rain: "mm/hr", snow: "cm/hr", wind: "km/h" },
   quizTaken: false,
   preferences: {
     runsCold: false,
@@ -48,8 +48,18 @@ const settingsSlice = createSlice({
       state.metric = payload;
       state.imperial = !payload;
       state.metric
-        ? (state.units = { temp: "°C", rain: "mm", snow: "cm", wind: "km/h" })
-        : (state.units = { temp: "°F", rain: "in", snow: "in", wind: "mph" });
+        ? (state.units = {
+            temp: "°C",
+            rain: "mm/hr",
+            snow: "cm/hr",
+            wind: "km/h",
+          })
+        : (state.units = {
+            temp: "°F",
+            rain: "in/hr",
+            snow: "in/hr",
+            wind: "mph",
+          });
     },
     setQuiz: (state, action: PayloadAction<boolean>) => {
       state.quizTaken = action.payload;
