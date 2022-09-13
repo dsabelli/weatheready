@@ -145,8 +145,11 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
               </div>
             </div>
             <div className="flex w-full justify-between items-center gap-1">
-              <div className="text-sm md:text-2xl w-1/2"> {desc}</div>
-              {pop !== 0 && (
+              <div className="text-sm md:text-2xl w-1/2 md:flex gap-1 justify-center">
+                {" "}
+                {desc}
+              </div>
+              {window.innerWidth > 576 && pop !== 0 && (
                 <div className="flex flex-col items-center gap-1 z-40">
                   <Umbrella />
                   <p className="text-xs md:text-base">
@@ -160,7 +163,16 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
         </div>
       </div>
       <div className="collapse-content ">
-        <ul className="flex text-xs md:text-sm font-bold justify-around w-full">
+        <ul className="flex  gap-2 text-xs md:text-sm font-bold justify-around w-full">
+          {window.innerWidth <= 576 && pop !== 0 && (
+            <li>
+              {" "}
+              <div className="flex flex-col gap-2 items-center">
+                <Umbrella />
+                <p className="text-xs md:text-base">{Math.round(pop * 100)}%</p>
+              </div>
+            </li>
+          )}
           {rain !== 0 && (
             <li>
               <div className="flex flex-col gap-2 items-center">
@@ -205,6 +217,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
               <Humidity /> <p>{Math.round(humidity)}%</p>
             </div>{" "}
           </li>
+
           <li>
             <div className="flex flex-col gap-2 items-center">
               <Navigation rotate={windDeg} />
@@ -213,18 +226,21 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
               </p>
             </div>
           </li>
-          <li>
-            <div className="flex flex-col gap-2 items-center">
-              <WindGust />
-              {!isNaN(windGust) ? (
-                <p>
-                  {Math.round(metric ? windGust * 3.6 : windGust)} {units.wind}
-                </p>
-              ) : (
-                <p>N/A</p>
-              )}
-            </div>
-          </li>
+          {window.innerWidth > 768 && (
+            <li>
+              <div className="flex flex-col gap-2 items-center">
+                <WindGust />
+                {!isNaN(windGust) ? (
+                  <p>
+                    {Math.round(metric ? windGust * 3.6 : windGust)}{" "}
+                    {units.wind}
+                  </p>
+                ) : (
+                  <p>N/A</p>
+                )}
+              </div>
+            </li>
+          )}
           <li>
             <div className="flex flex-col gap-2 items-center">
               <UVI />
