@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { useGetReverseLocationQuery } from "../../features/reverseLocationApi/reverseLocationSlice";
 import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
+import Error from "../../pages/Error";
 import { getAnimatedIcon } from "../../utils/getIcon";
 
 const ReverseLocation = () => {
@@ -31,16 +32,24 @@ const ReverseLocation = () => {
 
     weatherEls = (
       <>
-        <p>
+        <p
+          className={`${
+            window.innerWidth < 576 ? "text-xs" : "text-xl"
+          } font-semibold`}
+        >
           {Math.round(current.temp)}
           {units.temp}
         </p>
-        <div className={`w-10 md:w-12`}>
+        <div className={`w-10 mb-1 md:w-12`}>
           {getAnimatedIcon(current.weather[0].icon)}
         </div>
       </>
     );
+  } else if (isWeatherError) {
+    weatherEls = <Error />;
+    console.log(weatherError);
   }
+
   const {
     data: reverseLocationData,
     isLoading: isReverseLocationLoading,
@@ -61,8 +70,15 @@ const ReverseLocation = () => {
     const location = reverseLocationData.features[0].properties;
 
     reverseLocationEl = (
-      <p>{`${location.city}, ${location.state || location.country}`}</p>
+      <p
+        className={`${
+          window.innerWidth < 576 ? "text-xs" : "text-xl"
+        } font-semibold`}
+      >{`${location.city}, ${location.state || location.country}`}</p>
     );
+  } else if (isReverseLocationError) {
+    reverseLocationEl = <Error />;
+    console.log(reverseLocationError);
   }
   return (
     <div className="flex w-full gap-2 justify-end items-center">
