@@ -40,7 +40,7 @@ const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
       <h2 className="text-xl md:text-2xl py-4 font-bold">
         8 Day Temperature Trend
       </h2>
-      <ResponsiveContainer aspect={window.innerWidth > 768 ? 5 : 3}>
+      <ResponsiveContainer aspect={window.innerWidth > 768 ? 4 : 2}>
         <LineChart
           data={weatherData}
           margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
@@ -51,8 +51,14 @@ const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
             stroke="currentColor"
             axisLine={false}
             tickLine={false}
+            fontSize={window.innerWidth > 768 ? 16 : 12}
           />
-          <XAxis stroke="currentColor" dataKey="dayAndMonth" xAxisId={0} />
+          <XAxis
+            stroke="currentColor"
+            dataKey="dayAndMonth"
+            xAxisId={0}
+            fontSize={window.innerWidth > 768 ? 16 : 12}
+          />
           <YAxis stroke="currentColor">
             <Label
               value={units.temp}
