@@ -113,7 +113,7 @@ const WinterJacket = () => {
 
   if (window.innerWidth >= 768) {
     winterjacket = (
-      <Tooltip label="WinterJacket">
+      <Tooltip label="Winter Jacket">
         <WinterJacketIcon />
       </Tooltip>
     );
