@@ -21,7 +21,13 @@ const NavBar = () => {
             className="btn btn-ghost hover:bg-opacity-0  normal-case text-xl p-0 relative"
           >
             <Logo />
-            <p className={`hidden sm:block sm:ml-2 text-2xl`}>Weather Ready</p>
+            <p
+              className={`${
+                window.innerWidth < 576 ? "text-sm" : "text-2xl"
+              } ml-2 mb-1 `}
+            >
+              Weather Ready
+            </p>
           </Link>
         </div>
         <ReverseLocation />

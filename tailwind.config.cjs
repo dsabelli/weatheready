@@ -12,30 +12,30 @@ module.exports = {
     themes: [
       {
         light: {
-          primary: "#ffb6af",
+          primary: "#ff6584",
 
           secondary: "#a7ea54",
 
-          accent: "#c1035c",
+          accent: "#3ABFF8",
 
           neutral: "#191D24",
 
           "base-100": "#FFF",
 
-          info: "#4FC1E3",
+          info: "#3ABFF8",
 
-          success: "#1D8B6E",
+          success: "#36D399",
 
-          warning: "#8F6C0A",
+          warning: "#FBBD23",
 
-          error: "#EF7B6B",
+          error: "#F87272",
         },
         dark: {
-          primary: "#6419E6",
+          primary: "#ff6584",
 
           secondary: "#D926A9",
 
-          accent: "#1FB2A6",
+          accent: "#3ABFF8",
 
           neutral: "#191D24",
 
