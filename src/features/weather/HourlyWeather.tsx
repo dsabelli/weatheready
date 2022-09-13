@@ -5,9 +5,8 @@ import { RootState } from "../../app/store";
 import ForecastWeatherCard from "../../components/layout/ForecastWeatherCard";
 import Loader from "../../components/UI/Loader";
 import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
-import Error from "../../pages/Error";
 import { nanoid } from "nanoid";
-import { off } from "process";
+
 const HourlyWeather = () => {
   let navigate = useNavigate();
   const { lat, lon } = useSelector((state: RootState) => state.location);

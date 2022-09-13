@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetOneCallQuery } from "../weatherApi/weatherApiSlice";
 import Loader from "../../components/UI/Loader";
-import Error from "../../pages/Error";
 import CurrentWeatherCard from "../../components/layout/CurrentWeatherCard";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
