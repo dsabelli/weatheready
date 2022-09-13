@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { useGetOneCallQuery } from "../../features/weatherApi/weatherApiSlice";
@@ -7,6 +8,7 @@ import Warning from "../../assets/icons/static/Warning";
 import { ArrowRight } from "../../assets/icons/static/Arrow";
 import { Link } from "react-router-dom";
 const AlertBanner = () => {
+  let navigate = useNavigate();
   const { lat, lon } = useSelector((state: RootState) => state.location);
 
   const {
@@ -41,29 +43,32 @@ const AlertBanner = () => {
               .join(" ");
       const alertDescription = alerts[0].description
         .split(" ")
-        .slice(0, 7)
+        .slice(0, 6)
         .join(" ");
       alertEls = (
-        <div className="alert bg-red-800 text-white shadow-lg mb-4 mx-auto max-w-3xl p-2 md:p-4">
-          <div className="flex w-full justify-between">
-            <div className="flex gap-2 items-center ">
-              <Warning />
-              <span className="text-sm md:text-lg font-bold">
-                {alertEvent}:
-              </span>
-              <p className="hidden sm:block">{alertDescription} </p>
-              <p>...</p>
-            </div>
-            <Link to="/alert">
+        <Link to="/alert">
+          <div className="alert bg-red-800 text-white shadow-lg mb-4 mx-auto max-w-3xl p-2 md:p-4">
+            <div className="flex w-full justify-between">
+              <div className="flex gap-2 items-center ">
+                <Warning />
+                <span className="text-sm md:text-lg font-bold">
+                  {alertEvent}:
+                </span>
+                <p className="hidden sm:block">{alertDescription} </p>
+                <p>...</p>
+              </div>
               <ArrowRight className="w-5 md:w-7" />
-            </Link>
+            </div>
           </div>
-        </div>
+        </Link>
       );
     }
   }
+  useEffect(() => {
+    isWeatherError && navigate("/error");
+  }, []);
 
-  return <div className="px-8">{alertEls}</div>;
+  return <div className="px-4">{alertEls}</div>;
 };
 
 export default AlertBanner;
