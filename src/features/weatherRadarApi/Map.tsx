@@ -21,7 +21,7 @@ const UpdateMapCenter = ({ mapCenter }: { mapCenter: [number, number] }) => {
 
 const Map = ({ height }: { height: string }) => {
   const [stepCounter, setStepCounter] = useState(12);
-  const [delay, setDelay] = useState(4);
+  const [delay, setDelay] = useState(3);
   const [opacity, setOpacity] = useState(70);
   const [step, setStep] = useState(false);
   const { lat, lon } = useSelector((state: RootState) => state.location);
