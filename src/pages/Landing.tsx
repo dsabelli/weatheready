@@ -10,7 +10,7 @@ const Landing = () => {
   let location = useLocation();
   const pathname = location.pathname;
   return (
-    <div className="flex flex-col justify-between h-screen ">
+    <div className="flex flex-col justify-between h-screen overflow-auto text-base-content">
       <div className="w-full">
         <NavBar />
         <AlertBanner />
