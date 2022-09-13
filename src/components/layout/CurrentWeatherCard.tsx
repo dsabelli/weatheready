@@ -75,13 +75,13 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
       <div className="flex flex-col w-2/5">
         <div className="flex justify-between items-center">
           <div className="text-lg md:text-2xl">
-            <h2>Current Weather - </h2>
+            <h2>Current - </h2>
             <div>{desc}</div>
           </div>
           <div className="justify-center hidden md:flex">{clothing}</div>
         </div>
         <div className="flex justify-center items-center">
-          <div className="w-32 md:w-48 ">{getAnimatedIcon(icon)}</div>
+          <div className="w-28 md:w-48 ">{getAnimatedIcon(icon)}</div>
           <div>
             <p className="text-2xl md:text-4xl font-semibold">
               {Math.round(temp)}
@@ -96,7 +96,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             </p>
           </div>
         </div>
-        <div className="justify-center md:hidden flex">{clothing}</div>
+        <div className="flex justify-end md:hidden">{clothing}</div>
       </div>
       <div className="w-3/5">
         <ul className="text-xs sm:text-sm md:text-base">
@@ -139,7 +139,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
           <li className="flex justify-between border-b-2 mb-3 md:mb-4">
             <p>Wind Speed</p>
             <div className="flex items-center gap-1">
-              <NavIcon className={`w-5 sm:mb-1.5`} rotate={windDeg} />
+              <NavIcon className={`w-4 md:w-5 mb-1.5`} rotate={windDeg} />
               {Math.round(metric ? windSpeed * 3.6 : windSpeed)} {units.wind}
             </div>
           </li>
