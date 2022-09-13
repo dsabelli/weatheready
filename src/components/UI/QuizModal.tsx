@@ -32,7 +32,7 @@ const QuizModal = () => {
       </label>
 
       <input type="checkbox" id="my-modal" className="modal-toggle" />
-      <div className="modal">
+      <div className="modal" style={{ zIndex: 9999 }}>
         <div className="modal-box">
           <h3 className="text-lg">
             Please answer the following question to help us determine your
