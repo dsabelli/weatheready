@@ -14,16 +14,14 @@ const NavBar = () => {
 
   return (
     <nav className="w-full">
-      <div className="navbar px-2 md:px-4 bg-accent w-full">
+      <div className="navbar px-2 md:px-4 bg-accent text-accent-content w-full">
         <div className="w-1/2">
           <Link
             to="/app"
             className="btn btn-ghost hover:bg-opacity-0  normal-case text-xl p-0 relative"
           >
             <Logo />
-            <p className={`hidden sm:block sm:ml-2 text-2xl text-base-content`}>
-              Weather Ready
-            </p>
+            <p className={`hidden sm:block sm:ml-2 text-2xl`}>Weather Ready</p>
           </Link>
         </div>
         <ReverseLocation />
