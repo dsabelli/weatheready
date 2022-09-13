@@ -1,7 +1,7 @@
 import React from "react";
 import Hero from "../components/UI/Hero";
 import { useNavigate } from "react-router-dom";
-import Tornado from "../assets/icons/static/Tornado";
+import Tornado from "../assets/icons/animated/Tornado";
 
 const Error = () => {
   let navigate = useNavigate();
