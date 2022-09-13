@@ -9,7 +9,8 @@ import { setLocation } from "../location/locationSlice";
 import { AutocompleteFeatures } from "../../types";
 import { RootState } from "../../app/store";
 import { setPreviousLocation } from "./previousLocationSlice";
-import { skipToken } from "@reduxjs/toolkit/dist/query";
+import Error from "../../pages/Error";
+
 const Search = () => {
   const dispatch = useDispatch();
   const { previousLocations } = useSelector(
@@ -77,6 +78,9 @@ const Search = () => {
         }`}
       </div>
     ));
+  } else if (isAutocompleteError) {
+    autocompleteEls = <Error />;
+    console.log(autocompleteError);
   }
 
   let previousLocationEls;
@@ -124,7 +128,7 @@ const Search = () => {
     );
   }
   return (
-    <div className="form-control w-full sm:w-80 ">
+    <div className="form-control w-full md:w-3/5 md:max-w-md">
       <Input
         value={autocomplete || ""}
         type="text"
@@ -153,8 +157,9 @@ const Search = () => {
       />
 
       <div
+        style={{ zIndex: 9999 }}
         className={` ${
-          visible ? "dropdown dropdown-end dropdown-open w-48 z-50" : "hidden"
+          visible ? "dropdown dropdown-end dropdown-open w-full" : "hidden"
         }`}
       >
         <ul
