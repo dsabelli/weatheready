@@ -128,12 +128,12 @@ const Search = () => {
     );
   }
   return (
-    <div className="form-control w-full md:w-3/5 md:max-w-md">
+    <div className="form-control w-full md:w-3/5 md:max-w-md text-base-content">
       <Input
         value={autocomplete || ""}
         type="text"
         placeholder="Search Location..."
-        className="input w-full bg-base-200 focus:outline-none md:text-accent-content md:bg-accent-focus placeholder-opacity-50 placeholder-accent-content"
+        className="input w-full bg-base-200 focus:outline-none text-accent-content md:bg-accent-focus placeholder-opacity-50 placeholder-accent-content"
         onChange={(e) =>
           e.target.value !== ""
             ? (setAutocomplete(e.target.value), setVisible(true))
