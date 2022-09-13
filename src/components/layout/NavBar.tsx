@@ -2,7 +2,6 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import Search from "../../features/location/Search";
 import ReverseLocation from "../UI/ReverseLocation";
-import SettingsToggle from "../UI/SettingsToggle";
 import QuizModal from "../UI/QuizModal";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";

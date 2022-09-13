@@ -34,10 +34,9 @@ const TodayWeather = () => {
     weatherEls = weatherData.hourly
       //filter for 8am/2pm/8pm today and 2am tomorrow
       .filter((day) => {
-        const hours = new Date(day.dt * 1000).getHours();
-        const currentDay = new Date(day.dt * 1000).getDate();
+        const hours = new Date((day.dt + offset) * 1000).getHours();
+        const currentDay = new Date((day.dt + offset) * 1000).getDate();
         const today = new Date().getDate();
-        console.log(currentDay, today);
 
         return (
           (hours === 2 && currentDay === today + 1) ||

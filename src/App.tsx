@@ -12,6 +12,7 @@ import Today from "./pages/Today";
 import { RootState } from "./app/store";
 import Alert from "./pages/Alert";
 import Radar from "./pages/Radar";
+import { Theme } from "react-daisyui";
 
 interface Coords {
   coords: {
@@ -22,6 +23,7 @@ interface Coords {
 function App() {
   const dispatch = useDispatch();
   const { lat, lon } = useSelector((state: RootState) => state.location);
+  const { theme } = useSelector((state: RootState) => state.settings);
 
   const successCallback = (position: Coords) => {
     const { latitude, longitude } = position.coords;
@@ -42,17 +44,19 @@ function App() {
   }, []);
 
   return (
-    <Routes>
-      <Route path="/app" element={<Landing />}>
-        <Route path="today" element={<Today />} />
-        <Route path="hourly" element={<Hourly />} />
-        <Route path="8-day" element={<EightDay />} />
-        <Route path="radar" element={<Radar />} />
-      </Route>
-      <Route path="alert" element={<Alert />} />
-      <Route path="error" element={<Error />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <Theme dataTheme={theme}>
+      <Routes>
+        <Route path="/app" element={<Landing />}>
+          <Route path="today" element={<Today />} />
+          <Route path="hourly" element={<Hourly />} />
+          <Route path="8-day" element={<EightDay />} />
+          <Route path="radar" element={<Radar />} />
+        </Route>
+        <Route path="alert" element={<Alert />} />
+        <Route path="error" element={<Error />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Theme>
   );
 }
 

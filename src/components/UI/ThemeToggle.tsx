@@ -1,25 +1,27 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { setUnits } from "../../features/settings/settingsSlice";
+import { setTheme } from "../../features/settings/settingsSlice";
 
-const SettingsToggle = () => {
+const ThemeToggle = () => {
   const dispatch = useDispatch();
-  const { metric } = useSelector((state: RootState) => state.settings);
+  const { theme } = useSelector((state: RootState) => state.settings);
 
   return (
     <div className="form-control">
       <label className="label cursor-pointer gap-1">
-        <p>°C</p>
+        <p>Light</p>
         <input
           className="toggle"
           type="checkbox"
-          onChange={() => dispatch(setUnits(!metric))}
+          onChange={() =>
+            dispatch(setTheme(theme === "light" ? "dark" : "light"))
+          }
         />
-        <p>°F</p>
+        <p>Dark</p>
       </label>
     </div>
   );
 };
 
-export default SettingsToggle;
+export default ThemeToggle;

@@ -4,13 +4,13 @@ import AlertBanner from "../components/UI/AlertBanner";
 import Map from "../features/weatherRadarApi/Map";
 import NavBar from "../components/layout/NavBar";
 import CurrentWeather from "../features/weather/CurrentWeather";
-import Footer from "../components/UI/Footer";
+import Footer from "../components/layout/Footer";
 
 const Landing = () => {
   let location = useLocation();
   const pathname = location.pathname;
   return (
-    <div className="flex flex-col justify-between h-screen text-primary-content">
+    <div className="flex flex-col justify-between h-screen ">
       <div className="w-full">
         <NavBar />
         <AlertBanner />

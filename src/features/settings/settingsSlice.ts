@@ -19,6 +19,7 @@ export interface Settings {
   };
   quizTaken: boolean;
   preferences: Preferences;
+  theme: string;
 }
 interface Config {
   key: string;
@@ -38,6 +39,7 @@ const initialState: Settings = {
     runsCold: false,
     runsHot: false,
   },
+  theme: "light",
 };
 const settingsSlice = createSlice({
   name: "settings",
@@ -68,9 +70,13 @@ const settingsSlice = createSlice({
       const payload = action.payload;
       state.preferences = { ...payload };
     },
+    setTheme: (state, action: PayloadAction<string>) => {
+      state.theme = action.payload;
+    },
   },
 });
 
-export const { setUnits, setQuiz, setPreferences } = settingsSlice.actions;
+export const { setUnits, setQuiz, setPreferences, setTheme } =
+  settingsSlice.actions;
 
 export default persistReducer(persistConfig, settingsSlice.reducer);
