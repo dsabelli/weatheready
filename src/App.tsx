@@ -46,11 +46,11 @@ function App() {
   return (
     <Theme dataTheme={theme}>
       <Routes>
-        <Route path="/app" element={<Landing />}>
-          <Route path="today" element={<Today />} />
-          <Route path="hourly" element={<Hourly />} />
-          <Route path="8-day" element={<EightDay />} />
-          <Route path="radar" element={<Radar />} />
+        <Route path="/" element={<Landing />}>
+          <Route path="app/today" element={<Today />} />
+          <Route path="app/hourly" element={<Hourly />} />
+          <Route path="app/8-day" element={<EightDay />} />
+          <Route path="app/radar" element={<Radar />} />
         </Route>
         <Route path="alert" element={<Alert />} />
         <Route path="error" element={<Error />} />

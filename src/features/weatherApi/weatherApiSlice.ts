@@ -12,7 +12,7 @@ export interface Coords {
 export const weatherApiSlice = createApi({
   reducerPath: "weatherApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `http://api.openweathermap.org/data/`,
+    baseUrl: `https://api.openweathermap.org/data/`,
   }),
   // tagTypes: ["Weather"],
   endpoints: (builder) => ({
