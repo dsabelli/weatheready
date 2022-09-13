@@ -21,9 +21,7 @@ const NavBar = () => {
             className="btn btn-ghost hover:bg-opacity-0  normal-case text-xl p-0 relative"
           >
             <Logo />
-            <p
-              className={`hidden sm:block sm:ml-2 text-2xl text-primary-content`}
-            >
+            <p className={`hidden sm:block sm:ml-2 text-2xl text-base-content`}>
               Weather Ready
             </p>
           </Link>
