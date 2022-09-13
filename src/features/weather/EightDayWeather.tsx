@@ -54,12 +54,12 @@ const EightDayWeather = () => {
     ));
   } else if (isWeatherError) {
     weatherEls = <Error />;
+    console.log(weatherError);
   }
 
   return (
     <div>
       <div className=" mx-auto mb-4 max-w-3xl">
-        {" "}
         {weatherData && <EightDayChart data={weatherData.daily} />}
       </div>
       {weatherEls}

@@ -68,6 +68,7 @@ const TodayWeather = () => {
       ));
   } else if (isWeatherError) {
     weatherEls = <Error />;
+    console.log(weatherError);
   }
 
   return <div className="w-full">{weatherEls}</div>;

@@ -48,6 +48,7 @@ const AlertWeather = () => {
     else weatherEls = "No weather alerts";
   } else if (isWeatherError) {
     weatherEls = <Error />;
+    console.log(weatherError);
   }
 
   return <div className="px-4">{weatherEls}</div>;

@@ -58,6 +58,7 @@ const HourlyWeather = () => {
       ));
   } else if (isWeatherError) {
     weatherEls = <Error />;
+    console.log(weatherError);
   }
 
   return <div>{weatherEls}</div>;

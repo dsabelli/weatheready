@@ -55,12 +55,17 @@ const Weather = () => {
           date={current.dt + offset}
         />
         {weatherData.minutely && (
-          <PrecipitationChart data={weatherData.minutely} />
+          <PrecipitationChart
+            data={weatherData.minutely}
+            rain={current.rain ? current.rain["1h"] : 0}
+            snow={current.snow ? current.snow["1h"] : 0}
+          />
         )}
       </div>
     );
   } else if (isWeatherError) {
     weatherEls = <Error />;
+    console.log(weatherError);
   }
 
   return <div className="w-full">{weatherEls}</div>;
