@@ -1,19 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const Refresh = () => {
-  const [spin, setSpin] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setSpin(true);
-    }, 5000);
-    setTimeout(() => {
-      setSpin(false);
-    }, 1000);
-  }, [spin]);
-
   return (
-    <div className={`w-5 md:w-7 ${spin ? "animate-spin" : ""}`}>
+    <div className={`w-5 md:w-7`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
