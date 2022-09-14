@@ -28,7 +28,7 @@ const getClothing = (
   const sunsetHours = new Date(sunset * 1000).getHours();
   temp = Math.round(temp);
 
-  if (clouds <= 25 && dateHours < sunsetHours - 2 && dateHours > 9) temp += 2;
+  if (clouds <= 25 && dateHours < sunsetHours - 2 && dateHours > 8) temp += 2;
 
   switch (true) {
     case temp < 5:
@@ -39,7 +39,7 @@ const getClothing = (
         </>
       );
       break;
-    case temp >= 5 && temp <= 15:
+    case temp >= 5 && temp <= 12:
       clothing = (
         <>
           <Sweater />
@@ -47,7 +47,7 @@ const getClothing = (
         </>
       );
       break;
-    case temp > 15 && temp <= 20:
+    case temp > 12 && temp <= 20:
       clothing = (
         <>
           <Jacket />
@@ -69,9 +69,10 @@ const getClothing = (
 
   const accessories = (
     <>
-      {clouds < 50 && dateHours < sunsetHours && dateHours !== 2 && (
-        <Sunglasses />
-      )}
+      {clouds < 50 &&
+        dateHours < sunsetHours &&
+        dateHours !== 2 &&
+        dateHours > 8 && <Sunglasses />}
       {(uvi >= 4 && !rain && (
         <>
           <Sunscreen />
