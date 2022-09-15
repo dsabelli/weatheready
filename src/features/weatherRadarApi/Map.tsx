@@ -9,6 +9,8 @@ import Play from "../../assets/icons/static/Play";
 import Pause from "../../assets/icons/static/Pause";
 import { Slider } from "@mantine/core";
 
+//pans to center when user updates their location
+//required to update map center as MapContainer component props are immutable
 const UpdateMapCenter = ({ mapCenter }: { mapCenter: [number, number] }) => {
   const { lat, lon } = useSelector((state: RootState) => state.location);
   const map = useMap();
@@ -41,8 +43,10 @@ const Map = ({ height }: { height: string }) => {
   if (isRadarLoading) {
     radarEls = <Loader />;
   } else if (isRadarSuccess) {
+    //concatenate past and preset data
     const radarImage = radarData.radar.past.concat(radarData.radar.nowcast);
 
+    //map over data into TileLayer components with image urls
     radarEls = radarImage.map((image: Radar) => (
       <TileLayer
         opacity={opacity / 100}
@@ -50,6 +54,7 @@ const Map = ({ height }: { height: string }) => {
         url={`${radarData.host}${image.path}/256/{z}/{x}/{y}/4/1_1.png`}
       />
     ));
+    //map over data to get time for each image
     radarTime = radarImage.map(
       (time: Radar) =>
         `${new Date(time.time * 1000).getHours()}:${
@@ -65,6 +70,8 @@ const Map = ({ height }: { height: string }) => {
     isRadarError && navigate("/error");
   }, []);
 
+  //when user presses play button, if the step conuter is <16, ++ else set to 0
+  //steps are on a delay set by user
   useEffect(() => {
     if (step) {
       setTimeout(() => {
@@ -91,6 +98,7 @@ const Map = ({ height }: { height: string }) => {
         />
         {radarEls && radarEls[stepCounter]}
       </MapContainer>
+      {/* play pause button and sliders for user control of image cycling, speed and opacity */}
       <div className="flex flex-col gap-4 justify-center items-start py-4">
         <div className="flex items-center gap-4 w-full">
           <label
@@ -140,7 +148,7 @@ const Map = ({ height }: { height: string }) => {
             />
           </div>
         </div>
-
+        {/* background gradients for legend */}
         <div className="flex items-center w-full">
           <p>Rain</p>
           <div

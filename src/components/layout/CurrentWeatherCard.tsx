@@ -44,15 +44,19 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
   const { preferences } = useSelector((state: RootState) => state.settings);
   const { runsHot, runsCold } = preferences;
   const { metric, units } = useSelector((state: RootState) => state.settings);
+
   const sunriseHours: number = new Date(sunrise * 1000).getHours();
   const sunriseMinutes: number = new Date(sunrise * 1000).getMinutes();
   const sunsetHours: number = new Date(sunset * 1000).getHours();
   const sunsetMinutes: number = new Date(sunset * 1000).getMinutes();
+  //uppercase first letter of each word in the description
   const desc: string = description
     .split(" ")
     .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
     .join(" ");
 
+  //function returns the feels like temperature as Celsius
+  // based on the user's temp preference
   const getTemp = (feelsLike: number): number => {
     let temp = feelsLike;
     if (!metric) temp = (temp - 32) * (5 / 9);
@@ -60,7 +64,9 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
     return temp;
   };
 
-  const clothing = getClothing(
+  //returns clothing based on the tempersture returned from getTemp
+  //returns accessories based on the other args
+  const clothing: JSX.Element = getClothing(
     getTemp(feelsLike),
     clouds,
     uvi,
@@ -103,6 +109,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
           {rain !== 0 && (
             <li className="flex justify-between border-b-2 mb-3 md:mb-4">
               <p>Rain</p>
+              {/* round and convert mm/hr to in/hr depending on user's unit settings */}
               <p>
                 {Math.round(
                   metric
@@ -118,6 +125,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
           {snow !== 0 && (
             <li className="flex justify-between border-b-2 mb-3 md:mb-4">
               <p>Snow</p>
+              {/* round and convert mm/hr to cm/hr or in/hr depending on user's unit settings */}
               <p>
                 {Math.round(
                   metric
@@ -146,6 +154,8 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
           <li className="flex justify-between border-b-2 mb-3 md:mb-4">
             <p>Wind Gust</p>
             <p>
+              {/* sometimes windGust data is not available */}
+              {/* convert m/s to km/h depending on user's unit settings */}
               {!isNaN(windGust)
                 ? Math.round(metric ? windGust * 3.6 : windGust)
                 : "N/A"}{" "}
@@ -156,6 +166,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
             <p>UVI</p>{" "}
             <p>
               {Math.round(uvi)} {getUvDesc(Math.round(uvi))}
+              {/* return a description of UVI based on UVI number */}
             </p>
           </li>
           <li className="flex justify-between border-b-2 mb-3 md:mb-4">

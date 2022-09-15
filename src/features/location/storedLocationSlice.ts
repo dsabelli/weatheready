@@ -15,6 +15,8 @@ const persistConfig: Config = {
 
 const initialState: Location = { lat: "", lon: "" };
 
+//stores the user's current location
+//persists in local storage
 const storedLocationSlice = createSlice({
   name: "storedLocation",
   initialState,

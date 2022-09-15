@@ -21,6 +21,9 @@ const initialState: LocationInitialState = {
   previousLocations: [],
 };
 
+//adds most recent location searches to beginning of array
+//stores 4 locations, pops off anything greater
+//data persists in local storage
 const previousLocationSlice = createSlice({
   name: "previousLocation",
   initialState,

@@ -41,6 +41,8 @@ const initialState: Settings = {
   },
   theme: "light",
 };
+
+//set and persist user settings in local storage
 const settingsSlice = createSlice({
   name: "settings",
   initialState,

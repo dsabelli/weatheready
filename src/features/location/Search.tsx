@@ -10,7 +10,6 @@ import { setLocation } from "../location/locationSlice";
 import { AutocompleteFeatures } from "../../types";
 import { RootState } from "../../app/store";
 import { setPreviousLocation } from "./previousLocationSlice";
-import Error from "../../pages/Error";
 
 const Search = () => {
   let navigate = useNavigate();
@@ -26,6 +25,7 @@ const Search = () => {
   const [search, setSearch] = useState("");
   const [debouncedAutocomplete] = useDebounce(autocomplete, 200);
 
+  //user's input is debounced to reduce autocomplete api queries
   useEffect(() => {
     if (debouncedAutocomplete) setSearch(debouncedAutocomplete);
   }, [debouncedAutocomplete]);
@@ -43,9 +43,12 @@ const Search = () => {
   if (isAutocompleteLoading) {
     autocompleteEls = <Loader />;
   } else if (isAutocompleteSuccess) {
+    //filter results with cities (some results don't list a city and return undefined)
     const cities = autocompleteData.features.filter(
       (data) => data.properties.city
     );
+    //map through and add event listener to set location and add to previous location on click
+    //listener also sets autocomplete and closes dropdown
     autocompleteEls = cities.map((data: AutocompleteFeatures) => (
       <div
         onClick={() => (
@@ -86,6 +89,7 @@ const Search = () => {
 
   let previousLocationEls;
   if (previousLocations) {
+    //if there are any previous locations, display like autocomplete locations
     previousLocationEls = previousLocations.map((location) => (
       <div
         className="opacity-60"
@@ -112,6 +116,7 @@ const Search = () => {
 
   let currentLocationEl;
   if (storedLocation.lat && storedLocation.lon) {
+    //if there is a stored current location, display like autocomplete locations
     currentLocationEl = (
       <div
         onClick={() => (
@@ -161,7 +166,7 @@ const Search = () => {
             : null
         }
       />
-
+      {/* dropdown should be most in front on page */}
       <div
         style={{ zIndex: 9999 }}
         className={` ${
@@ -173,6 +178,7 @@ const Search = () => {
           className=" dropdown-content menu p-2 shadow bg-base-200 rounded-box w-full overflow-y-auto max-h-80 md:max-h-96"
         >
           <li className={` dropdown ${visible ? "" : "hidden"}`}>
+            {/* show autocomplete results when searching, else show current/previous locations */}
             {autocomplete && autocompleteEls}
             {!autocomplete && (
               <>

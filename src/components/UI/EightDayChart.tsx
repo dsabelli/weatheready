@@ -20,6 +20,9 @@ interface PrecipitationData {
 
 const EightDayChart: React.FC<PrecipitationData> = ({ data }) => {
   const { units } = useSelector((state: RootState) => state.settings);
+
+  //add day of week and date of month to weatherData objects to use as x-axis on chart
+  //add high and low and round temps for y-axis and tooltip
   const weatherData = data.map((d) => {
     const day = getDayOfWeek(new Date(d.dt * 1000).getDay()).slice(0, 3);
     const dayAndMonth = `${new Date(d.dt * 1000).getMonth() + 1}/${new Date(

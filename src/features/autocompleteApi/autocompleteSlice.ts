@@ -3,6 +3,8 @@ import { AutocompleteData } from "../../types";
 
 const geoApi: string = import.meta.env.VITE_GEO_API_KEY;
 
+//fetches location data based on the user's text input
+//returns matches to autocomplete user's input
 export const autocompleteSlice = createApi({
   reducerPath: "autocompleteApi",
   baseQuery: fetchBaseQuery({

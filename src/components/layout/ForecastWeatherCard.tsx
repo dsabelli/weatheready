@@ -57,19 +57,25 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   const { runsHot, runsCold } = preferences;
   const { metric, units } = useSelector((state: RootState) => state.settings);
 
+  //uppercase first letter of each word in the description and map to paragraph
   const desc = description
     .split(" ")
     .map((word) => (
       <p key={nanoid()}>{word.slice(0, 1).toUpperCase() + word.slice(1)}</p>
     ));
-
+  //get the day of the week (ex; Monday, Tuesday, etc...)
   const dayOfWeek: string = getDayOfWeek(new Date(date * 1000).getDay());
+  //get month and day, return as string MM/dd
   const dayAndMonth: string = `${
     new Date(date * 1000).getMonth() + 1
   }/${new Date(date * 1000).getDate()}`;
+  //get time by hour
   const hours: number = new Date(date * 1000).getHours();
+  //get time of day depending on hour, Morning, Afternoon, Evening, Night
   const timeOfDay: string = getTimeOfDay(new Date(date * 1000).getHours());
 
+  //function returns the feels like temperature as Celsius
+  // based on the user's temp preference
   const getTemp = (feelsLike: number): number => {
     let temp = feelsLike;
     if (!metric) temp = (temp - 32) * (5 / 9);
@@ -77,6 +83,8 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
     return temp;
   };
 
+  //returns clothing based on the tempersture returned from getTemp
+  //returns accessories based on the other args
   const clothing: JSX.Element = getClothing(
     getTemp(feelsLike),
     clouds,
@@ -86,7 +94,8 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
     pop,
     0
   );
-
+  //Forecast Card is used in the Today, Hourly, and 8-day pages
+  //Some conditional rendering based on pathname to include or exlude data
   return (
     <div className="collapse collapse-arrow bg-base-100 shadow-xl py-4 mx-auto max-w-3xl mb-4 ">
       <input type="checkbox" className="z-20 p-0" />
@@ -146,7 +155,6 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
             </div>
             <div className="flex w-full justify-between items-center gap-1">
               <div className="text-sm md:text-2xl w-1/2 md:flex gap-1 justify-center">
-                {" "}
                 {desc}
               </div>
               {window.innerWidth > 576 && pop !== 0 && (
@@ -166,7 +174,6 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
         <ul className="flex  gap-2 text-xs md:text-sm font-bold justify-around w-full">
           {window.innerWidth <= 576 && pop !== 0 && (
             <li>
-              {" "}
               <div className="flex flex-col gap-2 items-center">
                 <Umbrella />
                 <p className="text-xs md:text-base">{Math.round(pop * 100)}%</p>
@@ -230,6 +237,8 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
             <li>
               <div className="flex flex-col gap-2 items-center">
                 <WindGust />
+                {/* sometimes windGust data is not available */}
+                {/* convert m/s to km/h depending on user's unit settings */}
                 {!isNaN(windGust) ? (
                   <p>
                     {Math.round(metric ? windGust * 3.6 : windGust)}{" "}
@@ -246,6 +255,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
               <UVI />
               <p>
                 {Math.round(uvi)} {getUvDesc(Math.round(uvi))}
+                {/* return a description of UVI based on UVI number */}
               </p>
             </div>
           </li>

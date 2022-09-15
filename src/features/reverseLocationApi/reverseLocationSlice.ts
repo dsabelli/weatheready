@@ -3,6 +3,7 @@ import { ReverseLocationData } from "../../types";
 
 const geoApi: string = import.meta.env.VITE_GEO_API_KEY;
 
+//gets the city and state or country based on the coordiantes
 export const reverseLocationSlice = createApi({
   reducerPath: "reverseLocationApi",
   baseQuery: fetchBaseQuery({

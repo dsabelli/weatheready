@@ -28,6 +28,7 @@ export const store = configureStore({
     storedLocation: storedLocationReducer,
     settings: settingsReducer,
   },
+  //set up middleware for slices, ignore actions for redux-persist as recommended by redux docs.
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -41,7 +42,9 @@ export const store = configureStore({
     ),
 });
 
+//set up persistor for PersistGate wrapper
 export const persistor = persistStore(store);
 
+//infer types from store per redux docs
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

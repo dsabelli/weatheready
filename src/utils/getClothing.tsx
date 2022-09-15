@@ -28,8 +28,12 @@ const getClothing = (
   const sunsetHours = new Date(sunset * 1000).getHours();
   temp = Math.round(temp);
 
+  //if it's mostly sunny, after 8am and before 2 hours to sunset, add 2C to temperature
+  //corrects for very sunny weather, think full sun at noon
   if (clouds <= 25 && dateHours < sunsetHours - 2 && dateHours > 8) temp += 2;
 
+  //switch statement with temperature breakpoints
+  //breakpoints are based on studies of human comfort and clothing thermal insulation values
   switch (true) {
     case temp < 5:
       clothing = (
@@ -54,7 +58,6 @@ const getClothing = (
           <Pants />
         </>
       );
-
       break;
     case temp > 20:
       clothing = (
@@ -63,10 +66,10 @@ const getClothing = (
           <Shorts />
         </>
       );
-
       break;
   }
 
+  //accessories are rendered when conditions are met
   const accessories = (
     <>
       {clouds < 50 &&
@@ -114,6 +117,7 @@ const getClothing = (
         <Info>
           <div>
             <div className="flex justify-center items-center gap-1">
+              {/* if no conditions are met, return "N/A" */}
               {accessories.props.children[0] ? accessories : "N/A"}
             </div>
             <h3 className="text-center text-xs">Accessories</h3>

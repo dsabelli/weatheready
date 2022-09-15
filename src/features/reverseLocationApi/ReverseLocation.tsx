@@ -31,7 +31,7 @@ const ReverseLocation = () => {
 
   if (isWeatherSuccess) {
     const current = weatherData.current;
-
+    //gets and returns the current weather and icon
     weatherEls = (
       <>
         <p
@@ -69,7 +69,7 @@ const ReverseLocation = () => {
 
   if (isReverseLocationSuccess) {
     const location = reverseLocationData.features[0].properties;
-
+    //gets the city and state or country based on the current location coordinates
     reverseLocationEl = (
       <p
         className={`${

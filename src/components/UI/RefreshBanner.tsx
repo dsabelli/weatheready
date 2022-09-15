@@ -4,6 +4,8 @@ import Refresh from "../../assets/icons/static/Refresh";
 const RefreshBanner = () => {
   const [refresh, setRefresh] = useState(false);
 
+  //set to truthy every 30 minutes
+  //will reset to falsy on page reload
   useEffect(() => {
     setTimeout(() => {
       setRefresh(true);

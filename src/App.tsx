@@ -20,11 +20,15 @@ interface Coords {
     longitude: number;
   };
 }
+
 function App() {
   const dispatch = useDispatch();
   const { lat, lon } = useSelector((state: RootState) => state.location);
   const { theme } = useSelector((state: RootState) => state.settings);
 
+  //callback when user permits use of current position
+  //takes the current position coordinates and sets the storedlocation to those coords
+  //if there is no current location, also sets location to the coordinates
   const successCallback = (position: Coords) => {
     const { latitude, longitude } = position.coords;
     dispatch(

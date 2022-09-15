@@ -10,17 +10,22 @@ const AlertWeatherCard: React.FC<Alerts> = ({
   end,
   description,
 }) => {
-  const startDay = getDayOfWeek(new Date(start * 1000).getDay());
-  const startDayAndMonth = `${new Date(start * 1000).getMonth() + 1}/${new Date(
-    start * 1000
-  ).getDate()}`;
-  const startTime = new Date(start * 1000).getHours();
-  const endDay = getDayOfWeek(new Date(end * 1000).getDay());
-  const endDayAndMonth = `${new Date(end * 1000).getMonth() + 1}/${new Date(
-    end * 1000
-  ).getDate()}`;
-  const endTime = new Date(end * 1000).getHours();
+  //get the day of the week (ex; Monday, Tuesday, etc...)
+  const startDay: string = getDayOfWeek(new Date(start * 1000).getDay());
+  //get month and day, return as string MM/dd
+  const startDayAndMonth: string = `${
+    new Date(start * 1000).getMonth() + 1
+  }/${new Date(start * 1000).getDate()}`;
+  //get start time of alert event
+  const startTime: number = new Date(start * 1000).getHours();
+  const endDay: string = getDayOfWeek(new Date(end * 1000).getDay());
+  const endDayAndMonth: string = `${
+    new Date(end * 1000).getMonth() + 1
+  }/${new Date(end * 1000).getDate()}`;
+  //get end time of alert event
+  const endTime: number = new Date(end * 1000).getHours();
 
+  //some event titles only appear as "weather", change to something more substantial
   event === "weather" ? (event = "Special Weather Event") : event;
 
   return (
@@ -36,6 +41,7 @@ const AlertWeatherCard: React.FC<Alerts> = ({
         <p className="text-sm opacity-70 my-2">Source: {sender_name}</p>
       </div>
       <div>
+        {/* description given as a string with newline escapes  */}
         {description.split("\n").map((paragraph) => (
           <p key={nanoid()} className="mb-4">
             {paragraph}

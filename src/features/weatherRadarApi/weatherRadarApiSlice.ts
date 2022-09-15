@@ -18,6 +18,7 @@ export interface RadarData {
   version: string;
 }
 
+//returns weather map data for the entire map
 export const weatherRadarApiSlice = createApi({
   reducerPath: "weatherRadarApi",
   baseQuery: fetchBaseQuery({

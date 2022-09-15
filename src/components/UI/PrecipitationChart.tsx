@@ -29,6 +29,9 @@ const PrecipitationChart: React.FC<PrecipitationData> = ({
   snow,
 }) => {
   const { units } = useSelector((state: RootState) => state.settings);
+
+  //add a leading zero to mintues less than 10 (ex; 10:08 vs 10:8)
+  //round precipitation
   const precipData = data.map((d) => {
     const hours = new Date(d.dt * 1000).getHours();
     const minutes = new Date(d.dt * 1000).getMinutes();
@@ -39,6 +42,7 @@ const PrecipitationChart: React.FC<PrecipitationData> = ({
     };
   });
 
+  //will be falsy when there is no precipitation data for the hour, used for conditional rendering
   const hidePrecipData = precipData.every((d) => d.precipitation === 0);
   return (
     <div className={`mx-auto max-w-3xl p-2 ${hidePrecipData ? "hidden" : ""}`}>

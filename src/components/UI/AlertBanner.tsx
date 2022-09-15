@@ -34,6 +34,8 @@ const AlertBanner = () => {
     const alerts = weatherData.alerts;
 
     if (alerts) {
+      //some event titles only appear as "weather", change to something more substantial
+      //if it isn't capitalize the first letter of each word, then remove after 6th word
       const alertEvent =
         alerts[0].event === "weather"
           ? "Special Weather Statement"
@@ -41,10 +43,12 @@ const AlertBanner = () => {
               .split(" ")
               .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
               .join(" ");
+
       const alertDescription = alerts[0].description
         .split(" ")
         .slice(0, 6)
         .join(" ");
+
       alertEls = (
         <Link to="/alert">
           <div className="alert bg-red-800 text-white shadow-lg mb-4 mx-auto max-w-3xl p-2 md:p-4">
@@ -65,6 +69,7 @@ const AlertBanner = () => {
     }
   }
   useEffect(() => {
+    console.log(weatherError);
     isWeatherError && navigate("/error");
   }, []);
 

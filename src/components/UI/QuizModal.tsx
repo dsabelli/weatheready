@@ -10,6 +10,9 @@ const QuizModal = () => {
   const { preferences } = useSelector((state: RootState) => state.settings);
   const [radioOne, setRadioOne] = useState("");
 
+  //set temp preference based on answer. Correct for user cycling through answers before submitting
+  //on submission will hide the modal button until local storage cleared
+
   useEffect(() => {
     if (radioOne === "cold")
       dispatch(
@@ -30,8 +33,8 @@ const QuizModal = () => {
       <label htmlFor="my-modal" className="cursor-pointer modal-button">
         <Barometer />
       </label>
-
       <input type="checkbox" id="my-modal" className="modal-toggle" />
+      //ensure modal is in front of map and map buttons
       <div className="modal" style={{ zIndex: 9999 }}>
         <div className="modal-box">
           <h3 className="text-lg">

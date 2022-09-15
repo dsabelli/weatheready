@@ -9,12 +9,12 @@ export interface Coords {
   units: string;
 }
 
+//returns weather data based on the coordinates and units provided
 export const weatherApiSlice = createApi({
   reducerPath: "weatherApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `https://api.openweathermap.org/data/`,
   }),
-  // tagTypes: ["Weather"],
   endpoints: (builder) => ({
     getOneCall: builder.query<OneCallData, Coords>({
       query: (arg) => {
