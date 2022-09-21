@@ -34,7 +34,7 @@ const QuizModal = () => {
         <Barometer />
       </label>
       <input type="checkbox" id="my-modal" className="modal-toggle" />
-      //ensure modal is in front of map and map buttons
+      {/* ensure modal is in front of map and map buttons */}
       <div className="modal" style={{ zIndex: 9999 }}>
         <div className="modal-box">
           <h3 className="text-lg">
