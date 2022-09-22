@@ -30,12 +30,12 @@ const Sweater = () => {
     );
   } else if (window.innerWidth < 768) {
     sweater = (
-      <Popover width={100} position="top">
+      <Popover width={120} position="top">
         <Popover.Target>
           <SweaterIcon />
         </Popover.Target>
         <Popover.Dropdown className={"bg-base-300 px-0 py-1 border-none "}>
-          <Text className="text-base-content text-sm font-bold text-center">
+          <Text className="text-base-content text-xs font-bold text-center">
             Thick Sweater or Heavy Jacket
           </Text>
         </Popover.Dropdown>
