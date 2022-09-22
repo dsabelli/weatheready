@@ -21,30 +21,6 @@ const A10d = () => {
             <stop offset=".45" stopColor="#4286ee" />
             <stop offset="1" stopColor="#0950bc" />
           </linearGradient>
-          <linearGradient
-            id="b"
-            x1="16.5"
-            x2="21.5"
-            y1="19.67"
-            y2="28.33"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stopColor="#fbbf24" />
-            <stop offset=".45" stopColor="#fbbf24" />
-            <stop offset="1" stopColor="#f59e0b" />
-          </linearGradient>
-          <linearGradient
-            id="c"
-            x1="22.56"
-            x2="39.2"
-            y1="21.96"
-            y2="50.8"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0" stopColor="#f3f7fe" />
-            <stop offset=".45" stopColor="#f3f7fe" />
-            <stop offset="1" stopColor="#deeafb" />
-          </linearGradient>
 
           <linearGradient
             id="d"
@@ -68,7 +44,7 @@ const A10d = () => {
           cx="19"
           cy="24"
           r="5"
-          fill="url(#b)"
+          fill="#fbbf24"
           stroke="#f8af18"
           strokeMiterlimit="10"
           strokeWidth=".5"
@@ -90,7 +66,7 @@ const A10d = () => {
           />
         </path>
         <path
-          fill="url(#c)"
+          fill="#f3f7fe"
           stroke="#e6effc"
           strokeMiterlimit="10"
           strokeWidth=".5"
