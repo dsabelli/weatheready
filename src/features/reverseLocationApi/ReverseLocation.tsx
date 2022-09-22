@@ -70,8 +70,6 @@ const ReverseLocation = () => {
   if (isReverseLocationSuccess) {
     const location = reverseLocationData.features[0].properties;
     //gets the city and state or country based on the current location coordinates
-    console.log(location);
-
     reverseLocationEl = (
       <p
         className={`${
