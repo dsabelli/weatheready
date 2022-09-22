@@ -70,12 +70,16 @@ const ReverseLocation = () => {
   if (isReverseLocationSuccess) {
     const location = reverseLocationData.features[0].properties;
     //gets the city and state or country based on the current location coordinates
+    console.log(location);
+
     reverseLocationEl = (
       <p
         className={`${
           window.innerWidth < 576 ? "text-xs" : "text-xl"
         } font-semibold`}
-      >{`${location.city}, ${location.state || location.country}`}</p>
+      >{`${location.city || location.county}, ${
+        location.state || location.country
+      }`}</p>
     );
   } else if (isReverseLocationError) {
     console.log(reverseLocationError);

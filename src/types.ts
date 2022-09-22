@@ -167,6 +167,7 @@ interface ReverseLocationResults {
     suburb?: string;
     district?: string;
     city?: string;
+    county?: string;
     postcode?: string;
     country?: string;
     country_code?: string;
