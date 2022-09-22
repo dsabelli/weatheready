@@ -154,9 +154,11 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
               </div>
             </div>
             <div className="flex w-full justify-between items-center gap-1">
+              {/* weather description */}
               <div className="text-sm md:text-2xl w-1/2 md:flex gap-1 justify-center">
                 {desc}
               </div>
+              {/* chance of precipitation and icon */}
               {window.innerWidth > 576 && pop !== 0 && (
                 <div className="flex flex-col items-center gap-1 z-40">
                   <Umbrella />
@@ -165,6 +167,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
                   </p>
                 </div>
               )}
+              {/* clothing and accessories element */}
               {clothing}
             </div>
           </div>
