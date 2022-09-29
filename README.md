@@ -10,7 +10,7 @@ I also thought the idea of clothing recommendations is neat and very useful. I f
 
 ## What Did I Learn
 
-This project reinforced React, TypeScript and Redux skills, as well as unit testing with Jest.
+This project reinforced React, TypeScript and Redux skills.
 
 Other skills I was able to improve on include: styling with Tailwind CSS, working with 3rd party APIs, RTK Query, use of a queue data structure, working with geolocation, and use of local storage.
 
