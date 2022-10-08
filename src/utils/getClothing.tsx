@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import Hat from "../assets/icons/static/clothing/Hat";
 import Jacket from "../assets/icons/static/clothing/Jacket";
 import Mittens from "../assets/icons/static/clothing/Mittens";
@@ -70,45 +71,24 @@ const getClothing = (
   }
 
   //accessories are rendered when conditions are met
-  const accessories = (
-    <>
-      {clouds < 50 &&
-        dateHours < sunsetHours &&
-        dateHours !== 2 &&
-        dateHours > 8 && <Sunglasses />}
-      {(uvi >= 4 && !rain && (
-        <>
-          <Sunscreen />
-          <Hat />
-        </>
-      )) ||
-        (uvi >= 4 && pop * 100 < 20 && (
-          <>
-            <Sunscreen />
-            <Hat />
-          </>
-        ))}
-      {(rain > 0 && (
-        <>
-          <Umbrella />
-          <RainBoots />
-        </>
-      )) ||
-        (pop * 100 >= 50 && temp > 5 && (
-          <>
-            <Umbrella />
-            <RainBoots />
-          </>
-        ))}
-      {temp <= 0 && (
-        <>
-          <Toque />
-          <Mittens />
-          <Scarf />
-        </>
-      )}
-    </>
-  );
+  const accessories: JSX.Element[] = [];
+
+  if (temp <= 0) accessories.push(<Scarf />);
+  if (temp < 5) accessories.push(<Toque />, <Mittens />);
+  if (
+    clouds < 50 &&
+    dateHours < sunsetHours &&
+    dateHours !== 2 &&
+    dateHours > 8
+  )
+    accessories.push(<Sunglasses />);
+  if (
+    (uvi >= 5 && !rain && temp >= 15) ||
+    (uvi >= 5 && pop * 100 < 20 && temp >= 15)
+  )
+    accessories.push(<Sunscreen />, <Hat />);
+  if (rain > 0 || (pop * 100 >= 50 && temp > 5))
+    accessories.push(<Umbrella />, <RainBoots />);
 
   return (
     <div className="flex gap-1">
@@ -118,7 +98,9 @@ const getClothing = (
           <div>
             <div className="flex justify-center items-center gap-1">
               {/* if no conditions are met, return "N/A" */}
-              {accessories.props.children[0] ? accessories : "N/A"}
+              {accessories.length
+                ? accessories.map((a) => <div key={nanoid()}>{a}</div>)
+                : "N/A"}
             </div>
             <h3 className="text-center text-xs">Accessories</h3>
           </div>
