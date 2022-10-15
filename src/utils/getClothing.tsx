@@ -73,8 +73,8 @@ const getClothing = (
   //accessories are rendered when conditions are met
   const accessories: JSX.Element[] = [];
 
-  if (temp <= 0) accessories.push(<Scarf />);
-  if (temp < 5) accessories.push(<Toque />, <Mittens />);
+  if (temp <= 2) accessories.push(<Scarf />);
+  if (temp <= 5) accessories.push(<Toque />, <Mittens />);
   if (
     clouds < 50 &&
     dateHours < sunsetHours &&
@@ -87,7 +87,7 @@ const getClothing = (
     (uvi >= 5 && pop * 100 < 20 && temp >= 15)
   )
     accessories.push(<Sunscreen />, <Hat />);
-  if (rain > 0 || (pop * 100 >= 50 && temp > 5))
+  if (rain > 0 || (pop * 100 >= 50 && temp >= 3))
     accessories.push(<Umbrella />, <RainBoots />);
 
   return (
