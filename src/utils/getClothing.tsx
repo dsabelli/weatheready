@@ -1,17 +1,17 @@
 import { nanoid } from "nanoid";
-import Hat from "../assets/icons/static/clothing/Hat";
+import Hat from "../assets/icons/static/accessories/Hat";
 import Jacket from "../assets/icons/static/clothing/Jacket";
-import Mittens from "../assets/icons/static/clothing/Mittens";
+import Mittens from "../assets/icons/static/accessories/Mittens";
 import Pants from "../assets/icons/static/clothing/Pants";
-import RainBoots from "../assets/icons/static/clothing/RainBoots";
-import Scarf from "../assets/icons/static/clothing/Scarf";
+import RainBoots from "../assets/icons/static/accessories/RainBoots";
+import Scarf from "../assets/icons/static/accessories/Scarf";
 import Shorts from "../assets/icons/static/clothing/Shorts";
-import Sunglasses from "../assets/icons/static/clothing/Sunglasses";
-import Sunscreen from "../assets/icons/static/clothing/Sunscreen";
+import Sunglasses from "../assets/icons/static/accessories/Sunglasses";
+import Sunscreen from "../assets/icons/static/accessories/Sunscreen";
 import Sweater from "../assets/icons/static/clothing/Sweater";
-import Toque from "../assets/icons/static/clothing/Toque";
+import Toque from "../assets/icons/static/accessories/Toque";
 import TShirt from "../assets/icons/static/clothing/TShirt";
-import Umbrella from "../assets/icons/static/clothing/Umbrella";
+import Umbrella from "../assets/icons/static/accessories/Umbrella";
 import WinterJacket from "../assets/icons/static/clothing/WinterJacket";
 import Info from "../assets/icons/static/Info";
 
