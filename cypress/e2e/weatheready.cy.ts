@@ -1,5 +1,7 @@
 /// <reference types="cypress"/>
 
+import { contains } from "cypress/types/jquery";
+
 function mockLocation(latitude: number, longitude: number) {
   return {
     onBeforeLoad(win: any) {
@@ -59,6 +61,14 @@ describe("Landing Page Functionality", () => {
     cy.wait(800);
     cy.get(".feather-play").click();
     cy.wrap(".radar-time").should("not.equal", time);
+  });
+
+  it("searches for a new location and stores as recent", () => {
+    cy.get("input.search-input").type("London");
+    cy.contains("London, England").click();
+    cy.contains("London, England");
+    cy.get("input.search-input").focus();
+    cy.get(".opacity-60").contains("London, England");
   });
 
   // it("speeds up radar", () => {
