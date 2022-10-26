@@ -45,7 +45,11 @@ const PrecipitationChart: React.FC<PrecipitationData> = ({
   //will be falsy when there is no precipitation data for the hour, used for conditional rendering
   const hidePrecipData = precipData.every((d) => d.precipitation === 0);
   return (
-    <div className={`mx-auto max-w-3xl p-2 ${hidePrecipData ? "hidden" : ""}`}>
+    <div
+      className={`precip-chart mx-auto max-w-3xl p-2 ${
+        hidePrecipData ? "hidden" : ""
+      }`}
+    >
       {!hidePrecipData && (
         <ResponsiveContainer aspect={window.innerWidth > 768 ? 6 : 3}>
           <AreaChart

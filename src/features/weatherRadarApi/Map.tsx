@@ -120,7 +120,9 @@ const Map = ({ height }: { height: string }) => {
             classNames={{ root: "w-full" }}
             label={null}
           />
-          {radarTime && <p className="text-xl">{radarTime[stepCounter]}</p>}
+          {radarTime && (
+            <p className="text-xl radar-time">{radarTime[stepCounter]}</p>
+          )}
         </div>
 
         <div className="flex items-center gap-6 w-full">
@@ -131,7 +133,7 @@ const Map = ({ height }: { height: string }) => {
               onChange={setDelay}
               min={1}
               max={6}
-              classNames={{ root: "w-full" }}
+              classNames={{ root: "w-full", thumb: "speed-control" }}
               label={null}
             />
             <p>Fast</p>
