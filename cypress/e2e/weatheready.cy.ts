@@ -86,7 +86,7 @@ function mockLocation(latitude: number, longitude: number) {
 //   // });
 // });
 
-describe("Landing Page Functionality", () => {
+describe("Routing Functionality", () => {
   it("visits weatheready.com", () => {
     cy.visit("/", mockLocation(42.0531, -82.5998));
   });
@@ -114,6 +114,11 @@ describe("Landing Page Functionality", () => {
   it("Goes to Radar route", () => {
     cy.contains("Radar").click();
     cy.url().should("eq", "http://localhost:5173/app/radar");
+  });
+
+  it("Goes to Landing Page", () => {
+    cy.contains("Weather Ready").click();
+    cy.url().should("eq", "http://localhost:5173/");
   });
 });
 export {};
