@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 
-import { contains } from "cypress/types/jquery";
+import "@4tw/cypress-drag-drop";
 
 function mockLocation(latitude: number, longitude: number) {
   return {
@@ -74,20 +74,6 @@ describe("Landing Page Functionality", () => {
     cy.get("input.search-input").focus();
     cy.get(".opacity-60").contains("London, England");
   });
-
-  // it("speeds up radar", () => {
-  //   cy.get(".feather-pause").click();
-  //   cy.wait(3200);
-  //   cy.get(".feather-play").click();
-  //   let time1 = cy.get(".radar-time");
-  //   //set back to original position
-  //   cy.get(".feather-pause").click();
-  //   cy.wait(1400);
-  //   cy.get(".feather-play").click();
-  //   //   let thumb = cy.get(".speed-control");
-  //   //   thumb.trigger("mousedown");
-  //   //   thumb.trigger("mousemove");
-  // });
 });
 
 describe("Routing Functionality", () => {
@@ -123,6 +109,60 @@ describe("Routing Functionality", () => {
   it("Goes to Landing Page", () => {
     cy.contains("Weather Ready").click();
     cy.url().should("eq", "http://localhost:5173/");
+  });
+});
+
+describe("Radar Controls Functionality", () => {
+  it("visits weatheready.com", () => {
+    cy.visit("/", mockLocation(42.0531, -82.5998));
+  });
+
+  it("speeds up radar", () => {
+    const radarControl = cy.get(".radar-control");
+    radarControl.move({ deltaX: -600 });
+    radarControl.should("have.attr", "aria-valuenow", "0");
+    cy.get(".speed-control").move({ deltaX: 100 });
+    cy.get(".feather-pause").click();
+    cy.wait(1200);
+    cy.get(".feather-play").click();
+    cy.get(".radar-control").should("have.attr", "aria-valuenow", "6");
+    radarControl.move({ deltaX: -600 });
+    cy.get(".speed-control").move({ deltaX: -100 });
+    cy.get(".feather-pause").click();
+    cy.wait(1200);
+    cy.get(".feather-play").click();
+    cy.get(".radar-control").should("have.attr", "aria-valuenow", "4");
+  });
+
+  it("slows down radar", () => {
+    const radarControl = cy.get(".radar-control");
+    radarControl.move({ deltaX: -600 });
+    radarControl.should("have.attr", "aria-valuenow", "0");
+    cy.get(".speed-control").move({ deltaX: -100 });
+    cy.get(".feather-pause").click();
+    cy.wait(1200);
+    cy.get(".feather-play").click();
+    cy.get(".radar-control").should("have.attr", "aria-valuenow", "2");
+    radarControl.move({ deltaX: -600 });
+    cy.get(".speed-control").move({ deltaX: 100 });
+    cy.get(".feather-pause").click();
+    cy.wait(1200);
+    cy.get(".feather-play").click();
+    cy.get(".radar-control").should("have.attr", "aria-valuenow", "4");
+  });
+
+  it("increases radar opacity", () => {
+    cy.get(".opacity-control").move({ deltaX: 150 });
+    cy.get(".radar-layer").should("have.css", "opacity", "1");
+    cy.get(".opacity-control").move({ deltaX: -150 });
+    cy.get(".radar-layer").should("have.css", "opacity", "0.5");
+  });
+
+  it("decreases radar opacity", () => {
+    cy.get(".opacity-control").move({ deltaX: -100 });
+    cy.get(".radar-layer").should("have.css", "opacity", "0.17");
+    cy.get(".opacity-control").move({ deltaX: 100 });
+    cy.get(".radar-layer").should("have.css", "opacity", "0.47");
   });
 });
 export {};
