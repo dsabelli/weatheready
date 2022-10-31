@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["cypress", "node"]
+    "types": ["cypress", "node", "@4tw/cypress-drag-drop"]
   },
   "include": ["src", "**/*.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
