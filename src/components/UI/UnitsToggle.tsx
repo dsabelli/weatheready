@@ -14,7 +14,7 @@ const UnitsToggle = () => {
         <p>°C</p>
         <input
           checked={checked}
-          className="toggle"
+          className="toggle units-toggle"
           type="checkbox"
           onChange={() => (
             dispatch(setUnits(!metric)), setChecked((prev) => !prev)

@@ -14,7 +14,7 @@ const ThemeToggle = () => {
         <p>Light</p>
         <input
           checked={checked}
-          className="toggle"
+          className="toggle theme-toggle"
           type="checkbox"
           onChange={() => (
             dispatch(setTheme(theme === "light" ? "dark" : "light")),

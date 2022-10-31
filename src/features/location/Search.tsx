@@ -144,7 +144,7 @@ const Search = () => {
         value={autocomplete || ""}
         type="text"
         placeholder="Search Location..."
-        className="input w-full bg-base-200 focus:outline-none sm:text-accent-content sm:bg-accent-focus placeholder-opacity-50 sm:placeholder-accent-content"
+        className="search-input input w-full bg-base-200 focus:outline-none sm:text-accent-content sm:bg-accent-focus placeholder-opacity-50 sm:placeholder-accent-content"
         onChange={(e) =>
           e.target.value !== ""
             ? (setAutocomplete(e.target.value), setVisible(true))

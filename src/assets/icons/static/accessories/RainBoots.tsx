@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { Tooltip } from "@mantine/core";
 
 const RainBootsIcon = forwardRef<HTMLDivElement>((props, ref) => (
-  <div {...props} className="w-6 md:w-10 z-30" ref={ref}>
+  <div {...props} className="w-6 md:w-10 z-30 accessory" ref={ref}>
     <svg
       version="1.1"
       viewBox="75 0 550 550"

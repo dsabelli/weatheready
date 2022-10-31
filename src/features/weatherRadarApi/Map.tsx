@@ -49,6 +49,7 @@ const Map = ({ height }: { height: string }) => {
     //map over data into TileLayer components with image urls
     radarEls = radarImage.map((image: Radar) => (
       <TileLayer
+        className="radar-layer"
         opacity={opacity / 100}
         key={image.time}
         url={`${radarData.host}${image.path}/256/{z}/{x}/{y}/4/1_1.png`}
@@ -117,10 +118,12 @@ const Map = ({ height }: { height: string }) => {
             value={stepCounter}
             onChange={setStepCounter}
             max={15}
-            classNames={{ root: "w-full" }}
+            classNames={{ root: "w-full", thumb: "radar-control" }}
             label={null}
           />
-          {radarTime && <p className="text-xl">{radarTime[stepCounter]}</p>}
+          {radarTime && (
+            <p className="text-xl radar-time">{radarTime[stepCounter]}</p>
+          )}
         </div>
 
         <div className="flex items-center gap-6 w-full">
@@ -131,7 +134,7 @@ const Map = ({ height }: { height: string }) => {
               onChange={setDelay}
               min={1}
               max={6}
-              classNames={{ root: "w-full" }}
+              classNames={{ root: "w-full", thumb: "speed-control" }}
               label={null}
             />
             <p>Fast</p>
@@ -143,7 +146,7 @@ const Map = ({ height }: { height: string }) => {
               onChange={setOpacity}
               min={10}
               max={100}
-              classNames={{ root: "w-full" }}
+              classNames={{ root: "w-full", thumb: "opacity-control" }}
               label={null}
             />
           </div>

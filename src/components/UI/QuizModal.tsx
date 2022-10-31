@@ -56,6 +56,7 @@ const QuizModal = () => {
                   value="cold"
                   label="Sweater in Summer"
                   classNames={{ label: "text-current" }}
+                  data-cy="r0"
                 />
                 <Radio
                   value="hot"
@@ -76,6 +77,7 @@ const QuizModal = () => {
 
           <div className="modal-action">
             <label
+              data-cy="submit-quiz"
               htmlFor="my-modal"
               className={`btn ${radioOne ? "" : "btn-disabled"}`}
               onClick={() => dispatch(setQuiz(true))}
