@@ -35,7 +35,7 @@ const HourlyWeather = () => {
       weatherData.timezone_offset + new Date().getTimezoneOffset() * 60;
     weatherEls = weatherData.hourly
       .filter(
-        (day) => new Date(day.dt * 1000).getDate() === new Date().getDate()
+        (day) => new Date(day.dt * 1000).getDate() <= new Date().getDate() + 1
       )
       .map((hour) => (
         <ForecastWeatherCard
