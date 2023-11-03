@@ -106,7 +106,10 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
               <p className="text-base md:text-2xl">{timeOfDay}</p>
             )}
             {pathname.includes("hourly") && (
-              <p className="text-base md:text-2xl">{`${hours}:00`}</p>
+              <>
+                <p className="text-base md:text-2xl">{`${hours}:00`}</p>
+                <p className="text-sm md:text-base">{dayAndMonth}</p>
+              </>
             )}
             {pathname.includes("8-day") && (
               <>
