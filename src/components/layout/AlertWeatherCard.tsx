@@ -29,7 +29,7 @@ const AlertWeatherCard: React.FC<Alerts> = ({
   event === "weather" ? (event = "Special Weather Event") : event;
 
   return (
-    <div className="flex flex-col max-w-4xl mx-auto mb-6 shadow-xl p-8 bg-base-100">
+    <div className="flex flex-col max-w-5xl mx-auto mb-6 shadow-xl p-8 bg-base-100">
       <div className="border-b">
         <h1 className="text-3xl my-2">{event}</h1>
         <p>

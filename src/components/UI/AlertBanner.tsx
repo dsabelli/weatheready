@@ -51,7 +51,7 @@ const AlertBanner = () => {
 
       alertEls = (
         <Link to="/alert">
-          <div className="alert bg-red-800 text-white shadow-lg mb-4 mx-auto max-w-3xl p-2 md:p-4">
+          <div className="alert bg-red-800 text-white shadow-lg mb-4 mx-auto max-w-5xl p-2 md:p-4">
             <div className="flex w-full justify-between">
               <div className="flex gap-2 items-center ">
                 <Warning />

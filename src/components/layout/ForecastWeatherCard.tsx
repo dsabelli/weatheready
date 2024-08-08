@@ -97,7 +97,7 @@ const ForecastWeatherCard: React.FC<ForecastCardData> = ({
   //Forecast Card is used in the Today, Hourly, and 8-day pages
   //Some conditional rendering based on pathname to include or exlude data
   return (
-    <div className="collapse collapse-arrow bg-base-100 shadow-xl py-4 mx-auto max-w-3xl mb-4 ">
+    <div className="collapse collapse-arrow bg-base-100 shadow-xl py-4 mx-auto max-w-5xl mb-4 ">
       <input type="checkbox" className="z-20 p-0" />
       <div className="collapse-title text-base md:text-xl font-semibold py-3 pr-8">
         <div className="flex flex-col w-full ">

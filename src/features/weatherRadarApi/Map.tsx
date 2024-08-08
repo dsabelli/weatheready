@@ -84,7 +84,7 @@ const Map = ({ height }: { height: string }) => {
   }, [stepCounter, step]);
 
   return (
-    <div className="max-w-3xl mx-auto mt-2 px-2">
+    <div className="max-w-5xl mx-auto mt-2 px-2">
       <MapContainer
         center={[+lat, +lon]}
         zoom={8}

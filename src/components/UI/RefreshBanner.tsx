@@ -17,7 +17,7 @@ const RefreshBanner = () => {
       {refresh && (
         <div className="px-4">
           <div
-            className="alert alert-warning shadow-lg mb-4 mx-auto max-w-3xl p-2 md:p-4 cursor-pointer text-xs md:text-base"
+            className="alert alert-warning shadow-lg mb-4 mx-auto max-w-5xl p-2 md:p-4 cursor-pointer text-xs md:text-base"
             onClick={() => window.location.reload()}
           >
             <div className="w-full">

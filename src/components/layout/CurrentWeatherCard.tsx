@@ -77,7 +77,7 @@ const CurrentWeatherCard: React.FC<WeatherCardData> = ({
   );
 
   return (
-    <div className="flex bg-base-100 gap-4 mx-auto max-w-3xl px-2">
+    <div className="flex bg-base-100 gap-4 mx-auto max-w-5xl px-2">
       <div className="flex flex-col w-2/5">
         <div className="flex justify-between items-center">
           <div className="text-lg md:text-2xl">
